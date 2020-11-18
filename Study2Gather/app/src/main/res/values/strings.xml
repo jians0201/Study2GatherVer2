@@ -51,6 +51,8 @@
     / #Messages Page
     <string name="messagesTitle">Messages</string>
     <string name="messagesTabTitle">Messages</string>
+    <string name="messagesSender">Tanjiro</string>
+    <string name="messagesBrief">Muda Muda Muda!</string>
 
     / #Profile Page
     <string name="profileTitle">Profile</string>
