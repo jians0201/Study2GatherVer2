@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -15,16 +16,25 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.study2gather.ui.home.HomeRecyclerItem;
+import com.example.study2gather.ui.home.HomeRecylerItemArrayAdapter;
 import com.example.study2gather.ui.messages.MessagesFragment;
 import com.example.study2gather.ui.profile.ProfileFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
+import java.util.ArrayList;
+
 
 public class MainActivity extends AppCompatActivity/* implements View.OnClickListener*/ {
     private BottomNavigationView navView;
     private NavController navController;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -37,15 +47,10 @@ public class MainActivity extends AppCompatActivity/* implements View.OnClickLis
         navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
+
     }
 
-//    @Override
-//
-//    public void onClick(View v){
-//        switch(v.getId()){
-//            case R.id.buttonss:
-//                Log.d("testest", "Wtf");
-//                break;
-//        }
-//    }
+
+
+
 }
