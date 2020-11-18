@@ -15,13 +15,15 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical"
+            android:paddingBottom="20dp"
+            android:background="@drawable/border_bottom" >
 
             <androidx.cardview.widget.CardView
-                android:layout_marginTop="10dp"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_gravity="center"
+                android:layout_marginTop="20dp"
                 app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="250dp">
 
@@ -42,65 +44,73 @@
 
             </androidx.cardview.widget.CardView>
 
-            <TextView
-                android:id="@+id/profileName"
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="5dp"
-                android:fontFamily="@font/exo_extrabold"
-                android:text="@string/profileName"
-                android:textStyle="bold" />
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_gravity="center" >
 
-            <TextView
-                android:id="@+id/profileID"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="5dp"
-                android:fontFamily="@font/exo_extrabold"
-                android:text="@string/profileID"
-                android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/profileName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:drawablePadding="5dp"
+                    android:fontFamily="@font/exo_extrabold"
+                    android:text="@string/profileName"
+                    android:textStyle="bold"
+                    app:drawableEndCompat="@drawable/ic_male_white_12dp" />
 
-            <TextView
-                android:id="@+id/profileEmail"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="5dp"
-                android:fontFamily="@font/exo"
-                android:text="@string/profileEmail"
-                android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/profileEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="15dp"
+                    android:drawablePadding="10dp"
+                    android:fontFamily="@font/exo"
+                    android:text="@string/profileEmail"
+                    android:textStyle="bold"
+                    app:drawableStartCompat="@drawable/ic_email_white_18dp" />
 
-            <TextView
-                android:id="@+id/profileBirthday"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="5dp"
-                android:fontFamily="@font/exo"
-                android:text="@string/profileBirthday"
-                android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/profileBirthday"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:drawablePadding="10dp"
+                    android:fontFamily="@font/exo"
+                    android:text="@string/profileBirthday"
+                    android:textStyle="bold"
+                    app:drawableLeftCompat="@drawable/ic_birthday_white_18dp" />
 
-            <TextView
-                android:id="@+id/profileSchool"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="5dp"
-                android:fontFamily="@font/exo"
-                android:text="@string/profileSchool"
-                android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/profileSchool"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:drawablePadding="10dp"
+                    android:fontFamily="@font/exo"
+                    android:text="@string/profileSchool"
+                    android:textStyle="bold"
+                    app:drawableStartCompat="@drawable/ic_school_white_18dp" />
 
-            <TextView
-                android:id="@+id/profileLocation"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="5dp"
-                android:fontFamily="@font/exo"
-                android:text="@string/profileLocation"
-                android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/profileLocation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:drawablePadding="10dp"
+                    android:fontFamily="@font/exo"
+                    android:text="@string/profileLocation"
+                    android:textStyle="bold"
+                    app:drawableLeftCompat="@drawable/ic_location_white_18dp" />
+
+            </LinearLayout>
 
         </LinearLayout>
     </ScrollView>
