@@ -33,5 +33,6 @@ public class ForumFragment extends Fragment {
         return root;
     }
 
+    // Implement your onclick for fragments here
 
 }
