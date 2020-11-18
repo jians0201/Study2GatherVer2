@@ -1,0 +1,69 @@
+<resources>
+    <string name="app_name">Study2Gather</string>
+
+    // #Splash Screen
+    <string name="splashLogoDesc">Study2Gather</string>
+
+    // #Login Page
+    <string name="loginEmailLabel">Email</string>
+    <string name="loginPasswordLabel">Password</string>
+    <string name="loginLoginBtn">Login</string>
+    <string name="loginRegisterBtn">Register</string>
+    // Error Text
+    <string name="loginEmptyError">Field can\'t be empty!</string>
+    <string name="loginEmailError">Enter a valid Email!</string>
+    <string name="loginPasswordError">Password must be at least 8 characters!</string>
+
+    // #Registration Page
+    <string name="registerPicDesc">registerPic</string>
+    <string name="registerTitle">Let\'s Start!</string>
+    <string name="registerUsernameLabel">Username</string>
+    <string name="registerEmailLabel">Email</string>
+    <string name="registerPasswordLabel">Password</string>
+    <string name="registerConfirmPasswordLabel">Confirm Password</string>
+    <string name="registerSexLabel">Sex</string>
+    <string name="registerSexMaleLabel">Male</string>
+    <string name="registerSexFemaleLabel">Female</string>
+    <string name="registerDOBLabel">DOB</string>
+    <string name="registerDOBBtn">Calender</string>
+    <string name="registerRegisterBtn">Register</string>
+    // Error Text
+    <string name="registerEmptyError">Field can\'t be empty!</string>
+    <string name="registerUsernameError">Username must be 4–18 characters!</string>
+    <string name="registerEmailError">Enter a valid Email!</string>
+    <string name="registerPasswordError">Password must be at least 8 characters!</string>
+    <string name="registerConfirmPasswordError">Password does not match!</string>
+    <string name="registerSexError">Select a Gender!</string>
+    <string name="registerDOBError">Enter a Date of Birth!</string>
+
+    // #Home Page
+    <string name="homeTitle">Home</string>
+    <string name="homeTabTitle">Home</string>
+
+    / #Forum Page
+    <string name="forumTitle">Forum</string>
+    <string name="forumTabTitle">Forum</string>
+
+    / #Courses Page
+    <string name="coursesTitle">Courses</string>
+    <string name="coursesTabTitle">Courses</string>
+
+    / #Messages Page
+    <string name="messagesTitle">Messages</string>
+    <string name="messagesTabTitle">Messages</string>
+
+    / #Profile Page
+    <string name="profileTitle">Profile</string>
+    <string name="profileTabTitle">Profile</string>
+    <string name="profileName">Muda (Not Michael Jackson)</string>
+    <string name="profileID">\@bakayaro._.</string>
+    <string name="profileEmail">\mudaa@bakayaro.com</string>
+    <string name="profileBirthday">6 September 2025</string>
+    <string name="profileSchool">Singapore Polytechnic</string>
+    <string name="profileLocation">Singapore</string>
+
+    / #Chat Page
+    <string name="chatTitle">Chat</string>
+    <string name="chatTabTitle">Chat</string>
+
+</resources>
