@@ -84,7 +84,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
 //                                Toast.makeText(Login.this, "Logged In Successfully", Toast.LENGTH_SHORT).show();
                                 pgbar.setVisibility(View.GONE);
 //                                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser(); //leave it first I might need later on
-                                i = new Intent(getApplicationContext(), Home.class);
+                                i = new Intent(getApplicationContext(), MainActivity.class);
                                 startActivity(i);
                             } else {
                                 Toast.makeText(Login.this, "Failed to login! Email or Password is incorrect!", Toast.LENGTH_LONG).show();
