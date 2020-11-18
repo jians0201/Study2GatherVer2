@@ -21,8 +21,7 @@
             android:theme="@style/Theme.MaterialComponents.NoActionBar" />
         <activity
             android:name=".Chat"
-            android:label="@string/chatTitle" >
-        </activity>
+            android:label="@string/chatTitle" />
         <activity
             android:name=".MainActivity" >
             <intent-filter>

@@ -12,7 +12,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.study2gather.R;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class HomeRecylerItemArrayAdapter extends RecyclerView.Adapter<HomeRecylerItemArrayAdapter.MyViewHolder> {
 
@@ -46,18 +48,30 @@ public class HomeRecylerItemArrayAdapter extends RecyclerView.Adapter<HomeRecyle
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        //Set Country Flag
+        //Set Post User Profile Picture
         holder.imageViewPostUserPic.setImageResource(mPosts.get(position).getPostUserPic());
 
-        //Set Country Name
+        //Set Post Username
         holder.textViewPostUsername.setText(mPosts.get(position).getPostUsername());
 
-        //Set Currency
-        holder.textViewPostTime.setText(mPosts.get(position).getPostTime());
+        //Set Post Time
+        String time = mPosts.get(position).getPostTime() + " hours ago";
+        holder.textViewPostTime.setText(time);
 
+        //Set Post Caption
         holder.textViewPostCaption.setText(mPosts.get(position).getPostCaption());
 
-        holder.textViewPostPic.setImageResource(mPosts.get(position).getPostPic());
+        //Set Post Picture
+        holder.imageViewPostPic.setImageResource(mPosts.get(position).getPostPic());
+
+        //Set Post Like Count
+        String likeCount = "";
+        if(mPosts.get(position).getPostLikeCount() > 1) {
+            likeCount = NumberFormat.getNumberInstance(Locale.US).format(mPosts.get(position).getPostLikeCount()) + " likes";
+        } else {
+            likeCount = "1 like";
+        }
+        holder.textViewPostLikeCount.setText(likeCount);
     }
 
     @Override
@@ -81,15 +95,17 @@ public class HomeRecylerItemArrayAdapter extends RecyclerView.Adapter<HomeRecyle
         private TextView textViewPostUsername;
         private TextView textViewPostTime;
         private TextView textViewPostCaption;
-        private ImageView textViewPostPic;
+        private ImageView imageViewPostPic;
+        private TextView textViewPostLikeCount;
 
         MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            imageViewPostUserPic = itemView.findViewById(R.id.postProfilePic);
+            imageViewPostUserPic = itemView.findViewById(R.id.homePostProfilePic);
             textViewPostUsername = itemView.findViewById(R.id.homePostUsername);
             textViewPostTime = itemView.findViewById(R.id.homePostTime);
             textViewPostCaption = itemView.findViewById(R.id.homePostCaption);
-            textViewPostPic = itemView.findViewById(R.id.homePostPic);
+            imageViewPostPic = itemView.findViewById(R.id.homePostPic);
+            textViewPostLikeCount = itemView.findViewById(R.id.homePostLikeCount);
         }
     }
 

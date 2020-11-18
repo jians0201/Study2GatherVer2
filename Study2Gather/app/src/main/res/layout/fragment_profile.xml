@@ -59,56 +59,73 @@
                     android:drawablePadding="5dp"
                     android:fontFamily="@font/exo_extrabold"
                     android:text="@string/profileName"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp"
                     android:textStyle="bold"
                     app:drawableEndCompat="@drawable/ic_male_white_12dp" />
 
-                <TextView
-                    android:id="@+id/profileEmail"
-                    android:layout_width="match_parent"
+                <LinearLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="15dp"
-                    android:drawablePadding="10dp"
-                    android:fontFamily="@font/exo"
-                    android:text="@string/profileEmail"
-                    android:textStyle="bold"
-                    app:drawableStartCompat="@drawable/ic_email_white_18dp" />
+                    android:orientation="vertical"
+                    android:layout_gravity="center" >
 
-                <TextView
-                    android:id="@+id/profileBirthday"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="5dp"
-                    android:drawablePadding="10dp"
-                    android:fontFamily="@font/exo"
-                    android:text="@string/profileBirthday"
-                    android:textStyle="bold"
-                    app:drawableLeftCompat="@drawable/ic_birthday_white_18dp" />
+                    <TextView
+                        android:id="@+id/profileEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="15dp"
+                        android:drawablePadding="10dp"
+                        android:drawableTint="@color/grey"
+                        android:fontFamily="@font/exo"
+                        android:text="@string/profileEmail"
+                        android:textColor="@color/grey"
+                        android:textStyle="bold"
+                        app:drawableStartCompat="@drawable/ic_email_white_18dp" />
 
-                <TextView
-                    android:id="@+id/profileSchool"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="5dp"
-                    android:drawablePadding="10dp"
-                    android:fontFamily="@font/exo"
-                    android:text="@string/profileSchool"
-                    android:textStyle="bold"
-                    app:drawableStartCompat="@drawable/ic_school_white_18dp" />
+                    <TextView
+                        android:id="@+id/profileBirthday"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="5dp"
+                        android:drawablePadding="10dp"
+                        android:drawableTint="@color/grey"
+                        android:fontFamily="@font/exo"
+                        android:text="@string/profileBirthday"
+                        android:textColor="@color/grey"
+                        android:textStyle="bold"
+                        app:drawableLeftCompat="@drawable/ic_birthday_white_18dp" />
 
-                <TextView
-                    android:id="@+id/profileLocation"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="5dp"
-                    android:drawablePadding="10dp"
-                    android:fontFamily="@font/exo"
-                    android:text="@string/profileLocation"
-                    android:textStyle="bold"
-                    app:drawableLeftCompat="@drawable/ic_location_white_18dp" />
+                    <TextView
+                        android:id="@+id/profileSchool"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="5dp"
+                        android:drawablePadding="10dp"
+                        android:drawableTint="@color/grey"
+                        android:fontFamily="@font/exo"
+                        android:text="@string/profileSchool"
+                        android:textColor="@color/grey"
+                        android:textStyle="bold"
+                        app:drawableStartCompat="@drawable/ic_school_white_18dp" />
+
+                    <TextView
+                        android:id="@+id/profileLocation"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="5dp"
+                        android:drawablePadding="10dp"
+                        android:drawableTint="@color/grey"
+                        android:fontFamily="@font/exo"
+                        android:text="@string/profileLocation"
+                        android:textColor="@color/grey"
+                        android:textStyle="bold"
+                        app:drawableLeftCompat="@drawable/ic_location_white_18dp" />
+                </LinearLayout>
 
             </LinearLayout>
 

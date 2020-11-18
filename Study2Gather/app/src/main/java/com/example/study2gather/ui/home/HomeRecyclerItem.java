@@ -6,13 +6,15 @@ public class HomeRecyclerItem {
     private String postTime;
     private String postCaption;
     private int postPic;
+    private int postLikeCount;
 
-    public HomeRecyclerItem(int postUserPic, String postUsername, String postTime, String postCaption, int postPic) {
+    public HomeRecyclerItem(int postUserPic, String postUsername, String postTime, String postCaption, int postPic, int postLikeCount) {
         this.postUserPic = postUserPic;
         this.postUsername = postUsername;
         this.postTime = postTime;
         this.postCaption = postCaption;
         this.postPic = postPic;
+        this.postLikeCount = postLikeCount;
     }
 
     public int getPostUserPic() { return postUserPic; }
@@ -36,4 +38,6 @@ public class HomeRecyclerItem {
     {
         return postPic;
     }
+
+    public int getPostLikeCount() { return postLikeCount; }
 }

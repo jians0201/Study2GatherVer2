@@ -33,9 +33,6 @@ public class MainActivity extends AppCompatActivity/* implements View.OnClickLis
     private BottomNavigationView navView;
     private NavController navController;
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -49,8 +46,4 @@ public class MainActivity extends AppCompatActivity/* implements View.OnClickLis
         NavigationUI.setupWithNavController(navView, navController);
 
     }
-
-
-
-
 }

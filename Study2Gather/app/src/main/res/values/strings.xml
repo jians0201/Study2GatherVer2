@@ -39,9 +39,6 @@
     // #Home Page
     <string name="homeTitle">Home</string>
     <string name="homeTabTitle">Home</string>
-    <string name="homePostUsername">Tanjiro</string>
-    <string name="homePostTime">6 Hours Ago</string>
-    <string name="homePostCaption">OwO</string>
 
     / #Forum Page
     <string name="forumTitle">Forum</string>

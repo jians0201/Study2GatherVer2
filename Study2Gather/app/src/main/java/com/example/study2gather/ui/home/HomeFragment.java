@@ -32,10 +32,8 @@ public class HomeFragment extends Fragment {
     private ArrayList<HomeRecyclerItem> mPosts = new ArrayList<>();
     private View root;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel =
-                new ViewModelProvider(this).get(HomeViewModel.class);
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
         root = inflater.inflate(R.layout.fragment_home, container, false);
         btn = root.findViewById(R.id.fab);
         btn.setOnClickListener(new View.OnClickListener() {
@@ -49,8 +47,7 @@ public class HomeFragment extends Fragment {
         return root;
     }
 
-    private void setUIRef()
-    {
+    private void setUIRef() {
         //Reference of RecyclerView
         mRecyclerView = root.findViewById(R.id.homePostList);
         //Linear Layout Manager
@@ -73,12 +70,13 @@ public class HomeFragment extends Fragment {
         mRecyclerView.setAdapter(myRecyclerViewAdapter);
     }
 
-    private void bindPostsData()
-    {
-        mPosts.add(new HomeRecyclerItem(R.drawable.tanjiro, "Tanjiro",  "6 Hours Ago", "OwO #HiHi", R.drawable.ic_post_pic));
-        mPosts.add(new HomeRecyclerItem(R.drawable.tanjiro, "Tanjiro",  "6 Hours Ago", "OwO #HiHi", R.drawable.ic_post_pic));
-        mPosts.add(new HomeRecyclerItem(R.drawable.tanjiro, "Tanjiro",  "6 Hours Ago", "OwO #HiHi", R.drawable.ic_post_pic));
-        mPosts.add(new HomeRecyclerItem(R.drawable.tanjiro, "Tanjiro",  "6 Hours Ago", "OwO #HiHi", R.drawable.ic_post_pic));
-        mPosts.add(new HomeRecyclerItem(R.drawable.tanjiro, "Tanjiro",  "6 Hours Ago", "OwO #HiHi", R.drawable.ic_post_pic));
+    private void bindPostsData() {
+        mPosts.add(new HomeRecyclerItem(R.drawable.tanjiro, "Tanjiro",  "6", "OwO #HiHi", R.drawable.ic_post_pic, 987654321));
+        mPosts.add(new HomeRecyclerItem(R.drawable.tanjiro, "Tanjiro",  "6", "OwO #HiHi", R.drawable.ic_post_pic, 987654321));
+        mPosts.add(new HomeRecyclerItem(R.drawable.tanjiro, "Tanjiro",  "6", "OwO #HiHi", R.drawable.ic_post_pic, 987654321));
+        mPosts.add(new HomeRecyclerItem(R.drawable.tanjiro, "Tanjiro",  "6", "OwO #HiHi", R.drawable.ic_post_pic, 987654321));
+        mPosts.add(new HomeRecyclerItem(R.drawable.tanjiro, "Tanjiro",  "6", "OwO #HiHi", R.drawable.ic_post_pic, 987654321));
+        mPosts.add(new HomeRecyclerItem(R.drawable.tanjiro, "Tanjiro",  "6", "OwO #HiHi", R.drawable.ic_post_pic, 987654321));
+        mPosts.add(new HomeRecyclerItem(R.drawable.tanjiro, "Tanjiro",  "6", "OwO #HiHi", R.drawable.ic_post_pic, 987654321));
     }
 }
