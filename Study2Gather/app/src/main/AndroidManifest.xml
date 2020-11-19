@@ -12,7 +12,13 @@
         android:theme="@style/Theme.Study2Gather" >
         <activity
             android:name=".Splash"
-            android:theme="@style/Theme.MaterialComponents.NoActionBar" />
+            android:theme="@style/Theme.MaterialComponents.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".Login"
             android:theme="@style/Theme.MaterialComponents.NoActionBar" />
@@ -24,11 +30,7 @@
             android:label="@string/chatTitle" />
         <activity
             android:name=".MainActivity" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <meta-data
