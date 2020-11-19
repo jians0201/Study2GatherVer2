@@ -1,7 +1,7 @@
 package com.example.study2gather;
 
 public class UserObj {
-    private String username, email, password, gender, dob;
+    private String username, email, password, gender, dob, school, location;
 
     public UserObj() {}
 
@@ -11,6 +11,16 @@ public class UserObj {
         this.password = password;
         this.gender = gender;
         this.dob = dob;
+    }
+
+    public UserObj(String username, String email, String password, String gender, String dob, String school, String location) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.gender = gender;
+        this.dob = dob;
+        this.school = school;
+        this.location = location;
     }
 
     public String getUsername() {
@@ -52,4 +62,12 @@ public class UserObj {
     public void setDob(String dob) {
         this.dob = dob;
     }
+
+    public String getSchool() { return school; }
+
+    public void setSchool(String school) { this.school = school; }
+
+    public String getLocation() { return location; }
+
+    public void setLocation(String location) { this.location = location; }
 }
