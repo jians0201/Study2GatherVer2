@@ -1,20 +1,21 @@
 package com.example.study2gather.ui.home;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.study2gather.Post;
 import com.example.study2gather.R;
+import com.squareup.picasso.Picasso;
 
-import java.text.NumberFormat;
+import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Locale;
 
 public class HomeRecylerItemArrayAdapter extends RecyclerView.Adapter<HomeRecylerItemArrayAdapter.MyViewHolder> {
 
@@ -48,30 +49,41 @@ public class HomeRecylerItemArrayAdapter extends RecyclerView.Adapter<HomeRecyle
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+
         //Set Post User Profile Picture
-        holder.imageViewPostUserPic.setImageResource(mPosts.get(position).getPostUserPic());
+//        holder.imageViewPostUserPic.setImageResource(mPosts.get(position).getPostUserPic());
+        Picasso.get().load(mPosts.get(position).getPostProfilePic()).into(holder.imageViewPostUserPic);
 
         //Set Post Username
-        holder.textViewPostUsername.setText(mPosts.get(position).getPostUsername());
+        holder.textViewPostUsername.setText(mPosts.get(position).getPostAuthor());
 
         //Set Post Time
-        String time = mPosts.get(position).getPostTime() + " hours ago";
-        holder.textViewPostTime.setText(time);
+
+//        String time = mPosts.get(position).getPostTime() + " hours ago";
+        Timestamp ts = new Timestamp(mPosts.get(position).getTimestamp());
+//        holder.textViewPostTime.setText(time);
+        holder.textViewPostTime.setText(String.valueOf(ts));
 
         //Set Post Caption
         holder.textViewPostCaption.setText(mPosts.get(position).getPostCaption());
 
         //Set Post Picture
-        holder.imageViewPostPic.setImageResource(mPosts.get(position).getPostPic());
+//        holder.imageViewPostPic.setImageResource(mPosts.get(position).getPostPic());
+        Picasso.get().load(mPosts.get(position).getPostPic()).into(holder.imageViewPostPic);
 
         //Set Post Like Count
         String likeCount = "";
-        if(!mPosts.get(position).getPostLikeCount().equals("0")) {
-            likeCount = mPosts.get(position).getPostLikeCount() + " likes";
+        long postLikeCount =  mPosts.get(position).getPostLikeCount();
+        if (postLikeCount < 1000) {
+            likeCount = String.valueOf(postLikeCount);
+        } else if (postLikeCount < 1000000) {
+            likeCount = String.format("%.1f", Float.valueOf(postLikeCount/1000))+"K";
+        } else if (postLikeCount < 1000000000) {
+            likeCount = String.format("%.1f", Float.valueOf(postLikeCount/1000000))+"M";
         } else {
-            likeCount = "0 like";
+            likeCount = String.format("%.1f", Float.valueOf(postLikeCount/1000000000))+"B";
         }
-        holder.textViewPostLikeCount.setText(likeCount);
+            holder.textViewPostLikeCount.setText(likeCount);
     }
 
     @Override
