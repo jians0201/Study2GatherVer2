@@ -12,6 +12,11 @@ public class MessagesRecyclerItem {
         this.chatTitle = chatTitle;
     }
 
+    public MessagesRecyclerItem(String chatTitle, String lastMsg) {
+        this.chatTitle = chatTitle;
+        this.lastMsg = lastMsg;
+    }
+
     public String getChatTitle() { return chatTitle; }
 
     public void setChatTitle(String chatTitle) { this.chatTitle = chatTitle; }

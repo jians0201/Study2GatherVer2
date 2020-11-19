@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.study2gather.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -50,6 +51,9 @@ public class MessagesRecyclerItemArrayAdapter extends RecyclerView.Adapter<Messa
 
         //Set Latest Message
         holder.messagesBrief.setText("");
+
+        //Set Chat Pic
+        Picasso.get().load(mChats.get(position).getChatPic()).into(holder.profilePic);
 
     }
 
