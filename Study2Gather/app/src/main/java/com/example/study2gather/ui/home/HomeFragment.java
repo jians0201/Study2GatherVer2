@@ -29,7 +29,7 @@ public class HomeFragment extends Fragment {
     private HomeViewModel homeViewModel;
     private FloatingActionButton btn;
     private RecyclerView mRecyclerView;
-    private ArrayList<HomeRecyclerItem> mPosts = new ArrayList<>();
+    private ArrayList<Post> mPosts = new ArrayList<>();
     private View root;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -60,7 +60,7 @@ public class HomeFragment extends Fragment {
         {
             //Handling clicks
             @Override
-            public void onItemClicked(HomeRecyclerItem post)
+            public void onItemClicked(Post post)
             {
                 Toast.makeText(getContext(), post.getPostUsername(), Toast.LENGTH_SHORT).show();
             }
@@ -71,12 +71,12 @@ public class HomeFragment extends Fragment {
     }
 
     private void bindPostsData() {
-        mPosts.add(new HomeRecyclerItem(R.drawable.tanjiro, "Tanjiro",  "6", "OwO #HiHi", R.drawable.ic_post_pic, 987654321));
-        mPosts.add(new HomeRecyclerItem(R.drawable.tanjiro, "Tanjiro",  "6", "OwO #HiHi", R.drawable.ic_post_pic, 987));
-        mPosts.add(new HomeRecyclerItem(R.drawable.tanjiro, "Tanjiro",  "6", "OwO #HiHi", R.drawable.ic_post_pic, 98765));
-        mPosts.add(new HomeRecyclerItem(R.drawable.tanjiro, "Tanjiro",  "6", "OwO #HiHi", R.drawable.ic_post_pic, 987654321));
-        mPosts.add(new HomeRecyclerItem(R.drawable.tanjiro, "Tanjiro",  "6", "OwO #HiHi", R.drawable.ic_post_pic, 987654321));
-        mPosts.add(new HomeRecyclerItem(R.drawable.tanjiro, "Tanjiro",  "6", "OwO #HiHi", R.drawable.ic_post_pic, 987654321));
-        mPosts.add(new HomeRecyclerItem(R.drawable.tanjiro, "Tanjiro",  "6", "OwO #HiHi", R.drawable.ic_post_pic, 987654321));
+        mPosts.add(new Post(R.drawable.tanjiro, "Tanjiro",  "6", "OwO #HiHi", R.drawable.ic_post_pic, 987654321));
+        mPosts.add(new Post(R.drawable.tanjiro, "Tanjiro",  "6", "OwO #HiHi", R.drawable.ic_post_pic, 987));
+        mPosts.add(new Post(R.drawable.tanjiro, "Tanjiro",  "6", "OwO #HiHi", R.drawable.ic_post_pic, 98765));
+        mPosts.add(new Post(R.drawable.tanjiro, "Tanjiro",  "6", "OwO #HiHi", R.drawable.ic_post_pic, 987654321));
+        mPosts.add(new Post(R.drawable.tanjiro, "Tanjiro",  "6", "OwO #HiHi", R.drawable.ic_post_pic, 987654321));
+        mPosts.add(new Post(R.drawable.tanjiro, "Tanjiro",  "6", "OwO #HiHi", R.drawable.ic_post_pic, 987654321));
+        mPosts.add(new Post(R.drawable.tanjiro, "Tanjiro",  "6", "OwO #HiHi", R.drawable.ic_post_pic, 987654321));
     }
 }

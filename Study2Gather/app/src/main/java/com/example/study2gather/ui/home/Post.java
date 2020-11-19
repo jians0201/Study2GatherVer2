@@ -1,6 +1,6 @@
 package com.example.study2gather.ui.home;
 
-public class HomeRecyclerItem {
+public class Post {
     private int postUserPic;
     private String postUsername;
     private String postTime;
@@ -8,7 +8,7 @@ public class HomeRecyclerItem {
     private int postPic;
     private String postLikeCount;
 
-    public HomeRecyclerItem(int postUserPic, String postUsername, String postTime, String postCaption, int postPic, double postLikeCount) {
+    public Post(int postUserPic, String postUsername, String postTime, String postCaption, int postPic, double postLikeCount) {
         this.postUserPic = postUserPic;
         this.postUsername = postUsername;
         this.postTime = postTime;

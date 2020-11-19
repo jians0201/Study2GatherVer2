@@ -18,10 +18,10 @@ import java.util.Locale;
 
 public class HomeRecylerItemArrayAdapter extends RecyclerView.Adapter<HomeRecylerItemArrayAdapter.MyViewHolder> {
 
-    private ArrayList<HomeRecyclerItem> mPosts;
+    private ArrayList<Post> mPosts;
     private MyRecyclerViewItemClickListener mItemClickListener;
 
-    public HomeRecylerItemArrayAdapter(ArrayList<HomeRecyclerItem> posts, MyRecyclerViewItemClickListener itemClickListener) {
+    public HomeRecylerItemArrayAdapter(ArrayList<Post> posts, MyRecyclerViewItemClickListener itemClickListener) {
         this.mPosts = posts;
         this.mItemClickListener = itemClickListener;
     }
@@ -111,6 +111,6 @@ public class HomeRecylerItemArrayAdapter extends RecyclerView.Adapter<HomeRecyle
 
     //RecyclerView Click Listener
     public interface MyRecyclerViewItemClickListener {
-        void onItemClicked(HomeRecyclerItem post);
+        void onItemClicked(Post post);
     }
 }
