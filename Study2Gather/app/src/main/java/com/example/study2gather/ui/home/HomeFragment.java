@@ -29,6 +29,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -36,7 +37,7 @@ public class HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
     private FloatingActionButton btnNewPost;
-    private RecyclerView mRecyclerView;
+    private RecyclerView homeRecyclerView;
     private View root;
 
     private DatabaseReference postsRef, userRef;
@@ -88,7 +89,7 @@ public class HomeFragment extends Fragment {
         });
 
 //        //get posts and pics
-        postsRef.addValueEventListener(new ValueEventListener() {
+        postsRef.orderByChild("timestamp").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 mPosts.clear();
@@ -126,8 +127,7 @@ public class HomeFragment extends Fragment {
         btnNewPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                date = new Date();
-                createNewPost(new Post(uid, "i love demon slayer", 45664,date.getTime()));
+                createNewPost();
             }
         });
 
@@ -136,11 +136,13 @@ public class HomeFragment extends Fragment {
 
     private void setUIRef() {
         //Reference of RecyclerView
-        mRecyclerView = root.findViewById(R.id.homePostList);
+        homeRecyclerView = root.findViewById(R.id.homePostList);
         //Linear Layout Manager
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
         //Set Layout Manager to RecyclerView
-        mRecyclerView.setLayoutManager(linearLayoutManager);
+        homeRecyclerView.setLayoutManager(linearLayoutManager);
+        //reverse posts so most recent on top
+//        Collections.reverse(mPosts);
 
         //Create adapter
         HomeRecylerItemArrayAdapter myRecyclerViewAdapter = new HomeRecylerItemArrayAdapter(mPosts, new HomeRecylerItemArrayAdapter.MyRecyclerViewItemClickListener()
@@ -154,10 +156,12 @@ public class HomeFragment extends Fragment {
         });
 
         //Set adapter to RecyclerView
-        mRecyclerView.setAdapter(myRecyclerViewAdapter);
+        homeRecyclerView.setAdapter(myRecyclerViewAdapter);
     }
 
-    private void createNewPost(Post post) {
+    private void createNewPost() {
+        date = new Date();
+        Post post = new Post(uid, "i love demon slayer", 45664,date.getTime());
         postsRef.child("post"+(maxId+1)).setValue(post);
     }
 }
