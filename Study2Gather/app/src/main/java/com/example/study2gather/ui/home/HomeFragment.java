@@ -72,8 +72,8 @@ public class HomeFragment extends Fragment {
 
     private void bindPostsData() {
         mPosts.add(new HomeRecyclerItem(R.drawable.tanjiro, "Tanjiro",  "6", "OwO #HiHi", R.drawable.ic_post_pic, 987654321));
-        mPosts.add(new HomeRecyclerItem(R.drawable.tanjiro, "Tanjiro",  "6", "OwO #HiHi", R.drawable.ic_post_pic, 987654321));
-        mPosts.add(new HomeRecyclerItem(R.drawable.tanjiro, "Tanjiro",  "6", "OwO #HiHi", R.drawable.ic_post_pic, 987654321));
+        mPosts.add(new HomeRecyclerItem(R.drawable.tanjiro, "Tanjiro",  "6", "OwO #HiHi", R.drawable.ic_post_pic, 987));
+        mPosts.add(new HomeRecyclerItem(R.drawable.tanjiro, "Tanjiro",  "6", "OwO #HiHi", R.drawable.ic_post_pic, 98765));
         mPosts.add(new HomeRecyclerItem(R.drawable.tanjiro, "Tanjiro",  "6", "OwO #HiHi", R.drawable.ic_post_pic, 987654321));
         mPosts.add(new HomeRecyclerItem(R.drawable.tanjiro, "Tanjiro",  "6", "OwO #HiHi", R.drawable.ic_post_pic, 987654321));
         mPosts.add(new HomeRecyclerItem(R.drawable.tanjiro, "Tanjiro",  "6", "OwO #HiHi", R.drawable.ic_post_pic, 987654321));

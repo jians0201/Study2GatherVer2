@@ -66,10 +66,10 @@ public class HomeRecylerItemArrayAdapter extends RecyclerView.Adapter<HomeRecyle
 
         //Set Post Like Count
         String likeCount = "";
-        if(mPosts.get(position).getPostLikeCount() > 1) {
-            likeCount = NumberFormat.getNumberInstance(Locale.US).format(mPosts.get(position).getPostLikeCount()) + " likes";
+        if(!mPosts.get(position).getPostLikeCount().equals("0")) {
+            likeCount = mPosts.get(position).getPostLikeCount() + " likes";
         } else {
-            likeCount = "1 like";
+            likeCount = "0 like";
         }
         holder.textViewPostLikeCount.setText(likeCount);
     }
