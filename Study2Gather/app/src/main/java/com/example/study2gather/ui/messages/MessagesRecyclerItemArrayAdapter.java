@@ -50,7 +50,7 @@ public class MessagesRecyclerItemArrayAdapter extends RecyclerView.Adapter<Messa
         holder.messagesSender.setText(mChats.get(position).getChatTitle());
 
         //Set Latest Message
-        holder.messagesBrief.setText("");
+        holder.messagesBrief.setText(mChats.get(position).getLastMsg());
 
         //Set Chat Pic
         Picasso.get().load(mChats.get(position).getChatPic()).into(holder.profilePic);
