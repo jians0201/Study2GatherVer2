@@ -1,20 +1,13 @@
 package com.example.study2gather;
 
 import android.os.Bundle;
-
 import androidx.appcompat.app.AppCompatActivity;
-<<<<<<< Updated upstream
 import androidx.appcompat.app.AppCompatDelegate;
-import androidx.drawerlayout.widget.DrawerLayout;
-=======
->>>>>>> Stashed changes
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
 
 public class MainActivity extends AppCompatActivity/* implements View.OnClickListener*/ {
     private BottomNavigationView navView;
