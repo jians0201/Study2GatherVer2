@@ -39,7 +39,7 @@ public class MessagesFragment extends Fragment {
 
     private long maxId;
     private String uid;
-//    private ArrayList<MessagesRecyclerItem> mChats;
+    private ArrayList<MessagesRecyclerItem> mChats;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         messagesViewModel = new ViewModelProvider(this).get(MessagesViewModel.class);
