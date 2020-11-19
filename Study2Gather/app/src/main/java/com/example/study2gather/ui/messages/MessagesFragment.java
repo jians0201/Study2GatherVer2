@@ -16,14 +16,32 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.study2gather.Chat;
 import com.example.study2gather.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.database.DatabaseReference;
 
 public class MessagesFragment extends Fragment {
 
     private MessagesViewModel messagesViewModel;
+    private FloatingActionButton btnNewMessage;
+
+    private DatabaseReference ref;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         messagesViewModel = new ViewModelProvider(this).get(MessagesViewModel.class);
         View root = inflater.inflate(R.layout.fragment_messages, container, false);
+        btnNewMessage = root.findViewById(R.id.fab);
+
+        btnNewMessage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
         return root;
+    }
+
+    public void createNewChat() {
+
     }
 }

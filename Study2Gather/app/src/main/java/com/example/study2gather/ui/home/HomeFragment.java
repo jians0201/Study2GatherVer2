@@ -2,7 +2,6 @@ package com.example.study2gather.ui.home;
 
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,12 +35,11 @@ import java.util.HashMap;
 public class HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
-    private FloatingActionButton btn;
+    private FloatingActionButton btnNewPost;
     private RecyclerView mRecyclerView;
     private View root;
 
-    private DatabaseReference postsRef;
-    private DatabaseReference userRef;
+    private DatabaseReference postsRef, userRef;
     private FirebaseUser user;
     private StorageReference imagesRef, profilePicsRef;
 
@@ -55,7 +53,7 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
         root = inflater.inflate(R.layout.fragment_home, container, false);
-        btn = root.findViewById(R.id.fab);
+        btnNewPost = root.findViewById(R.id.fab);
         imagesRef = FirebaseStorage.getInstance().getReference("images");
         profilePicsRef = FirebaseStorage.getInstance().getReference("profileImages");
         user = FirebaseAuth.getInstance().getCurrentUser();
@@ -125,7 +123,7 @@ public class HomeFragment extends Fragment {
         });
 
         //add post btn
-        btn.setOnClickListener(new View.OnClickListener() {
+        btnNewPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 date = new Date();
