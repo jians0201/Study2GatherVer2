@@ -40,7 +40,7 @@ public class HomeFragment extends Fragment {
     private RecyclerView homeRecyclerView;
     private View root;
 
-    private DatabaseReference postsRef, userRef;
+    private DatabaseReference postsRef, usersRef;
     private FirebaseUser user;
     private StorageReference imagesRef, profilePicsRef;
 
@@ -59,12 +59,12 @@ public class HomeFragment extends Fragment {
         profilePicsRef = FirebaseStorage.getInstance().getReference("profileImages");
         user = FirebaseAuth.getInstance().getCurrentUser();
         uid = user.getUid();
-        userRef = FirebaseDatabase.getInstance().getReference("Users");
+        usersRef = FirebaseDatabase.getInstance().getReference("Users");
         postsRef = FirebaseDatabase.getInstance().getReference("Posts");
         usersListWithName = new HashMap<String, String>();
 
         //get own info
-        userRef.child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
+        usersRef.child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) { userProfile = snapshot.getValue(UserObj.class); }
             @Override
@@ -79,7 +79,7 @@ public class HomeFragment extends Fragment {
         });
 
         //get all users info
-        userRef.addValueEventListener(new ValueEventListener() {
+        usersRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot ds : snapshot.getChildren()) { usersListWithName.put(ds.getKey(),ds.child("username").getValue(String.class)); }
