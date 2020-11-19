@@ -6,15 +6,15 @@ public class HomeRecyclerItem {
     private String postTime;
     private String postCaption;
     private int postPic;
-    private int postLikeCount;
+    private String postLikeCount;
 
-    public HomeRecyclerItem(int postUserPic, String postUsername, String postTime, String postCaption, int postPic, int postLikeCount) {
+    public HomeRecyclerItem(int postUserPic, String postUsername, String postTime, String postCaption, int postPic, double postLikeCount) {
         this.postUserPic = postUserPic;
         this.postUsername = postUsername;
         this.postTime = postTime;
         this.postCaption = postCaption;
         this.postPic = postPic;
-        this.postLikeCount = postLikeCount;
+        this.postLikeCount = (postLikeCount /1000 < 1) ? String.format("%.0f",postLikeCount) : (postLikeCount/1000000 < 1) ? String.format("%.1f", postLikeCount/1000) + "k" :String.format("%.1f", postLikeCount/1000000) + "M" ;
     }
 
     public int getPostUserPic() { return postUserPic; }
@@ -39,5 +39,5 @@ public class HomeRecyclerItem {
         return postPic;
     }
 
-    public int getPostLikeCount() { return postLikeCount; }
+    public String getPostLikeCount() { return postLikeCount; }
 }
