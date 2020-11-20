@@ -1,5 +1,6 @@
 package com.example.study2gather.ui.messages;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,13 +49,14 @@ public class MessagesRecyclerItemArrayAdapter extends RecyclerView.Adapter<Messa
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         //Set Chat Title
         holder.messagesSender.setText(mChats.get(position).getChatTitle());
+        Log.d("TITLE A",mChats.get(position).getChatTitle());
 
         //Set Latest Message
         holder.messagesBrief.setText(mChats.get(position).getLastMsg());
 
         //Set Chat Pic
         Picasso.get().load(mChats.get(position).getChatPic()).into(holder.profilePic);
-
+        Log.d("URI", String.valueOf(mChats.get(position).getChatPic()));
     }
 
     @Override

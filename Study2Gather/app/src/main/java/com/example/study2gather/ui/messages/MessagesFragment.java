@@ -3,6 +3,7 @@ package com.example.study2gather.ui.messages;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -91,12 +92,57 @@ public class MessagesFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot ds : snapshot.getChildren()) { usersListWithName.put(ds.getKey(),ds.child("username").getValue(String.class)); }
+                //get all chats
+                chatsRef.orderByChild(uid).equalTo(true).addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if (snapshot.exists()) {
+
+                            mChats.clear();
+                            for (DataSnapshot child : snapshot.getChildren()) {
+                                MessagesRecyclerItem msgRItem = new MessagesRecyclerItem();
+                                chatIdList.add(child.getKey()); //fill chat ids for messaging later
+                                //If Title exists means its a group chat
+                                if (child.child("title").exists()) {
+        //                            mChats.add(child.child("title").getValue().toString());
+                                    msgRItem.setChatTitle(child.child("title").getValue().toString());
+                                }
+                                //If Title does not exist means its a normal chat
+                                else {
+                                    for (DataSnapshot c : child.getChildren()) {
+                                        if (!c.getKey().equals(uid)) {
+                                            String id = c.getKey();
+                                            msgRItem.setChatTitle(usersListWithName.get(id));
+                                            Log.d("NAME",usersListWithName.get(id));
+                                            //get chat pic
+                                            Log.d("ID",id);
+                                            profilePicsRef.child(id+"_profile.jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                                @Override
+                                                public void onSuccess(Uri uri) { //only works if profile pic was found
+                                                    msgRItem.setChatPic(uri);
+                                                    mChats.add(msgRItem);
+                                                    Log.d("Title",msgRItem.getChatTitle());
+                                                    Log.d("SIZE",String.valueOf(mChats.size()));
+                                                    if (mChats.size() == snapshot.getChildrenCount()) setUIRef();
+                                                }
+                                            });
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {}
+                });
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {}
         });
 
-        //get all chats
+//        //get all chats
 //        chatsRef.orderByChild(uid).equalTo(true).addValueEventListener(new ValueEventListener() {
 //            @Override
 //            public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -116,12 +162,16 @@ public class MessagesFragment extends Fragment {
 //                                if (!c.getKey().equals(uid)) {
 //                                    String id = c.getKey();
 //                                    msgRItem.setChatTitle(usersListWithName.get(id));
+//                                    Log.d("NAME",usersListWithName.get(id));
 //                                    //get chat pic
+//                                    Log.d("ID",id);
 //                                    profilePicsRef.child(id+"_profile.jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
 //                                        @Override
-//                                        public void onSuccess(Uri uri) {
+//                                        public void onSuccess(Uri uri) { //only works if profile pic was found
 //                                            msgRItem.setChatPic(uri);
 //                                            mChats.add(msgRItem);
+//                                            Log.d("Title",msgRItem.getChatTitle());
+//                                            Log.d("SIZE",String.valueOf(mChats.size()));
 //                                            if (mChats.size() == snapshot.getChildrenCount()) setUIRef();
 //                                        }
 //                                    });
@@ -143,8 +193,8 @@ public class MessagesFragment extends Fragment {
                 createNewChat();
             }
         });
-        bindCountriesData();
-        setUIRef();
+//        bindCountriesData();
+//        setUIRef();
 
         return root;
     }
