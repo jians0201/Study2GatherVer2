@@ -5,6 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <Button
+        android:id="@+id/registerBackBtn"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:drawableLeft="@drawable/ic_back_arrow_white_24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@android:color/transparent" />
+
     <ImageView
         android:id="@+id/registerPic"
         android:layout_width="166dp"

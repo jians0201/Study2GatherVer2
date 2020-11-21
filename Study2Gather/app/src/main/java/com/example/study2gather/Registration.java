@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import android.util.Patterns;
 import android.view.View;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -59,6 +60,15 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
         rgSexFemale = findViewById(R.id.registerSexFemale);
         rgDOBLabel = findViewById(R.id.registerDOBLabel);
         pgbar = findViewById(R.id.registerProgressBar);
+
+        Button button;
+        button = findViewById(R.id.registerBackBtn);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     // Handles radio button validations

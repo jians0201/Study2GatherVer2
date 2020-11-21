@@ -10,12 +10,12 @@
         android:id="@+id/splashLogo"
         android:layout_width="212dp"
         android:layout_height="233dp"
+        android:layout_gravity="center"
+        android:contentDescription="@string/splashLogoDesc"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/splash"
-        android:contentDescription="@string/splashLogoDesc" />
+        app:srcCompat="@drawable/splash" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
