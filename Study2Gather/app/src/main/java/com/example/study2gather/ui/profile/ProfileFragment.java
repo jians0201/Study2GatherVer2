@@ -104,10 +104,10 @@ public class ProfileFragment extends Fragment {
                 if (task.isSuccessful()) {
                     Picasso.get().load(task.getResult()).into(profilePic);
                 }
-            else {
-                //load temp image
-                profilePic.setImageResource(R.drawable.ic_profile_user_24dp);
-            }
+                else {
+                    //load temp image
+                    profilePic.setImageResource(R.drawable.ic_profile_user_24dp);
+                }
             }
         });
 

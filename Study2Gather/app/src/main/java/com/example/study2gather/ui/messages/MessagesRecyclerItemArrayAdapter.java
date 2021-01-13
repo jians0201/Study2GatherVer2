@@ -48,7 +48,6 @@ public class MessagesRecyclerItemArrayAdapter extends RecyclerView.Adapter<Messa
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         //Set Chat Title
-        holder.messagesSender.setText(mChats.get(position).getChatTitle());
         Log.d("TITLE A",mChats.get(position).getChatTitle());
 
         //Set Latest Message
@@ -56,7 +55,6 @@ public class MessagesRecyclerItemArrayAdapter extends RecyclerView.Adapter<Messa
 
         //Set Chat Pic
         Picasso.get().load(mChats.get(position).getChatPic()).into(holder.profilePic);
-        Log.d("URI", String.valueOf(mChats.get(position).getChatPic()));
     }
 
     @Override
