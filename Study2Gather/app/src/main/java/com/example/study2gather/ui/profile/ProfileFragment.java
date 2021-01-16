@@ -1,27 +1,24 @@
 package com.example.study2gather.ui.profile;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.study2gather.R;
 import com.example.study2gather.UserObj;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -37,6 +34,7 @@ public class ProfileFragment extends Fragment {
 
     private ImageView profilePic;
     private TextView profileName, profileEmail, profileBirthday, profileSchool, profileLocation;
+    private FloatingActionButton btnEditProfile;
     //gender together with name
 
     private FirebaseUser user;
@@ -58,6 +56,7 @@ public class ProfileFragment extends Fragment {
         profileBirthday = root.findViewById(R.id.profileBirthday);
         profileSchool = root.findViewById(R.id.profileSchool);
         profileLocation = root.findViewById(R.id.profileLocation);
+        btnEditProfile = root.findViewById(R.id.fabEditProfile);
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         uid = user.getUid();
@@ -111,7 +110,16 @@ public class ProfileFragment extends Fragment {
             }
         });
 
+        //edit profile btn
+        btnEditProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i ;
+                i = new Intent(getActivity(), ProfileEdit.class);
+                startActivity(i);
 
+            }
+        });
 
         return root;
     }

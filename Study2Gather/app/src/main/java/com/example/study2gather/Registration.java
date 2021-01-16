@@ -98,7 +98,7 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
             rgUname.setError(getString(R.string.registerEmptyError));
             return false;
         } else if (uname.length() < 4 || uname.length() > 18) {
-            rgUname.setError("Username must be 4-18 characters!");
+            rgUname.setError(getString(R.string.registerUsernameError));
             return false;
         } else {
             rgUname.setError(null);

@@ -74,9 +74,8 @@
                         android:layout_gravity="center"
                         android:layout_marginTop="15dp"
                         android:drawablePadding="10dp"
-                        android:drawableTint="@color/grey"
                         android:fontFamily="@font/exo"
-                        android:textColor="@color/grey"
+                        android:textColor="@color/white"
                         android:textStyle="bold"
                         app:drawableStartCompat="@drawable/ic_email_white_18dp" />
 
@@ -87,9 +86,8 @@
                         android:layout_gravity="center"
                         android:layout_marginTop="5dp"
                         android:drawablePadding="10dp"
-                        android:drawableTint="@color/grey"
                         android:fontFamily="@font/exo"
-                        android:textColor="@color/grey"
+                        android:textColor="@color/white"
                         android:textStyle="bold"
                         app:drawableLeftCompat="@drawable/ic_birthday_white_18dp" />
 
@@ -100,9 +98,8 @@
                         android:layout_gravity="center"
                         android:layout_marginTop="5dp"
                         android:drawablePadding="10dp"
-                        android:drawableTint="@color/grey"
                         android:fontFamily="@font/exo"
-                        android:textColor="@color/grey"
+                        android:textColor="@color/white"
                         android:textStyle="bold"
                         app:drawableStartCompat="@drawable/ic_school_white_18dp" />
 
@@ -113,9 +110,8 @@
                         android:layout_gravity="center"
                         android:layout_marginTop="5dp"
                         android:drawablePadding="10dp"
-                        android:drawableTint="@color/grey"
                         android:fontFamily="@font/exo"
-                        android:textColor="@color/grey"
+                        android:textColor="@color/white"
                         android:textStyle="bold"
                         app:drawableLeftCompat="@drawable/ic_location_white_18dp" />
                 </LinearLayout>
@@ -124,5 +120,17 @@
 
         </LinearLayout>
     </ScrollView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabEditProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        app:backgroundTint="@color/purple_500"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:tint="@color/white"
+        app:srcCompat="@drawable/ic_edit_white_24dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

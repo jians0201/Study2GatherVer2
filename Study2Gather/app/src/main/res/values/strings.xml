@@ -25,7 +25,7 @@
     <string name="registerSexMaleLabel">Male</string>
     <string name="registerSexFemaleLabel">Female</string>
     <string name="registerDOBLabel">DOB</string>
-    <string name="registerDOBBtn">Calender</string>
+    <string name="registerDOBBtn">Calendar</string>
     <string name="registerRegisterBtn">Register</string>
     // Error Text
     <string name="registerEmptyError">Field can\'t be empty!</string>
@@ -47,6 +47,12 @@
     / #Courses Page
     <string name="coursesTitle">Courses</string>
     <string name="coursesTabTitle">Courses</string>
+    <string name="coursesEmptySubs">You currently have not subscribed to any courses</string>
+    <string name="coursesMyCoursesLabel">My Courses</string>
+    <string name="coursesSuggestedCoursesLabel">Suggested Courses</string>
+    <string name="coursesCourseName">Python</string>
+    <string name="coursesCourseCategory">Programming Language</string>
+    <string name="coursesCourseTotalLecture">35 Lectures</string>
 
     / #Messages Page
     <string name="messagesTitle">Messages</string>
@@ -63,6 +69,25 @@
     <string name="profileBirthday">6 September 2025</string>
     <string name="profileSchool">Singapore Polytechnic</string>
     <string name="profileLocation">Singapore</string>
+
+    / #Profile Edit Page
+    <string name="profileEditTitle">Edit Profile</string>
+    <string name="profileEditPicBtnTxt">Change Profile Photo</string>
+    <string name="profileEditNameLabel">Username</string>
+    <string name="profileEditEmailLabel">Email</string>
+    <string name="profileEditSexLabel">Sex</string>
+    <string name="profileEditSexMaleLabel">Male</string>
+    <string name="profileEditSexFemaleLabel">Female</string>
+    <string name="profileEditDOBLabel">DOB</string>
+    <string name="profileEditDOBBtn">Calendar</string>
+    <string name="profileEditSchoolLabel">School</string>
+    <string name="profileEditLocationLabel">Location</string>
+    / #Error Text
+    <string name="profileEditEmptyError">Field can\'t be empty!</string>
+    <string name="profileEditUsernameError">Username must be 4–18 characters!</string>
+    <string name="profileEditEmailError">Enter a valid Email!</string>
+    <string name="profileEditSexError">Select a Gender!</string>
+    <string name="profileEditDOBError">Enter a Date of Birth!</string>
 
     / #Chat Page
     <string name="chatTitle">Chat</string>
