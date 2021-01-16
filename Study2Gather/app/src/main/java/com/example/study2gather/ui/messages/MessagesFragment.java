@@ -113,16 +113,12 @@ public class MessagesFragment extends Fragment {
                                         if (!c.getKey().equals(uid)) {
                                             String id = c.getKey();
                                             msgRItem.setChatTitle(usersListWithName.get(id));
-                                            Log.d("NAME",usersListWithName.get(id));
                                             //get chat pic
-                                            Log.d("ID",id);
                                             profilePicsRef.child(id+"_profile.jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                                 @Override
                                                 public void onSuccess(Uri uri) { //only works if profile pic was found
                                                     msgRItem.setChatPic(uri);
                                                     mChats.add(msgRItem);
-                                                    Log.d("Title",msgRItem.getChatTitle());
-                                                    Log.d("SIZE",String.valueOf(mChats.size()));
                                                     if (mChats.size() == snapshot.getChildrenCount()) setUIRef();
                                                 }
                                             });
@@ -142,59 +138,12 @@ public class MessagesFragment extends Fragment {
             public void onCancelled(@NonNull DatabaseError error) {}
         });
 
-//        //get all chats
-//        chatsRef.orderByChild(uid).equalTo(true).addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                if (snapshot.exists()) {
-//                    MessagesRecyclerItem msgRItem = new MessagesRecyclerItem();
-//                    mChats.clear();
-//                    for (DataSnapshot child : snapshot.getChildren()) {
-//                        chatIdList.add(child.getKey()); //fill chat ids for messaging later
-//                        //If Title exists means its a group chat
-//                        if (child.child("title").exists()) {
-////                            mChats.add(child.child("title").getValue().toString());
-//                            msgRItem.setChatTitle(child.child("title").getValue().toString());
-//                        }
-//                        //If Title does not exist means its a normal chat
-//                        else {
-//                            for (DataSnapshot c : child.getChildren()) {
-//                                if (!c.getKey().equals(uid)) {
-//                                    String id = c.getKey();
-//                                    msgRItem.setChatTitle(usersListWithName.get(id));
-//                                    Log.d("NAME",usersListWithName.get(id));
-//                                    //get chat pic
-//                                    Log.d("ID",id);
-//                                    profilePicsRef.child(id+"_profile.jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-//                                        @Override
-//                                        public void onSuccess(Uri uri) { //only works if profile pic was found
-//                                            msgRItem.setChatPic(uri);
-//                                            mChats.add(msgRItem);
-//                                            Log.d("Title",msgRItem.getChatTitle());
-//                                            Log.d("SIZE",String.valueOf(mChats.size()));
-//                                            if (mChats.size() == snapshot.getChildrenCount()) setUIRef();
-//                                        }
-//                                    });
-//                                    break;
-//                                }
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {}
-//        });
-
         btnNewMessage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 createNewChat();
             }
         });
-//        bindCountriesData();
-//        setUIRef();
 
         return root;
     }
