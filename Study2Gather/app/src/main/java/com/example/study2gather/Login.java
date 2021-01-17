@@ -70,12 +70,9 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
     public void onClick(View v){
         switch(v.getId()){
             case R.id.loginLoginButton:
-                String email = Objects.requireNonNull(loginEmail.getEditText()).getText().toString().trim();
-                String password = Objects.requireNonNull(loginPword.getEditText()).getText().toString().trim();
-
-                if (!validateEmail() | !validatePassword()) {
-                    return;
-                }
+                String email = loginEmail.getEditText().getText().toString().trim();
+                String password = loginPword.getEditText().getText().toString().trim();
+                if (validateEmail() && validatePassword()) {
                     pgbar.setVisibility(View.VISIBLE);
                     fAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
@@ -91,10 +88,10 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                                 pgbar.setVisibility(View.GONE);
                             }
                         }
-                    }).addOnFailureListener(e->{
+                    }).addOnFailureListener(e -> {
                         Log.d("Login Fail", e.getMessage());
                     });
-
+                }
                 break;
             case R.id.loginRegisterButton:
                 i = new Intent(getApplicationContext(), Registration.class);

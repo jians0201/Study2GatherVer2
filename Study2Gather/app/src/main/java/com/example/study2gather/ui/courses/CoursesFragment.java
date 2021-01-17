@@ -20,16 +20,15 @@ public class CoursesFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        coursesViewModel =
-                new ViewModelProvider(this).get(CoursesViewModel.class);
+        coursesViewModel = new ViewModelProvider(this).get(CoursesViewModel.class);
         View root = inflater.inflate(R.layout.fragment_courses, container, false);
-        final TextView textView = root.findViewById(R.id.text_courses);
-        coursesViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
+//        final TextView textView = root.findViewById(R.id.text_courses);
+//        coursesViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+//            @Override
+//            public void onChanged(@Nullable String s) {
+//                textView.setText(s);
+//            }
+//        });
         return root;
     }
 }

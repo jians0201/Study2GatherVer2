@@ -33,7 +33,7 @@
                     app:cardCornerRadius="250dp">
 
                     <ImageView
-                        android:id="@+id/profilePic"
+                        android:id="@+id/editProfilePic"
                         android:layout_width="75dp"
                         android:layout_height="75dp"
                         android:scaleType="centerCrop" />
@@ -52,10 +52,11 @@
                 android:fontFamily="@font/exo"
                 android:text="@string/profileEditPicBtnTxt"
                 android:textColor="#0E86EE"
+                android:onClick="onClick"
                 android:textSize="13sp" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/profileEditName"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -72,6 +73,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/profileEditPicBtn">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/profileEditName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text"
@@ -80,7 +82,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/profileEditEmail"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -97,6 +99,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/profileEditName" >
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/profileEditEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textEmailAddress"
@@ -198,7 +201,7 @@
             </LinearLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/profileEditSchool"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -212,6 +215,7 @@
                 app:errorEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/profileEditSchool"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text"
@@ -220,7 +224,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/profileEditLocation"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -234,6 +238,7 @@
                 app:errorEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/profileEditLocation"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text"

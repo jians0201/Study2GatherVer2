@@ -38,7 +38,7 @@ public class ProfileFragment extends Fragment {
     //gender together with name
 
     private FirebaseUser user;
-    private DatabaseReference ref;
+    private DatabaseReference userRef;
     private StorageReference profilePicRef;
 
     private String uid;
@@ -60,11 +60,11 @@ public class ProfileFragment extends Fragment {
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         uid = user.getUid();
-        ref = FirebaseDatabase.getInstance().getReference("Users");
+        userRef = FirebaseDatabase.getInstance().getReference("Users");
         profilePicRef = FirebaseStorage.getInstance().getReference("profileImages").child(uid+"_profile.jpg");
 
         //get userinfo
-        ref.child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
+        userRef.child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 userProfile = snapshot.getValue(UserObj.class);
@@ -73,21 +73,14 @@ public class ProfileFragment extends Fragment {
                     profileName.setText(userProfile.getUsername());
                     profileEmail.setText(userProfile.getEmail());
                     profileBirthday.setText(userProfile.getDob());
-                    if (userProfile.getSchool() == null) {
-                        profileSchool.setText("None");
-                    } else {
-                        profileSchool.setText(userProfile.getSchool());
-                    }
-                    if (userProfile.getLocation() == null) {
-                        profileLocation.setText("None");
-                    } else {
-                        profileLocation.setText(userProfile.getLocation());
-                    }
-                    if (userProfile.getGender().equals("male")) {
-                        profileName.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.ic_male_white_12dp,0);
-                    } else {
-                        profileName.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.ic_female_white_12dp,0);
-                    }
+                    if (userProfile.getSchool() == null)  profileSchool.setText("None");
+                    else profileSchool.setText(userProfile.getSchool());
+
+                    if (userProfile.getLocation() == null) profileLocation.setText("None");
+                    else profileLocation.setText(userProfile.getLocation());
+
+                    if (userProfile.getGender().equals("male")) profileName.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.ic_male_white_12dp,0);
+                    else profileName.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.ic_female_white_12dp,0);
                 }
             }
             @Override
