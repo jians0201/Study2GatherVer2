@@ -1,7 +1,10 @@
 package com.example.study2gather.ui.home;
 
+import android.content.ContentResolver;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +19,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.study2gather.Post;
 import com.example.study2gather.R;
 import com.example.study2gather.UserObj;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -95,17 +100,34 @@ public class HomeFragment extends Fragment {
                 mPosts.clear();
                 for (DataSnapshot ds : snapshot.getChildren()) {
                     Post p = ds.getValue(Post.class);
+                    Log.d("POST","Tried to get post");
                     //get post pic
-                    StorageReference profilePic = FirebaseStorage.getInstance().getReference("images").child(ds.getKey()+".jpg");
-                    profilePic.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    StorageReference postPic = FirebaseStorage.getInstance().getReference("images").child(ds.getKey()+".jpg");
+                    postPic.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
                         @Override
-                        public void onSuccess(Uri uri) {
-                            p.setPostPic(uri);
+                        public void onComplete(@NonNull Task<Uri> task) {
+                            if (task.isSuccessful()) {
+                                p.setPostPic(task.getResult());
+                            } else {
+                                Log.d("POST","FAILED to get post");
+//                                Uri temp_pfp = Uri.parse("android.resource://com.example.study2gather/drawable/no_image.png");
+                                Uri temp_pfp = Uri.parse("android.resource://com.example.study2gather/"+R.drawable.no_image);
+//                                Resources resources = getResources();
+//                                Uri temp_pfp = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + resources.getResourcePackageName(R.drawable.no_image) + '/' + resources.getResourceTypeName(R.drawable.no_image) + '/' + resources.getResourceEntryName(R.drawable.no_image) );
+                                //load temp image
+                                p.setPostProfilePic(temp_pfp);
+                            }
                             //get user profile pic
-                            profilePicsRef.child(p.getPostAuthor()+"_profile.jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            profilePicsRef.child(p.getPostAuthor()+"_profile.jpg").getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
                                 @Override
-                                public void onSuccess(Uri uri) {
-                                    p.setPostProfilePic(uri);
+                                public void onComplete(@NonNull Task<Uri> task) {
+                                    if (task.isSuccessful()) {
+                                        p.setPostProfilePic(task.getResult());
+                                    } else {
+                                        Uri temp_pfp = Uri.parse("android.resource://com.example.study2gather/drawable/no_image.png");
+                                        //load temp image
+                                        p.setPostProfilePic(temp_pfp);
+                                    }
                                     p.setPostAuthor(usersListWithName.get(p.getPostAuthor()));
                                     mPosts.add(p);
                                     //only populate posts once all posts have been retrieved
@@ -115,10 +137,32 @@ public class HomeFragment extends Fragment {
                         }
                     });
 
+//                            .addOnSuccessListener(new OnSuccessListener<Uri>() {
+//                        @Override
+//                        public void onSuccess(Uri uri) {
+//                            p.setPostPic(uri);
+//
+//                        }
+//                    });
+//                    postPic.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+//                        @Override
+//                        public void onSuccess(Uri uri) {
+//                            p.setPostPic(uri);
+//                            //get user profile pic
+//                            profilePicsRef.child(p.getPostAuthor()+"_profile.jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+////                                @Override
+////                                public void onSuccess(Uri uri) {
+////                                    p.setPostProfilePic(uri);
+////                                    p.setPostAuthor(usersListWithName.get(p.getPostAuthor()));
+////                                    mPosts.add(p);
+////                                    //only populate posts once all posts have been retrieved
+////                                    if (mPosts.size() == snapshot.getChildrenCount()) setUIRef();
+////                                }
+////                            });
+//                        }
+//                    });
                 }
-
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {}
         });
@@ -142,19 +186,13 @@ public class HomeFragment extends Fragment {
         //Set Layout Manager to RecyclerView
         homeRecyclerView.setLayoutManager(linearLayoutManager);
         //reverse posts so most recent on top
-//        Collections.reverse(mPosts);
-
+//        Collections.reverse(mPosts); //not working
         //Create adapter
-        HomeRecylerItemArrayAdapter myRecyclerViewAdapter = new HomeRecylerItemArrayAdapter(mPosts, new HomeRecylerItemArrayAdapter.MyRecyclerViewItemClickListener()
-        {
+        HomeRecylerItemArrayAdapter myRecyclerViewAdapter = new HomeRecylerItemArrayAdapter(mPosts, new HomeRecylerItemArrayAdapter.MyRecyclerViewItemClickListener() {
             //Handling clicks
             @Override
-            public void onItemClicked(Post post)
-            {
-                Toast.makeText(getContext(), post.getPostAuthor(), Toast.LENGTH_SHORT).show();
-            }
+            public void onItemClicked(Post post) { Toast.makeText(getContext(), post.getPostAuthor(), Toast.LENGTH_SHORT).show(); }
         });
-
         //Set adapter to RecyclerView
         homeRecyclerView.setAdapter(myRecyclerViewAdapter);
     }

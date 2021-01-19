@@ -1,9 +1,14 @@
 package com.example.study2gather;
 
 import android.app.DatePickerDialog;
+import android.content.ContentResolver;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -23,24 +28,30 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Objects;
 
 public class Registration extends AppCompatActivity implements View.OnClickListener{
-    // Global vars
-    private String DOBStr = "";
-    private String gender = "";
+
+    private String gender = "", DOBStr = "";
 
     private TextInputLayout rgUname, rgEmail, rgPword, rgCfmPword;
     private TextView DOBTextField, rgSexLabel, rgDOBLabel;
     private ProgressBar pgbar;
     private RadioButton rgSexMale, rgSexFemale;
+    private Button backBtn;
 
     private FirebaseAuth fAuth;
     private FirebaseDatabase fDb;
+    private StorageReference profilePicRef;
 
     private Intent i;
 
@@ -60,15 +71,17 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
         rgSexFemale = findViewById(R.id.registerSexFemale);
         rgDOBLabel = findViewById(R.id.registerDOBLabel);
         pgbar = findViewById(R.id.registerProgressBar);
-
-        Button button;
-        button = findViewById(R.id.registerBackBtn);
-        button.setOnClickListener(new View.OnClickListener() {
+        backBtn = findViewById(R.id.registerBackBtn);
+        profilePicRef = FirebaseStorage.getInstance().getReference("profileImages");
+        backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
+
+//        Uri uri = Uri.parse("android.resource://com.example.study2gather/drawable/ic_profile_user_24dp.xml");
+//        Log.d("PP",uri.toString());
     }
 
     // Handles radio button validations
@@ -207,36 +220,74 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
                 if (!validateUsername() | !validateEmail() | !validatePassword() | !validateConfirmPassword() | !validateGender() | !validateDOB()) {
                     return;
                 }
-                    //Show progress bar
-                    pgbar.setVisibility(View.VISIBLE);
-                    //Create user
-                    fAuth.createUserWithEmailAndPassword(email, password)
-                            .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                                @Override
-                                public void onComplete(@NonNull Task<AuthResult> task) {
-                                    if (task.isSuccessful()) {
-                                        UserObj user = new UserObj(username,email,password,gender,DOBStr);
-                                        fDb.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(user)
-                                                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                    @Override
-                                                    public void onComplete(@NonNull Task<Void> task) {
-                                                        if (task.isSuccessful()) {
-                                                            Toast.makeText(Registration.this, "Created new user successfully", Toast.LENGTH_SHORT).show();
-                                                            pgbar.setVisibility(View.GONE); //Remove progress bar
-                                                            i = new Intent(getApplicationContext(), Login.class);
-                                                            startActivity(i);
-                                                        } else {
-                                                            Toast.makeText(Registration.this, "Failed to Register! Try Again!", Toast.LENGTH_SHORT).show();
-                                                            pgbar.setVisibility(View.GONE); //Remove progress bar
-                                                        }
-                                                    }
-                                                });
-                                    } else {
-                                        Toast.makeText(Registration.this, "Failed to Register! Try Again!", Toast.LENGTH_SHORT).show();
-                                        pgbar.setVisibility(View.GONE); //Remove progress bar
-                                    }
-                                }
-                            });
+                //Show progress bar
+                pgbar.setVisibility(View.VISIBLE);
+                //Create user
+                fAuth.createUserWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                UserObj user = new UserObj(username,email,password,gender,DOBStr);
+                                String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                                fDb.getInstance().getReference("Users").child(uid).setValue(user)
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()) {
+                                                //upload profile pic
+//                                                Uri uri = Uri.parse("android.resource://com.example.study2gather/drawable/nezuko.jpg");
+//                                                Uri uri = Uri.parse("android.resource://com.example.study2gather/" + R.drawable.ic_profile_user_24dp);
+//                                                Bitmap bm = BitmapFactory.decodeResource(getResources(), R.drawable.ic_profile_user_24dp);
+
+//                                                InputStream iStream = null;
+//                                                try {
+//                                                    iStream = getContentResolver().openInputStream(uri);
+//                                                } catch (FileNotFoundException e) {
+//                                                    e.printStackTrace();
+//                                                }
+//                                                if (iStream != null) {
+//                                                    profilePicRef.child(uid+"_profile.jpg").putFile(uri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+//                                                        @Override
+//                                                        public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+//                                                            if (task.isSuccessful()) {
+//                                                                Toast.makeText(Registration.this, "Created new user successfully", Toast.LENGTH_SHORT).show();
+//                                                                pgbar.setVisibility(View.GONE); //Remove progress bar
+//                                                                i = new Intent(getApplicationContext(), Login.class);
+//                                                                startActivity(i);
+//                                                            }else {
+//                                                                Toast.makeText(Registration.this, "Failed to Register! Try Again!", Toast.LENGTH_SHORT).show();
+//                                                                pgbar.setVisibility(View.GONE); //Remove progress bar
+//                                                            }
+//                                                        }
+//                                                    });
+//                                                }
+//                                                            profilePicRef.child(uid+"_profile.jpg").putFile(uri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+//                                                                @Override
+//                                                                public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+//                                                                    if (task.isSuccessful()) {
+//                                                                        Toast.makeText(Registration.this, "Created new user successfully", Toast.LENGTH_SHORT).show();
+//                                                                        pgbar.setVisibility(View.GONE); //Remove progress bar
+//                                                                        i = new Intent(getApplicationContext(), Login.class);
+//                                                                        startActivity(i);
+//                                                                    }else {
+//                                                                        Toast.makeText(Registration.this, "Failed to Register! Try Again!", Toast.LENGTH_SHORT).show();
+//                                                                        pgbar.setVisibility(View.GONE); //Remove progress bar
+//                                                                    }
+//                                                                }
+//                                                            });
+                                            } else {
+                                                Toast.makeText(Registration.this, "Failed to Register! Try Again!", Toast.LENGTH_SHORT).show();
+                                                pgbar.setVisibility(View.GONE); //Remove progress bar
+                                            }
+                                        }
+                                    });
+                            } else {
+                                Toast.makeText(Registration.this, "Failed to Register! Try Again! User Might Already Exist!", Toast.LENGTH_SHORT).show();
+                                pgbar.setVisibility(View.GONE); //Remove progress bar
+                            }
+                        }
+                    });
                 break;
         }
     }
