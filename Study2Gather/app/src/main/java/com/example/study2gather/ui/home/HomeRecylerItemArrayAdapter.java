@@ -52,13 +52,16 @@ public class HomeRecylerItemArrayAdapter extends RecyclerView.Adapter<HomeRecyle
 
         //Set Post User Profile Picture
 //        holder.imageViewPostUserPic.setImageResource(mPosts.get(position).getPostUserPic());
-        Picasso.get().load(mPosts.get(position).getPostProfilePic()).into(holder.imageViewPostUserPic);
+        if (mPosts.get(position).getPostProfilePic() != null) {
+            Picasso.get().load(mPosts.get(position).getPostProfilePic()).into(holder.imageViewPostUserPic);
+        } else {
+            holder.imageViewPostPic.setImageResource(R.drawable.no_image);
+        }
 
         //Set Post Username
         holder.textViewPostUsername.setText(mPosts.get(position).getPostAuthor());
 
         //Set Post Time
-
 //        String time = mPosts.get(position).getPostTime() + " hours ago";
         Timestamp ts = new Timestamp(mPosts.get(position).getTimestamp());
 //        holder.textViewPostTime.setText(time);
@@ -69,7 +72,12 @@ public class HomeRecylerItemArrayAdapter extends RecyclerView.Adapter<HomeRecyle
 
         //Set Post Picture
 //        holder.imageViewPostPic.setImageResource(mPosts.get(position).getPostPic());
-        Picasso.get().load(mPosts.get(position).getPostPic()).into(holder.imageViewPostPic);
+        if (mPosts.get(position).getPostPic() != null) {
+            Picasso.get().load(mPosts.get(position).getPostPic()).into(holder.imageViewPostPic);
+        } else {
+            holder.imageViewPostPic.setImageResource(R.drawable.no_image);
+        }
+
 
         //Set Post Like Count
         String likeCount = "";

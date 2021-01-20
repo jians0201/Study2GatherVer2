@@ -108,14 +108,6 @@ public class HomeFragment extends Fragment {
                         public void onComplete(@NonNull Task<Uri> task) {
                             if (task.isSuccessful()) {
                                 p.setPostPic(task.getResult());
-                            } else {
-                                Log.d("POST","FAILED to get post");
-//                                Uri temp_pfp = Uri.parse("android.resource://com.example.study2gather/drawable/no_image.png");
-                                Uri temp_pfp = Uri.parse("android.resource://com.example.study2gather/"+R.drawable.no_image);
-//                                Resources resources = getResources();
-//                                Uri temp_pfp = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + resources.getResourcePackageName(R.drawable.no_image) + '/' + resources.getResourceTypeName(R.drawable.no_image) + '/' + resources.getResourceEntryName(R.drawable.no_image) );
-                                //load temp image
-                                p.setPostProfilePic(temp_pfp);
                             }
                             //get user profile pic
                             profilePicsRef.child(p.getPostAuthor()+"_profile.jpg").getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
@@ -123,10 +115,6 @@ public class HomeFragment extends Fragment {
                                 public void onComplete(@NonNull Task<Uri> task) {
                                     if (task.isSuccessful()) {
                                         p.setPostProfilePic(task.getResult());
-                                    } else {
-                                        Uri temp_pfp = Uri.parse("android.resource://com.example.study2gather/drawable/no_image.png");
-                                        //load temp image
-                                        p.setPostProfilePic(temp_pfp);
                                     }
                                     p.setPostAuthor(usersListWithName.get(p.getPostAuthor()));
                                     mPosts.add(p);
