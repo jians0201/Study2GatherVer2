@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/coursesDetailsImg"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/tanzuko" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:padding="15dp"
+                android:background="@drawable/border_bottom">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/coursesDetailsName"
+                        android:layout_width="250dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/exo_extrabold"
+                        android:text="@string/coursesCourseDetailName"
+                        android:textColor="@color/white" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/coursesDetailsCourseCategory"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/exo"
+                            android:text="@string/coursesCourseCategory"
+                            android:textColor="@color/grey"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/coursesDetailsCourseInterpunct"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/exo_extrabold"
+                            android:paddingStart="5dp"
+                            android:paddingEnd="5dp"
+                            android:text="‧"
+                            android:textColor="@color/grey"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/coursesDetailsCourseTotalLecture"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/exo"
+                            android:text="@string/coursesCourseTotalLecture"
+                            android:textColor="@color/grey"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:id="@+id/coursesDetailsSubButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/purple_700"
+                    android:fontFamily="@font/exo_extrabold"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:minWidth="0dp"
+                    android:minHeight="0dp"
+                    android:text="@string/coursesCourseDetailSubbed"
+                    android:textColor="@color/white"
+                    android:textSize="13sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/coursesDetailsLecture"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/exo"
+                    android:text="@string/coursesCourseDetailLect1"
+                    android:textSize="12sp" />
+
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <ImageButton
+                    android:id="@+id/coursesDetailsDownloadButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/purple_700"
+                    android:fontFamily="@font/exo_extrabold"
+                    android:text="@string/coursesCourseDetailSub"
+                    android:textColor="@color/white"
+                    android:textSize="13sp"
+                    app:srcCompat="@drawable/ic_arrow_circle_down_white_18dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp">
+
+                <TextView
+                    android:id="@+id/coursesDetailsLectureSlide"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/exo_extrabold"
+                    android:text="@string/coursesCourseDetailLect1Slide"
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</LinearLayout>

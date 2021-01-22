@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Study2Gather</string>
 
@@ -50,9 +51,25 @@
     <string name="coursesEmptySubs">You currently have not subscribed to any courses</string>
     <string name="coursesMyCoursesLabel">My Courses</string>
     <string name="coursesSuggestedCoursesLabel">Suggested Courses</string>
-    <string name="coursesCourseName">Python</string>
+    <string name="coursesCourseName">Introduction to Computer Science and Programming in Python</string>
     <string name="coursesCourseCategory">Programming Language</string>
     <string name="coursesCourseTotalLecture">35 Lectures</string>
+
+    <string name="coursesCourseDetailName">Introduction to Computer Science and Programming in Python</string>
+    <string name="coursesCourseDetailAuthor">Kamado Tanjiro</string>
+    <string name="coursesCourseDetailSub">Subscribe</string>
+    <string name="coursesCourseDetailSubbed">Subscribed</string>
+    <string name="coursesCourseDetailDesc">Learn Python Programming the Easy Way!<br/><br/>If you want to learn how to write Python programs that can be used on Linux, Mac, and Unix operating systems, code python like a pro, solve real-world problems, or automate repetitive and complex tasks, click the subscribe button!</string>
+    <string name="coursesCourseDetailsWYLLabel">What You Will Learn</string>
+    <string name="coursesCourseDetailsWYLDetails">How to prepare your computer for programming in Python.</string>
+    <string name="coursesCourseDetailsWYLDetails1">Suggested text editors and integrated development environments to use when coding in Python.</string>
+    <string name="coursesCourseDetailsWYLDetails2">How to work with various data types including strings, lists, tuples, dictionaries, booleans, and more.</string>
+    <string name="coursesCourseDetailsWYLDetails3">How to define and use functions.</string>
+    <string name="coursesCourseDetailsWYLDetails4">Important built-in Python functions that you will use often.</string>
+    <string name="coursesCourseDetailsWYLDetails5">What modules are, when you should use them, and how to create your own.</string>
+    <string name="coursesCourseDetailsWYLDetails6">How to organize your Python programs - Learn what goes where.</string>
+    <string name="coursesCourseDetailLect1">Lecture 1 - What is computation?</string>
+    <string name="coursesCourseDetailLect1Slide">Slides (PDF)</string>
 
     / #Messages Page
     <string name="messagesTitle">Messages</string>
