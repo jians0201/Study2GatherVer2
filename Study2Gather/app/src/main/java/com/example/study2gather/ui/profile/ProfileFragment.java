@@ -50,7 +50,7 @@ public class ProfileFragment extends Fragment {
         profileViewModel = new ViewModelProvider(this).get(ProfileViewModel.class);
         View root = inflater.inflate(R.layout.fragment_profile, container, false);
 
-        profilePic = root.findViewById(R.id.profilePic);
+        profilePic = root.findViewById(R.id.homePostCreateProfilePic);
         profileName = root.findViewById(R.id.profileName);
         profileEmail = root.findViewById(R.id.profileEmail);
         profileBirthday = root.findViewById(R.id.profileBirthday);

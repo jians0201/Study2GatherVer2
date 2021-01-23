@@ -41,6 +41,10 @@
     <string name="homeTitle">Home</string>
     <string name="homeTabTitle">Home</string>
 
+    // #Home Create Post Page
+    <string name="homePostCreateButton">Post</string>
+    <string name="homePostCreateHint">What\'s on your mind?</string>
+
     / #Forum Page
     <string name="forumTitle">Forum</string>
     <string name="forumTabTitle">Forum</string>
@@ -77,6 +81,9 @@
     <string name="messagesSender">Tanjiro</string>
     <string name="messagesBrief">Muda Muda Muda!</string>
 
+    / #Chat Page
+    <string name="messagesChatUser">Goku</string>
+
     / #Profile Page
     <string name="profileTitle">Profile</string>
     <string name="profileTabTitle">Profile</string>
@@ -107,9 +114,5 @@
     <string name="profileEditEmailError">Enter a valid Email!</string>
     <string name="profileEditSexError">Select a Gender!</string>
     <string name="profileEditDOBError">Enter a Date of Birth!</string>
-
-    / #Chat Page
-    <string name="chatTitle">Chat</string>
-    <string name="chatTabTitle">Chat</string>
 
 </resources>

@@ -37,9 +37,6 @@
                 android:value="com.example.study2gather"/>
         </activity>
         <activity
-            android:name=".Chat"
-            android:label="@string/chatTitle" />
-        <activity
             android:name=".ui.profile.ProfileEdit"
             android:label="@string/profileEditTitle"
             android:theme="@style/Theme.MaterialComponents" />

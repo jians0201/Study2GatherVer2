@@ -32,7 +32,7 @@
                     app:cardCornerRadius="250dp">
 
                     <ImageView
-                        android:id="@+id/profilePic"
+                        android:id="@+id/homePostCreateProfilePic"
                         android:layout_width="145dp"
                         android:layout_height="145dp"
                         android:scaleType="centerCrop" />
@@ -120,7 +120,8 @@
                         android:fontFamily="@font/exo_extrabold"
                         android:text="@string/profileLogoutButton"
                         android:textColor="@color/white"
-                        android:textSize="20sp" />
+                        android:textSize="20sp"
+                        app:cornerRadius="9999dp" />
 
                 </LinearLayout>
 

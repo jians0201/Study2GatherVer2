@@ -126,10 +126,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/purple_700"
-                    android:fontFamily="@font/exo_extrabold"
-                    android:text="@string/coursesCourseDetailSub"
-                    android:textColor="@color/white"
-                    android:textSize="13sp"
                     app:srcCompat="@drawable/ic_arrow_circle_down_white_18dp" />
             </LinearLayout>
 

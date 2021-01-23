@@ -188,9 +188,10 @@
                     android:text="@string/profileEditDOBBtn"
                     android:textAllCaps="false"
                     android:textColor="@color/white"
+                    android:textSize="13sp"
+                    app:cornerRadius="9999dp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/profileEditDOBLabel"
-                    android:textSize="13sp" />
+                    app:layout_constraintTop_toBottomOf="@+id/profileEditDOBLabel" />
 
                 <TextView
                     android:id="@+id/profileEditDOBTxt"
