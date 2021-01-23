@@ -86,6 +86,8 @@
     <string name="profileBirthday">6 September 2025</string>
     <string name="profileSchool">Singapore Polytechnic</string>
     <string name="profileLocation">Singapore</string>
+    <string name="profileEditBtnDesc">Profile Edit</string>
+    <string name="profileLogoutButton">Logout</string>
 
     / #Profile Edit Page
     <string name="profileEditTitle">Edit Profile</string>

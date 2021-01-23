@@ -92,8 +92,8 @@ public class ProfileFragment extends Fragment {
                     if (userProfile.getLocation() == null) profileLocation.setText("None");
                     else profileLocation.setText(userProfile.getLocation());
 
-                    if (userProfile.getGender().equals("male")) profileName.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.ic_male_white_12dp,0);
-                    else profileName.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.ic_female_white_12dp,0);
+                    if (userProfile.getGender().equals("male")) profileName.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.ic_male_color_24dp,0);
+                    else profileName.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.ic_female_color_24dp,0);
                 }
             }
             @Override

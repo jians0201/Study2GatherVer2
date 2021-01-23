@@ -16,27 +16,25 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingBottom="20dp"
-            android:background="@drawable/border_bottom" >
+            android:padding="20dp">
 
             <androidx.cardview.widget.CardView
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
                 android:layout_gravity="center"
-                android:layout_marginTop="20dp"
                 app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="250dp">
 
                 <androidx.cardview.widget.CardView
-                    android:layout_width="75dp"
-                    android:layout_height="75dp"
+                    android:layout_width="145dp"
+                    android:layout_height="145dp"
                     android:layout_gravity="center"
                     app:cardCornerRadius="250dp">
 
                     <ImageView
                         android:id="@+id/profilePic"
-                        android:layout_width="75dp"
-                        android:layout_height="75dp"
+                        android:layout_width="145dp"
+                        android:layout_height="145dp"
                         android:scaleType="centerCrop" />
 
                 </androidx.cardview.widget.CardView>
@@ -46,74 +44,84 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_gravity="center" >
+                android:layout_gravity="center"
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/profileName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginTop="10dp"
-                    android:drawablePadding="5dp"
+                    android:layout_marginTop="20dp"
+                    android:drawablePadding="10dp"
                     android:fontFamily="@font/exo_extrabold"
                     android:textColor="#FFFFFF"
-                    android:textSize="18sp"
+                    android:textSize="25sp"
                     android:textStyle="bold" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_gravity="center" >
+                    android:layout_marginTop="25dp"
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/profileEmail"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
                         android:layout_marginTop="15dp"
                         android:drawablePadding="10dp"
                         android:fontFamily="@font/exo"
                         android:textColor="@color/white"
-                        android:textStyle="bold"
-                        app:drawableStartCompat="@drawable/ic_email_white_18dp" />
+                        android:textSize="22sp"
+                        app:drawableStartCompat="@drawable/ic_email_white_24dp" />
 
                     <TextView
                         android:id="@+id/profileBirthday"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="5dp"
+                        android:layout_marginTop="15dp"
                         android:drawablePadding="10dp"
                         android:fontFamily="@font/exo"
                         android:textColor="@color/white"
-                        android:textStyle="bold"
-                        app:drawableLeftCompat="@drawable/ic_birthday_white_18dp" />
+                        android:textSize="22sp"
+                        app:drawableLeftCompat="@drawable/ic_birthday_white_24dp" />
 
                     <TextView
                         android:id="@+id/profileSchool"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="5dp"
+                        android:layout_marginTop="15dp"
                         android:drawablePadding="10dp"
                         android:fontFamily="@font/exo"
                         android:textColor="@color/white"
-                        android:textStyle="bold"
-                        app:drawableStartCompat="@drawable/ic_school_white_18dp" />
+                        android:textSize="22sp"
+                        app:drawableStartCompat="@drawable/ic_school_white_24dp" />
 
                     <TextView
                         android:id="@+id/profileLocation"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="5dp"
+                        android:layout_marginTop="15dp"
                         android:drawablePadding="10dp"
                         android:fontFamily="@font/exo"
                         android:textColor="@color/white"
-                        android:textStyle="bold"
-                        app:drawableLeftCompat="@drawable/ic_location_white_18dp" />
+                        android:textSize="22sp"
+                        app:drawableLeftCompat="@drawable/ic_location_white_24dp" />
+
+                    <Button
+                        android:id="@+id/coursesDetailsSubButton2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="35dp"
+                        android:backgroundTint="@android:color/holo_red_dark"
+                        android:drawableEnd="@drawable/ic_exit_to_app_white_24dp"
+                        android:fontFamily="@font/exo_extrabold"
+                        android:text="@string/profileLogoutButton"
+                        android:textColor="@color/white"
+                        android:textSize="20sp" />
+
                 </LinearLayout>
 
             </LinearLayout>
@@ -131,6 +139,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:tint="@color/white"
-        app:srcCompat="@drawable/ic_edit_white_24dp"/>
+        app:srcCompat="@drawable/ic_edit_white_24dp"
+        android:contentDescription="@string/profileEditBtnDesc" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
