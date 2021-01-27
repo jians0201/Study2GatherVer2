@@ -44,10 +44,37 @@
     // #Home Create Post Page
     <string name="homePostCreateButton">Post</string>
     <string name="homePostCreateHint">What\'s on your mind?</string>
+    <string name="homePostCreateIncludeImg">Add Image</string>
 
     / #Forum Page
     <string name="forumTitle">Forum</string>
     <string name="forumTabTitle">Forum</string>
+    <string name="forumQuestion">What are the most common job interview questions and how should I answer them?</string>
+    <string name="forumAskUsername">Dance The Night Away :D</string>
+    <string name="forumCommentCount">1</string>
+    <string name="forumAskTime">3 hours ago</string>
+
+    / #Forum Details Page
+    <string name="forumQuestionDetails">
+        So I\'m going to attend my first ever interview for a job tomorrow. What are the tricky interview questions and how to answer them.
+    </string>
+
+    <string name="forumQuestionDetailsAnswer">Answer</string>
+    <string name="forumAnswerUsername">What is love? :(</string>
+    <string name="forumAnswerTime">2 hours ago</string>
+    <string name="forumQuestionDetailsAnswerDetails">
+        While it is important to review the most common interview questions, I would also take a look at a \"Performance, Self-Review\" critique of your work. Responses below are specific to the academic field of research I have been involved in for the last 5 years.
+        <br/><br/><br/>1. What projects have you enjoyed working on the most, and why?
+            <br/><br/>A: Some of my most highlighted work here at University has been working as a Researcher for a pediatric hematology/oncology study for sickle cell. I had the opportunity to sit down with patients, consent, and administer surveys about their experience as a patient. During this study, I also learned that patients who transition from pediatric care to adult get lost in transition. To address this, I facilitated monthly team meetings with providers, nurses, and social workers from both the adult and pediatric clinic twice a month to ensure data is being reviewed, voicing any concerns, and ensuring patients who are on study are frequently followed up with. We achieved a high retention rate, and even managed to get several of our on study subjects to attend a fall retreat for sickle cell.
+            <br/><br/><br/>2. What projects are you most proud of?
+            <br/><br/>A: The first project I took on as a Researcher was for a Dermatology outpatient sunscreen study. I worked alongside a PI who gave me the responsibility of recruiting 60 Hispanic women for a sponsored skin study. I developed multiple recruitment strategies, and successfully recruited the enrollment goal within the recruitment window. Additionally, I learned how to utilized skin measuring devices, and also camera-software to capture images of each patient visit.
+            <br/><br/><br/>3. What are the things you have learned?
+            <br/><br/>A: Coming up on 5 years, I have learned about the type of work I prefer doing as a researcher. Finding a balance between patient interaction and data entry is important. The healthy social interaction, and emphasizing the data collection are two-fold, yet I would like to be able to meet and develop a relationship with a patient prior to looking through medical charts.
+            <br/><br/><br/>4. What are some things you would have done differently looking back?
+            <br/><br/>A: I was assigned to an observational study in the PICU to look at the epidemiology of bleeding. I went from room to room and spoke with nurses to see if there was any bleeding; whether it was from moderate to severe. I was being asked to classify the type of bleeding, quantify the amount of bleeding, and check ordered meds for each patient who bled. Initially, I struggled with being able to interpret the information I was being asked to collect. Because of this, my time commitment for this study increased and other studies I was assigned to struggled temporarily. Eventually, I called a meeting with my supervisor to come up with a solution — and we decided on adding other researchers to this study. Instead of working longer hours, and committing more time to this study, I would have mentioned something sooner rather than later about the time allocated to this study. Ideally, working smarter and not harder to remediate a situation as the one illustrated would be useful in this circumstance.
+            <br/><br/><br/>5. What has your boss done to help you do your job better? What could they do differently?
+            <br/><br/>A: My supervisor was great when it came to answering any relevant questions when it related to the IRB. If I needed any guidance on how to submit a continuing review, do a study status update through RAMS-IRB, or needed to develop an amendment I learned how to do it the day of typically. My level of involvement in site feasibility meetings was very minimal, and for a suggestion I would recommend ensuring assigned CRCs such as myself was involved in the start-up process with the PI and along with the sponsor funding the research.
+    </string>
 
     / #Courses Page
     <string name="coursesTitle">Courses</string>

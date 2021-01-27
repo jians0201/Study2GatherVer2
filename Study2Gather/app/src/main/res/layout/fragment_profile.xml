@@ -32,7 +32,7 @@
                     app:cardCornerRadius="250dp">
 
                     <ImageView
-                        android:id="@+id/homePostCreateProfilePic"
+                        android:id="@+id/forumQuestionDetailsAnswerUserProfilePic"
                         android:layout_width="145dp"
                         android:layout_height="145dp"
                         android:scaleType="centerCrop" />

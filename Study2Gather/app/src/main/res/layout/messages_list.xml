@@ -29,7 +29,7 @@
                 app:cardCornerRadius="250dp">
 
                 <ImageView
-                    android:id="@+id/homePostCreateProfilePic"
+                    android:id="@+id/forumQuestionDetailsAnswerUserProfilePic"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:scaleType="centerCrop"
@@ -46,7 +46,7 @@
             android:gravity="center" >
 
             <TextView
-                android:id="@+id/messagesSender"
+                android:id="@+id/forumQuestionAskUser"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/exo_extrabold"

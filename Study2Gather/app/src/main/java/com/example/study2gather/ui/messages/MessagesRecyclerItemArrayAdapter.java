@@ -84,9 +84,9 @@ public class MessagesRecyclerItemArrayAdapter extends RecyclerView.Adapter<Messa
         MyViewHolder(@NonNull View itemView)
         {
             super(itemView);
-            messagesSender = itemView.findViewById(R.id.messagesSender);
+            messagesSender = itemView.findViewById(R.id.forumQuestionAskUser);
             messagesBrief = itemView.findViewById(R.id.messagesBrief);
-            profilePic = itemView.findViewById(R.id.homePostCreateProfilePic);
+            profilePic = itemView.findViewById(R.id.forumQuestionDetailsAnswerUserProfilePic);
         }
     }
 
