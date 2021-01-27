@@ -2,110 +2,133 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/loginLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent" >
 
-    <ImageView
-        android:id="@+id/loginAppIcon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="141dp"
-        android:layout_marginTop="70dp"
-        android:layout_marginEnd="142dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/loginEmailAddress"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_marginTop="100dp"
-        android:hint="@string/loginEmailLabel"
-        app:endIconMode="clear_text"
-        app:errorEnabled="true"
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fontFamily="@font/exo_extrabold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginAppIcon"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.textfield.TextInputEditText
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/animationView"
+            android:layout_width="320dp"
+            android:layout_height="280dp"
+            android:layout_marginTop="30dp"
+            android:scaleType="fitXY"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/planet" />
+
+        <LinearLayout
+            android:id="@+id/loginInputFieldLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/exo_extrabold"
-            android:inputType="textEmailAddress" />
+            android:layout_weight="0.2"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
 
-    </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/loginEmailAddress"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:hint="@string/loginEmailLabel"
+                app:endIconMode="clear_text"
+                app:errorEnabled="true">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/loginPassword"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_marginTop="5dp"
-        android:hint="@string/loginPasswordLabel"
-        app:endIconMode="password_toggle"
-        app:errorEnabled="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginEmailAddress"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/exo_extrabold"
+                    android:inputType="textEmailAddress" />
 
-        <com.google.android.material.textfield.TextInputEditText
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/loginPassword"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="5dp"
+                android:hint="@string/loginPasswordLabel"
+                app:endIconMode="password_toggle"
+                app:errorEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/exo_extrabold"
+                    android:inputType="textPassword" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/loginButtonLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/exo_extrabold"
-            android:inputType="textPassword" />
+            android:layout_weight="0.8"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
 
-    </com.google.android.material.textfield.TextInputLayout>
+            <Button
+                android:id="@+id/loginLoginButton"
+                android:layout_width="300dp"
+                android:layout_height="60dp"
+                android:backgroundTint="@color/purple_700"
+                android:fontFamily="@font/exo_extrabold"
+                android:onClick="onClick"
+                android:text="@string/loginLoginBtn"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                app:cornerRadius="9999dp"
+                tools:layout_editor_absoluteY="484dp" />
 
-    <Button
-        android:id="@+id/loginLoginButton"
-        android:layout_width="300dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="30dp"
-        android:backgroundTint="@color/purple_700"
-        android:fontFamily="@font/exo_extrabold"
-        android:onClick="onClick"
-        android:text="@string/loginLoginBtn"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        app:cornerRadius="9999dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginPassword" />
+            <Button
+                android:id="@+id/loginRegisterButton"
+                android:layout_width="300dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="5dp"
+                android:backgroundTint="@color/purple_500"
+                android:fontFamily="@font/exo_extrabold"
+                android:onClick="onClick"
+                android:text="@string/loginRegisterBtn"
+                android:textSize="18sp"
+                app:cornerRadius="9999dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/loginLoginButton" />
 
-    <Button
-        android:id="@+id/loginRegisterButton"
-        android:layout_width="300dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="70dp"
-        android:backgroundTint="@color/purple_500"
-        android:fontFamily="@font/exo_extrabold"
-        android:onClick="onClick"
-        android:text="@string/loginRegisterBtn"
-        android:textSize="18sp"
-        app:cornerRadius="9999dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginLoginButton" />
+        </LinearLayout>
+
+    </LinearLayout>
 
     <ProgressBar
         android:id="@+id/loginProgressBar"
         style="?android:attr/progressBarStyle"
         android:layout_width="80dp"
         android:layout_height="74dp"
-        android:layout_marginTop="328dp"
-        android:layout_marginEnd="164dp"
         android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        app:layout_constraintStart_toStartOf="@+id/linearLayout"
+        app:layout_constraintTop_toTopOf="@+id/linearLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,6 +4,7 @@
 
     // #Splash Screen
     <string name="splashLogoDesc">Study2Gather</string>
+    <string name="splashBgDesc">SplashBackground</string>
 
     // #Login Page
     <string name="loginEmailLabel">Email</string>

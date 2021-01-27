@@ -5,11 +5,14 @@ import android.os.Bundle;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -20,6 +23,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import java.util.Objects;
 
 public class Login extends AppCompatActivity implements View.OnClickListener{
+
+    private ConstraintLayout loginLayout;
     private TextInputLayout loginEmail, loginPword;
     private ProgressBar pgbar;
 
@@ -27,15 +32,21 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
 
     private FirebaseAuth fAuth;
 
+    private Animation anim;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Launch the layout -> splash.xml
         setContentView(R.layout.login);
+        loginLayout = findViewById(R.id.loginLayout);
         loginEmail = findViewById(R.id.loginEmailAddress);
         loginPword = findViewById(R.id.loginPassword);
         pgbar = findViewById(R.id.loginProgressBar);
         fAuth = FirebaseAuth.getInstance();
+
+        anim = AnimationUtils.loadAnimation(this, R.anim.fade);
+        loginLayout.startAnimation(anim);
     }
 
     private boolean validateEmail() {
