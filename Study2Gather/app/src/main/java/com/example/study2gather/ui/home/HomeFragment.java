@@ -1,6 +1,7 @@
 package com.example.study2gather.ui.home;
 
 import android.content.ContentResolver;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
@@ -50,7 +51,6 @@ public class HomeFragment extends Fragment {
     private StorageReference imagesRef, profilePicsRef;
 
     private ArrayList<Post> mPosts = new ArrayList<>();
-    private Date date;
     private long maxId;
     private String uid;
     private UserObj userProfile;
@@ -159,7 +159,8 @@ public class HomeFragment extends Fragment {
         btnNewPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                createNewPost();
+                Intent i = new Intent(getActivity(), HomeCreatePost.class);
+                startActivity(i);
             }
         });
 
@@ -183,11 +184,5 @@ public class HomeFragment extends Fragment {
         });
         //Set adapter to RecyclerView
         homeRecyclerView.setAdapter(myRecyclerViewAdapter);
-    }
-
-    private void createNewPost() {
-        date = new Date();
-        Post post = new Post(uid, "i love demon slayer", 45664,date.getTime());
-        postsRef.child("post"+(maxId+1)).setValue(post);
     }
 }

@@ -73,12 +73,12 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
         pgbar = findViewById(R.id.registerProgressBar);
         backBtn = findViewById(R.id.registerBackBtn);
         profilePicRef = FirebaseStorage.getInstance().getReference("profileImages");
-        backBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+//        backBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                finish();
+//            }
+//        });
 
 //        Uri uri = Uri.parse("android.resource://com.example.study2gather/drawable/ic_profile_user_24dp.xml");
 //        Log.d("PP",uri.toString());
@@ -186,8 +186,10 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v){
-//        Intent i;
         switch(v.getId()){
+            case R.id.registerBackBtn:
+                finish();
+                break;
             // Handles for DatePicker
             case R.id.registerDOBBtn:
                 Calendar calendar = Calendar.getInstance();

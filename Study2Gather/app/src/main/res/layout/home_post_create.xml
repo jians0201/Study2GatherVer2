@@ -20,6 +20,7 @@
             android:id="@+id/homePostCreateClearButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="onClick"
             android:backgroundTint="@android:color/transparent"
             android:tint="@color/purple_700"
             app:srcCompat="@drawable/ic_clear_white_36dp" />
@@ -33,6 +34,7 @@
             android:id="@+id/homePostCreateButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="onClick"
             android:backgroundTint="@color/purple_700"
             android:fontFamily="@font/exo_extrabold"
             android:insetTop="0dp"
@@ -72,11 +74,10 @@
                     app:cardCornerRadius="250dp">
 
                     <ImageView
-                        android:id="@+id/forumQuestionDetailsAnswerUserProfilePic"
+                        android:id="@+id/homePostCreateProfilePic"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/tanjiro" />
+                        android:scaleType="centerCrop" />
 
                 </androidx.cardview.widget.CardView>
 
@@ -108,9 +109,10 @@
                     app:cardCornerRadius="16dp">
 
                     <ImageView
-                        android:id="@+id/imageView"
+                        android:id="@+id/homePostCreatePostPic"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:onClick="onClick"
                         android:adjustViewBounds="true" />
 
                 </androidx.cardview.widget.CardView>
@@ -130,6 +132,7 @@
         <ImageButton
             android:id="@+id/homePostCreateInsertImgButton"
             android:layout_width="wrap_content"
+            android:onClick="onClick"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/purple_700"
             app:srcCompat="@drawable/ic_insert_photo_white_36dp" />

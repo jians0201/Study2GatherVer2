@@ -20,7 +20,6 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.study2gather.Chat;
 import com.example.study2gather.Post;
 import com.example.study2gather.R;
 import com.example.study2gather.UserObj;
