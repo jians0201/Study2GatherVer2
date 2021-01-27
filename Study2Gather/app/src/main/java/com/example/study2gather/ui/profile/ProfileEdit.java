@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,6 +16,8 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -225,35 +228,50 @@ public class ProfileEdit extends AppCompatActivity implements View.OnClickListen
         String location = profileLocation.getText().toString().trim();
         String dob = profileDOB.getText().toString().trim();
         Boolean changedProfile = false;
+        Boolean hasErr = false;
+        String alertMsgs = "";
+
 
         if (!userProfile.getUsername().equals(name)) {
-            userProfile.setUsername(name);
-            changedProfile = true;
+            if(name.length() < 4 || name.length() > 18){
+                hasErr = true;
+                profileName.setText(userProfile.getUsername());
+                alertMsgs += "Name should be between 4 to 18 characters only\n";
+            }else{
+                userProfile.setUsername(name);
+                changedProfile = true;
+            }
         }
         if (!userProfile.getEmail().equals(email)) {
-            user.updateEmail(email).addOnSuccessListener(new OnSuccessListener<Void>() {
-                @Override
-                public void onSuccess(Void aVoid) {
-                    Toast.makeText(ProfileEdit.this, "Email has been changed", Toast.LENGTH_SHORT).show();
-                    userProfile.setEmail(email);
-                    userRef.child(uid).setValue(userProfile).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isSuccessful()) {
-                                Toast.makeText(ProfileEdit.this, "Changed User Profile successfully", Toast.LENGTH_SHORT).show();
-                            } else {
-                                Toast.makeText(ProfileEdit.this, "Failed to Change Profile! Try Again!", Toast.LENGTH_SHORT).show();
+            if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+                hasErr = true;
+                profileEmail.setText(userProfile.getEmail());
+                alertMsgs += "The email is invalid!";
+            }else{
+                user.updateEmail(email).addOnSuccessListener(new OnSuccessListener<Void>(){
+                    @Override
+                    public void onSuccess(Void aVoid){
+                        Toast.makeText(ProfileEdit.this, "Email has been changed", Toast.LENGTH_SHORT).show();
+                        userProfile.setEmail(email);
+                        userRef.child(uid).setValue(userProfile).addOnCompleteListener(new OnCompleteListener<Void>(){
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task){
+                                if(task.isSuccessful()){
+                                    Toast.makeText(ProfileEdit.this, "Changed User Profile successfully", Toast.LENGTH_SHORT).show();
+                                }else{
+                                    Toast.makeText(ProfileEdit.this, "Failed to Change Profile! Try Again!", Toast.LENGTH_SHORT).show();
+                                }
                             }
-                        }
-                    });
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(ProfileEdit.this, "Email was not changed",Toast.LENGTH_SHORT).show();
-                    Log.d("FAILURE","FAILURE TO UPDATE EMAIL");
-                }
-            });
+                        });
+                    }
+                }).addOnFailureListener(new OnFailureListener(){
+                    @Override
+                    public void onFailure(@NonNull Exception e){
+                        Toast.makeText(ProfileEdit.this, "Email was not changed", Toast.LENGTH_SHORT).show();
+                        Log.d("FAILURE", "FAILURE TO UPDATE EMAIL");
+                    }
+                });
+            }
         }
         if (!school.isEmpty() && (userProfile.getSchool() == null || !userProfile.getSchool().equals(school))) {
             userProfile.setSchool(school);
@@ -275,6 +293,15 @@ public class ProfileEdit extends AppCompatActivity implements View.OnClickListen
             uploadImageToFirebase();
         }
 
+        // If error do this
+        if(hasErr){
+            AlertDialog.Builder builder = new AlertDialog.Builder(ProfileEdit.this).setTitle("Invalid inputs!").setMessage(alertMsgs+"\n\nValid inputs are still updated").setCancelable(false).setNeutralButton("OK", new DialogInterface.OnClickListener(){
+                public void onClick(DialogInterface dialog, int id){
+                    dialog.cancel();
+                }
+            });
+            builder.create().show();
+        }
         if (changedProfile) { //update profile
             userRef.child(uid).setValue(userProfile).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
@@ -287,6 +314,13 @@ public class ProfileEdit extends AppCompatActivity implements View.OnClickListen
                 }
             });
             changedProfile = false;
+        }else{
+            userRef.child(uid).setValue(userProfile).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    Toast.makeText(ProfileEdit.this, "There are no new changes", Toast.LENGTH_SHORT).show();
+                }
+            });
         }
     }
 }
