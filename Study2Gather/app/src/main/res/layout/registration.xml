@@ -29,6 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="56dp"
         android:layout_marginTop="30dp"
+        android:fontFamily="@font/exo_extrabold"
         android:text="@string/registerTitle"
         android:textColor="@color/white"
         android:textSize="30sp"
@@ -48,11 +49,13 @@
         app:errorEnabled="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/registerTitle">
+        app:layout_constraintTop_toBottomOf="@+id/registerTitle"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/exo_extrabold"
             android:inputType="text" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -68,11 +71,13 @@
         app:errorEnabled="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/registerUsername">
+        app:layout_constraintTop_toBottomOf="@+id/registerUsername"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/exo_extrabold"
             android:inputType="textEmailAddress" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -88,11 +93,13 @@
         app:errorEnabled="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/registerEmail">
+        app:layout_constraintTop_toBottomOf="@+id/registerEmail"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/exo_extrabold"
             android:inputType="textPassword" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -108,11 +115,13 @@
         app:errorEnabled="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/registerPassword">
+        app:layout_constraintTop_toBottomOf="@+id/registerPassword"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/exo_extrabold"
             android:inputType="textPassword" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -122,6 +131,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="56dp"
+        android:fontFamily="@font/exo_extrabold"
         android:text="@string/registerSexLabel"
         android:textColor="@color/white"
         android:textSize="18sp"
@@ -144,6 +154,7 @@
             android:layout_width="120dp"
             android:layout_height="match_parent"
             android:layout_marginStart="15dp"
+            android:fontFamily="@font/exo_extrabold"
             android:onClick="onRadioButtonClicked"
             android:text="@string/registerSexMaleLabel"
             android:textColor="@color/white"
@@ -153,6 +164,7 @@
             android:id="@+id/registerSexFemale"
             android:layout_width="120dp"
             android:layout_height="match_parent"
+            android:fontFamily="@font/exo_extrabold"
             android:onClick="onRadioButtonClicked"
             android:text="@string/registerSexFemaleLabel"
             android:textColor="@color/white"
@@ -166,6 +178,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="56dp"
         android:layout_marginTop="5dp"
+        android:fontFamily="@font/exo_extrabold"
         android:text="@string/registerDOBLabel"
         android:textColor="@color/white"
         android:textSize="18sp"
@@ -180,6 +193,7 @@
         android:layout_marginStart="56dp"
         android:backgroundTint="@color/purple_500"
         android:drawableLeft="@drawable/calendar"
+        android:fontFamily="@font/exo_extrabold"
         android:onClick="onClick"
         android:text="@string/registerDOBBtn"
         android:textAllCaps="false"
@@ -194,6 +208,7 @@
         android:layout_height="26dp"
         android:layout_marginStart="15dp"
         android:layout_marginTop="16dp"
+        android:fontFamily="@font/exo_extrabold"
         app:layout_constraintStart_toEndOf="@+id/registerDOBBtn"
         app:layout_constraintTop_toBottomOf="@+id/registerDOBLabel" />
 
@@ -205,6 +220,7 @@
         android:layout_marginTop="5dp"
         android:layout_marginBottom="30dp"
         android:backgroundTint="@color/purple_500"
+        android:fontFamily="@font/exo_extrabold"
         android:onClick="onClick"
         android:text="@string/registerRegisterBtn"
         android:textColor="@color/white"

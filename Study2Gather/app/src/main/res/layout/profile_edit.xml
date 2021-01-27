@@ -49,14 +49,13 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="2dp"
-                android:fontFamily="@font/exo"
+                android:fontFamily="@font/exo_extrabold"
+                android:onClick="onClick"
                 android:text="@string/profileEditPicBtnTxt"
                 android:textColor="#0E86EE"
-                android:onClick="onClick"
                 android:textSize="13sp" />
 
             <com.google.android.material.textfield.TextInputLayout
-
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -70,19 +69,20 @@
                 app:errorEnabled="true"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/profileEditPicBtn">
+                app:layout_constraintTop_toBottomOf="@+id/profileEditPicBtn"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox" >
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/profileEditName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/exo_extrabold"
                     android:inputType="text"
                     android:textSize="13sp" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -96,12 +96,14 @@
                 app:errorEnabled="true"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/profileEditName" >
+                app:layout_constraintTop_toBottomOf="@+id/profileEditName"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/profileEditEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/exo_extrabold"
                     android:inputType="textEmailAddress"
                     android:textSize="13sp" />
 
@@ -113,8 +115,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginStart="15dp"
-                android:layout_marginEnd="15dp"
                 android:layout_marginTop="15dp"
+                android:layout_marginEnd="15dp"
+                android:fontFamily="@font/exo_extrabold"
                 android:text="@string/profileEditSexLabel"
                 android:textColor="@color/white"
                 android:textSize="13sp"
@@ -138,6 +141,7 @@
                     android:layout_width="120dp"
                     android:layout_height="match_parent"
                     android:layout_marginStart="15dp"
+                    android:fontFamily="@font/exo_extrabold"
                     android:onClick="onRadioButtonClicked"
                     android:text="@string/profileEditSexMaleLabel"
                     android:textColor="@color/white"
@@ -147,6 +151,7 @@
                     android:id="@+id/profileEditSexFemale"
                     android:layout_width="120dp"
                     android:layout_height="match_parent"
+                    android:fontFamily="@font/exo_extrabold"
                     android:onClick="onRadioButtonClicked"
                     android:text="@string/profileEditSexFemaleLabel"
                     android:textColor="@color/white"
@@ -160,8 +165,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginStart="15dp"
-                android:layout_marginEnd="15dp"
                 android:layout_marginTop="15dp"
+                android:layout_marginEnd="15dp"
+                android:fontFamily="@font/exo_extrabold"
                 android:text="@string/profileEditDOBLabel"
                 android:textColor="@color/white"
                 android:textSize="13sp"
@@ -184,6 +190,7 @@
                     android:layout_marginStart="15dp"
                     android:backgroundTint="@color/purple_500"
                     android:drawableLeft="@drawable/calendar"
+                    android:fontFamily="@font/exo_extrabold"
                     android:onClick="onClick"
                     android:text="@string/profileEditDOBBtn"
                     android:textAllCaps="false"
@@ -198,11 +205,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
+                    android:fontFamily="@font/exo_extrabold"
                     android:textSize="13sp" />
             </LinearLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -213,19 +220,20 @@
                 android:hint="@string/profileEditSchoolLabel"
                 android:textStyle="bold"
                 app:endIconMode="clear_text"
-                app:errorEnabled="true">
+                app:errorEnabled="true"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox" >
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/profileEditSchool"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/exo_extrabold"
                     android:inputType="text"
                     android:textSize="13sp" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -236,12 +244,14 @@
                 android:hint="@string/profileEditLocationLabel"
                 android:textStyle="bold"
                 app:endIconMode="clear_text"
-                app:errorEnabled="true">
+                app:errorEnabled="true"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox" >
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/profileEditLocation"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/exo_extrabold"
                     android:inputType="text"
                     android:textSize="13sp" />
 
