@@ -127,14 +127,30 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:gravity="center_vertical|end"
-        android:padding="10dp">
+        android:paddingStart="10dp"
+        android:paddingTop="5dp"
+        android:paddingEnd="10dp"
+        android:paddingBottom="5dp">
+
+        <ImageButton
+            android:id="@+id/homePostCreateAddImgButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_corner"
+            android:backgroundTint="@color/purple_700"
+            android:onClick="onClick"
+            android:padding="10dp"
+            app:srcCompat="@drawable/ic_add_a_photo_white_36dp" />
 
         <ImageButton
             android:id="@+id/homePostCreateInsertImgButton"
             android:layout_width="wrap_content"
-            android:onClick="onClick"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/rounded_corner"
             android:backgroundTint="@color/purple_700"
+            android:onClick="onClick"
+            android:padding="10dp"
             app:srcCompat="@drawable/ic_insert_photo_white_36dp" />
 
     </LinearLayout>
