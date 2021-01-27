@@ -59,6 +59,8 @@ public class ProfileEdit extends AppCompatActivity implements View.OnClickListen
     private UserObj userProfile;
     private Uri newimguri;
 
+    private String userDOB;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -101,7 +103,8 @@ public class ProfileEdit extends AppCompatActivity implements View.OnClickListen
                 if (userProfile != null) {
                     profileName.setText(userProfile.getUsername());
                     profileEmail.setText(userProfile.getEmail());
-                    profileDOB.setText(userProfile.getDob());
+                    userDOB = userProfile.getDob();
+                    profileDOB.setText(userDOB);
                     profileSchool.setText(userProfile.getSchool());
                     profileLocation.setText(userProfile.getLocation());
                     gender = userProfile.getGender();
@@ -163,13 +166,25 @@ public class ProfileEdit extends AppCompatActivity implements View.OnClickListen
         switch(v.getId()) {
             // Handles for DatePicker
             case R.id.profileEditDOBBtn:
-                Calendar calendar = Calendar.getInstance();
-                DatePickerDialog dpd;
-                int day = calendar.get(Calendar.DAY_OF_MONTH);
-                int month = calendar.get(Calendar.MONTH) + 1;
-                int year = calendar.get(Calendar.YEAR);
+                // DATE OF BIRTH EDIT HERE
+                int day;
+                int month;
+                int year;
 
-                dpd = new DatePickerDialog(ProfileEdit.this, new DatePickerDialog.OnDateSetListener() {
+                if(userDOB == null){
+                    Calendar calendar = Calendar.getInstance();
+
+                    day = calendar.get(Calendar.DAY_OF_MONTH);
+                    month = calendar.get(Calendar.MONTH) + 1;
+                    year = calendar.get(Calendar.YEAR);
+                }else{
+                    final int firstPos = userDOB.indexOf("/");
+                    final int lastPos = userDOB.lastIndexOf("/");
+                    day = Integer.parseInt(userDOB.substring(0, firstPos).trim());
+                    month = Integer.parseInt(userDOB.substring(firstPos+1, lastPos).trim()) - 1;
+                    year = Integer.parseInt(userDOB.substring(lastPos+1).trim());
+                }
+                DatePickerDialog dpd = new DatePickerDialog(ProfileEdit.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                         String DOBstring = dayOfMonth + " / " + (month + 1) + " / " + year;
