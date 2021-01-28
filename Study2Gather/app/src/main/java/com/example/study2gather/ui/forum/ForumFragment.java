@@ -88,31 +88,31 @@ public class ForumFragment extends Fragment {
         });
 
         //get posts and pics
-//        forumRef.orderByChild("timestamp").addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                mQns.clear();
-//                for (DataSnapshot ds : snapshot.getChildren()) {
-//                    Log.d("POST",ds.getKey());
-//                    ForumQuestion qn = ds.getValue(ForumQuestion.class);
-//                    //get user profile pic
-//                    profilePicsRef.child(qn.getQuestionAuthor()+"_profile.jpg").getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
-//                        @Override
-//                        public void onComplete(@NonNull Task<Uri> task) {
-//                            if (task.isSuccessful()) {
-//                                qn.setQnProfilePic(task.getResult());
-//                            }
-//                            qn.setQuestionAuthor(usersListWithName.get(qn.getQuestionAuthor()));
-//                            mQns.add(qn);
-//                            //only populate questions once all questions have been retrieved
-//                            if (mQns.size() == snapshot.getChildrenCount()) setUIRef();
-//                        }
-//                    });
-//                }
-//            }
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {}
-//        });
+        forumRef.orderByChild("timestamp").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                mQns.clear();
+                for (DataSnapshot ds : snapshot.getChildren()) {
+                    Log.d("POST",ds.getKey());
+                    ForumQuestion qn = ds.getValue(ForumQuestion.class);
+                    //get user profile pic
+                    profilePicsRef.child(qn.getQuestionAuthor()+"_profile.jpg").getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Uri> task) {
+                            if (task.isSuccessful()) {
+                                qn.setQnProfilePic(task.getResult());
+                            }
+                            qn.setQuestionAuthor(usersListWithName.get(qn.getQuestionAuthor()));
+                            mQns.add(qn);
+                            //only populate questions once all questions have been retrieved
+                            if (mQns.size() == snapshot.getChildrenCount()) setUIRef();
+                        }
+                    });
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {}
+        });
 
         //add post btn
         btnNewQn.setOnClickListener(new View.OnClickListener() {
@@ -124,22 +124,22 @@ public class ForumFragment extends Fragment {
             }
         });
 
-        Date d = new Date();
-        mQns.add(new ForumQuestion("What is Love?","Bob",d.getTime(),0,"EJAAPJSOJF"));
-        mQns.add(new ForumQuestion("What is Love?","Bob",d.getTime(),0,"EJAAPJSOJF"));
-        mQns.add(new ForumQuestion("What is Love?","Bob",d.getTime(),0,"EJAAPJSOJF"));
-        mQns.add(new ForumQuestion("What is Love?","Bob",d.getTime(),0,"EJAAPJSOJF"));
-        mQns.add(new ForumQuestion("What is Love?","Bob",d.getTime(),0,"EJAAPJSOJF"));
-        mQns.add(new ForumQuestion("What is Love?","Bob",d.getTime(),0,"EJAAPJSOJF"));
-        mQns.add(new ForumQuestion("What is Love?","Bob",d.getTime(),0,"EJAAPJSOJF"));
-        mQns.add(new ForumQuestion("What is Love?","Bob",d.getTime(),0,"EJAAPJSOJF"));
-        mQns.add(new ForumQuestion("What is Love?","Bob",d.getTime(),0,"EJAAPJSOJF"));
-        mQns.add(new ForumQuestion("What is Love?","Bob",d.getTime(),0,"EJAAPJSOJF"));
-        mQns.add(new ForumQuestion("What is Love?","Bob",d.getTime(),0,"EJAAPJSOJF"));
-        mQns.add(new ForumQuestion("What is Love?","Bob",d.getTime(),0,"EJAAPJSOJF"));
-        mQns.add(new ForumQuestion("What is Love?","Bob",d.getTime(),0,"EJAAPJSOJF"));
-        mQns.add(new ForumQuestion("What is Love?","Bob",d.getTime(),0,"EJAAPJSOJF"));
-        setUIRef();
+//        Date d = new Date();
+//        mQns.add(new ForumQuestion("What is Love?","Bob",d.getTime(),0,"EJAAPJSOJF"));
+//        mQns.add(new ForumQuestion("What is Love?","Bob",d.getTime(),0,"EJAAPJSOJF"));
+//        mQns.add(new ForumQuestion("What is Love?","Bob",d.getTime(),0,"EJAAPJSOJF"));
+//        mQns.add(new ForumQuestion("What is Love?","Bob",d.getTime(),0,"EJAAPJSOJF"));
+//        mQns.add(new ForumQuestion("What is Love?","Bob",d.getTime(),0,"EJAAPJSOJF"));
+//        mQns.add(new ForumQuestion("What is Love?","Bob",d.getTime(),0,"EJAAPJSOJF"));
+//        mQns.add(new ForumQuestion("What is Love?","Bob",d.getTime(),0,"EJAAPJSOJF"));
+//        mQns.add(new ForumQuestion("What is Love?","Bob",d.getTime(),0,"EJAAPJSOJF"));
+//        mQns.add(new ForumQuestion("What is Love?","Bob",d.getTime(),0,"EJAAPJSOJF"));
+//        mQns.add(new ForumQuestion("What is Love?","Bob",d.getTime(),0,"EJAAPJSOJF"));
+//        mQns.add(new ForumQuestion("What is Love?","Bob",d.getTime(),0,"EJAAPJSOJF"));
+//        mQns.add(new ForumQuestion("What is Love?","Bob",d.getTime(),0,"EJAAPJSOJF"));
+//        mQns.add(new ForumQuestion("What is Love?","Bob",d.getTime(),0,"EJAAPJSOJF"));
+//        mQns.add(new ForumQuestion("What is Love?","Bob",d.getTime(),0,"EJAAPJSOJF"));
+//        setUIRef();
 
         return root;
     }
