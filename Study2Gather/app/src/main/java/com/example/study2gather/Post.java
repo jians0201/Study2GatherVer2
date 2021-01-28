@@ -3,12 +3,9 @@ package com.example.study2gather;
 import android.net.Uri;
 
 public class Post {
-    private Uri postProfilePic;
-    private String postAuthor;
-    private String postCaption;
-    private Uri postPic;
-    private long postLikeCount;
-    private long timestamp;
+    private Uri postProfilePic, postPic;
+    private String postAuthor, postCaption, postPicPath, postID;
+    private long postLikeCount, timestamp;
 
     public Post() {}
 
@@ -19,11 +16,24 @@ public class Post {
         this.postLikeCount = postLikeCount;
     }
 
-
-    public String getPostCaption()
-    {
-        return postCaption;
+    public Post(String postAuthor, String postCaption, long postLikeCount, long timestamp, String postPicPath) {
+        this.postAuthor = postAuthor;
+        this.postCaption = postCaption;
+        this.timestamp = timestamp;
+        this.postLikeCount = postLikeCount;
+        this.postPicPath = postPicPath;
     }
+
+    public Post(String postAuthor, String postCaption, long postLikeCount, long timestamp, String postPicPath, String postID) {
+        this.postAuthor = postAuthor;
+        this.postCaption = postCaption;
+        this.timestamp = timestamp;
+        this.postLikeCount = postLikeCount;
+        this.postPicPath = postPicPath;
+        this.postID = postID;
+    }
+
+    public String getPostCaption() { return postCaption; }
 
     public long getPostLikeCount() { return postLikeCount; }
 
@@ -46,4 +56,16 @@ public class Post {
     public Uri getPostPic() { return postPic; }
 
     public void setPostPic(Uri postPic) { this.postPic = postPic; }
+
+    public String getPostPicPath() { return postPicPath; }
+
+    public void setPostPicPath(String postPicPath) { this.postPicPath = postPicPath; }
+
+    public String getPostID() {
+        return postID;
+    }
+
+    public void setPostID(String postID) {
+        this.postID = postID;
+    }
 }

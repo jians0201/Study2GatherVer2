@@ -51,8 +51,7 @@ public class HomeFragment extends Fragment {
     private StorageReference imagesRef, profilePicsRef;
 
     private ArrayList<Post> mPosts = new ArrayList<>();
-    private long maxId;
-    private String uid;
+//    private String uid;
     private UserObj userProfile;
     private HashMap<String, String> usersListWithName;
 
@@ -62,26 +61,19 @@ public class HomeFragment extends Fragment {
         btnNewPost = root.findViewById(R.id.fab);
         imagesRef = FirebaseStorage.getInstance().getReference("images");
         profilePicsRef = FirebaseStorage.getInstance().getReference("profileImages");
-        user = FirebaseAuth.getInstance().getCurrentUser();
-        uid = user.getUid();
+//        user = FirebaseAuth.getInstance().getCurrentUser();
+//        uid = user.getUid();
         usersRef = FirebaseDatabase.getInstance().getReference("Users");
         postsRef = FirebaseDatabase.getInstance().getReference("Posts");
         usersListWithName = new HashMap<String, String>();
 
-        //get own info
-        usersRef.child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) { userProfile = snapshot.getValue(UserObj.class); }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) { Toast.makeText(getContext(),"Something Went Wrong",Toast.LENGTH_LONG).show(); }
-        });
-
-        postsRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) { if (snapshot.exists()) maxId = (snapshot.getChildrenCount()); }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {}
-        });
+//        //get own info
+//        usersRef.child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) { userProfile = snapshot.getValue(UserObj.class); }
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) { Toast.makeText(getContext(),"Something Went Wrong",Toast.LENGTH_LONG).show(); }
+//        });
 
         //get all users info
         usersRef.addValueEventListener(new ValueEventListener() {
@@ -93,16 +85,15 @@ public class HomeFragment extends Fragment {
             public void onCancelled(@NonNull DatabaseError error) {}
         });
 
-//        //get posts and pics
+        //get posts and pics
         postsRef.orderByChild("timestamp").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 mPosts.clear();
                 for (DataSnapshot ds : snapshot.getChildren()) {
                     Post p = ds.getValue(Post.class);
-                    Log.d("POST","Tried to get post");
                     //get post pic
-                    StorageReference postPic = FirebaseStorage.getInstance().getReference("images").child(ds.getKey()+".jpg");
+                    StorageReference postPic = FirebaseStorage.getInstance().getReference("images").child(p.getPostPicPath());
                     postPic.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
                         @Override
                         public void onComplete(@NonNull Task<Uri> task) {
@@ -124,31 +115,6 @@ public class HomeFragment extends Fragment {
                             });
                         }
                     });
-
-//                            .addOnSuccessListener(new OnSuccessListener<Uri>() {
-//                        @Override
-//                        public void onSuccess(Uri uri) {
-//                            p.setPostPic(uri);
-//
-//                        }
-//                    });
-//                    postPic.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-//                        @Override
-//                        public void onSuccess(Uri uri) {
-//                            p.setPostPic(uri);
-//                            //get user profile pic
-//                            profilePicsRef.child(p.getPostAuthor()+"_profile.jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-////                                @Override
-////                                public void onSuccess(Uri uri) {
-////                                    p.setPostProfilePic(uri);
-////                                    p.setPostAuthor(usersListWithName.get(p.getPostAuthor()));
-////                                    mPosts.add(p);
-////                                    //only populate posts once all posts have been retrieved
-////                                    if (mPosts.size() == snapshot.getChildrenCount()) setUIRef();
-////                                }
-////                            });
-//                        }
-//                    });
                 }
             }
             @Override
@@ -180,7 +146,7 @@ public class HomeFragment extends Fragment {
         HomeRecylerItemArrayAdapter myRecyclerViewAdapter = new HomeRecylerItemArrayAdapter(mPosts, new HomeRecylerItemArrayAdapter.MyRecyclerViewItemClickListener() {
             //Handling clicks
             @Override
-            public void onItemClicked(Post post) { Toast.makeText(getContext(), post.getPostAuthor(), Toast.LENGTH_SHORT).show(); }
+            public void onItemClicked(Post post) { Toast.makeText(getContext(), post.getPostCaption(), Toast.LENGTH_SHORT).show(); }
         });
         //Set adapter to RecyclerView
         homeRecyclerView.setAdapter(myRecyclerViewAdapter);

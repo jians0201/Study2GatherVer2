@@ -133,7 +133,7 @@
         android:paddingBottom="5dp">
 
         <ImageButton
-            android:id="@+id/homePostCreateAddImgButton"
+            android:id="@+id/homePostCreateAddImgButtonCamera"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/rounded_corner"

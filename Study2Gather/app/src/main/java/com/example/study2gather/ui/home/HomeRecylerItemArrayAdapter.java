@@ -111,12 +111,8 @@ public class HomeRecylerItemArrayAdapter extends RecyclerView.Adapter<HomeRecyle
 
     //RecyclerView View Holder
     class MyViewHolder extends RecyclerView.ViewHolder {
-        private ImageView imageViewPostUserPic;
-        private TextView textViewPostUsername;
-        private TextView textViewPostTime;
-        private TextView textViewPostCaption;
-        private ImageView imageViewPostPic;
-        private TextView textViewPostLikeCount;
+        private ImageView imageViewPostUserPic, imageViewPostPic;
+        private TextView textViewPostUsername, textViewPostTime, textViewPostCaption, textViewPostLikeCount;
 
         MyViewHolder(@NonNull View itemView) {
             super(itemView);

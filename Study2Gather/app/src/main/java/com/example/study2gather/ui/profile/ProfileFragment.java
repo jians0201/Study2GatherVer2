@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -14,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.study2gather.Login;
 import com.example.study2gather.R;
 import com.example.study2gather.UserObj;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -32,6 +34,7 @@ import com.squareup.picasso.Picasso;
 
 public class ProfileFragment extends Fragment {
 
+    private Button btnLogout;
     private ImageView profilePic;
     private TextView profileName, profileEmail, profileBirthday, profileSchool, profileLocation;
     private FloatingActionButton btnEditProfile;
@@ -57,6 +60,7 @@ public class ProfileFragment extends Fragment {
         profileSchool = root.findViewById(R.id.profileSchool);
         profileLocation = root.findViewById(R.id.profileLocation);
         btnEditProfile = root.findViewById(R.id.fabEditProfile);
+        btnLogout = root.findViewById(R.id.profileLogout);
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         uid = user.getUid();
@@ -106,10 +110,18 @@ public class ProfileFragment extends Fragment {
         btnEditProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i ;
-                i = new Intent(getActivity(), ProfileEdit.class);
+                Intent i = new Intent(getActivity(), ProfileEdit.class);
                 startActivity(i);
+            }
+        });
 
+        //logout btn
+        btnLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut(); //logout
+                Intent i = new Intent(getActivity(), Login.class);
+                startActivity(i);
             }
         });
 

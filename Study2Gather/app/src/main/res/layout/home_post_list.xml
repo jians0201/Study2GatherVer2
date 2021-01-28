@@ -36,8 +36,7 @@
                     android:id="@+id/homePostProfilePic"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/tanjiro" />
+                    android:scaleType="centerCrop" />
 
             </androidx.cardview.widget.CardView>
 
@@ -85,8 +84,7 @@
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_marginBottom="5dp"
-        android:background="#000000"
-        app:srcCompat="@drawable/ic_post_pic" />
+        android:background="#000000" />
 
     <LinearLayout
         android:layout_width="match_parent"

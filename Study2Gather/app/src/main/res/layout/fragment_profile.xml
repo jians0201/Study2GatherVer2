@@ -110,7 +110,7 @@
                         app:drawableLeftCompat="@drawable/ic_location_white_24dp" />
 
                     <Button
-                        android:id="@+id/coursesDetailsSubButton2"
+                        android:id="@+id/profileLogout"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
