@@ -51,9 +51,9 @@ public class HomeFragment extends Fragment {
     private StorageReference imagesRef, profilePicsRef;
 
     private ArrayList<Post> mPosts = new ArrayList<>();
-//    private String uid;
+    private String uid;
     private UserObj userProfile;
-    private HashMap<String, String> usersListWithName;
+//    private HashMap<String, String> usersListWithName;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
@@ -61,29 +61,29 @@ public class HomeFragment extends Fragment {
         btnNewPost = root.findViewById(R.id.fab);
         imagesRef = FirebaseStorage.getInstance().getReference("images");
         profilePicsRef = FirebaseStorage.getInstance().getReference("profileImages");
-//        user = FirebaseAuth.getInstance().getCurrentUser();
-//        uid = user.getUid();
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        uid = user.getUid();
         usersRef = FirebaseDatabase.getInstance().getReference("Users");
         postsRef = FirebaseDatabase.getInstance().getReference("Posts");
-        usersListWithName = new HashMap<String, String>();
+//        usersListWithName = new HashMap<String, String>();
 
 //        //get own info
-//        usersRef.child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) { userProfile = snapshot.getValue(UserObj.class); }
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) { Toast.makeText(getContext(),"Something Went Wrong",Toast.LENGTH_LONG).show(); }
-//        });
+        usersRef.child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) { userProfile = snapshot.getValue(UserObj.class); }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) { Toast.makeText(getContext(),"Something Went Wrong",Toast.LENGTH_LONG).show(); }
+        });
 
         //get all users info
-        usersRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot ds : snapshot.getChildren()) { usersListWithName.put(ds.getKey(),ds.child("username").getValue(String.class)); }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {}
-        });
+//        usersRef.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                for(DataSnapshot ds : snapshot.getChildren()) { usersListWithName.put(ds.getKey(),ds.child("username").getValue(String.class)); }
+//            }
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {}
+//        });
 
         //get posts and pics
         postsRef.orderByChild("timestamp").addValueEventListener(new ValueEventListener() {
@@ -101,13 +101,12 @@ public class HomeFragment extends Fragment {
                                 p.setPostPic(task.getResult());
                             }
                             //get user profile pic
-                            profilePicsRef.child(p.getPostAuthor()+"_profile.jpg").getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+                            profilePicsRef.child(p.getPostAuthorID()+"_profile.jpg").getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Uri> task) {
                                     if (task.isSuccessful()) {
                                         p.setPostProfilePic(task.getResult());
                                     }
-                                    p.setPostAuthor(usersListWithName.get(p.getPostAuthor()));
                                     mPosts.add(p);
                                     //only populate posts once all posts have been retrieved
                                     if (mPosts.size() == snapshot.getChildrenCount()) setUIRef();
@@ -126,6 +125,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getActivity(), HomeCreatePost.class);
+                i.putExtra("username",userProfile.getUsername());
                 startActivity(i);
             }
         });
