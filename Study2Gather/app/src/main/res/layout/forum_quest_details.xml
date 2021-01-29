@@ -62,8 +62,7 @@
                             android:id="@+id/forumQuestionDetailsAskUserProfilePic"
                             android:layout_width="35dp"
                             android:layout_height="35dp"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/tanjiro" />
+                            android:scaleType="centerCrop" />
 
                     </androidx.cardview.widget.CardView>
 

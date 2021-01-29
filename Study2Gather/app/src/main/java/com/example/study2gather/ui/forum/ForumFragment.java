@@ -56,7 +56,7 @@ public class ForumFragment extends Fragment {
     private ArrayList<ForumQuestion> mQns = new ArrayList<>();
     private String uid;
     private UserObj userProfile;
-    private HashMap<String, String> usersListWithName;
+//    private HashMap<String, String> usersListWithName;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         forumViewModel = new ViewModelProvider(this).get(ForumViewModel.class);
@@ -67,7 +67,7 @@ public class ForumFragment extends Fragment {
         uid = user.getUid();
         usersRef = FirebaseDatabase.getInstance().getReference("Users");
         forumRef = FirebaseDatabase.getInstance().getReference("Forum");
-        usersListWithName = new HashMap<String, String>();
+//        usersListWithName = new HashMap<String, String>();
 
         //get own info
         usersRef.child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -78,14 +78,14 @@ public class ForumFragment extends Fragment {
         });
 
         //get all users info
-        usersRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot ds : snapshot.getChildren()) { usersListWithName.put(ds.getKey(),ds.child("username").getValue(String.class)); }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {}
-        });
+//        usersRef.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                for(DataSnapshot ds : snapshot.getChildren()) { usersListWithName.put(ds.getKey(),ds.child("username").getValue(String.class)); }
+//            }
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {}
+//        });
 
         //get posts and pics
         forumRef.orderByChild("timestamp").addValueEventListener(new ValueEventListener() {
@@ -95,13 +95,12 @@ public class ForumFragment extends Fragment {
                 for (DataSnapshot ds : snapshot.getChildren()) {
                     ForumQuestion qn = ds.getValue(ForumQuestion.class);
                     //get user profile pic
-                    profilePicsRef.child(qn.getQuestionAuthor()+"_profile.jpg").getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+                    profilePicsRef.child(qn.getQuestionAuthorID()+"_profile.jpg").getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
                         @Override
                         public void onComplete(@NonNull Task<Uri> task) {
                             if (task.isSuccessful()) {
                                 qn.setQnProfilePic(task.getResult());
                             }
-                            qn.setQuestionAuthor(usersListWithName.get(qn.getQuestionAuthor()));
                             mQns.add(qn);
                             //only populate questions once all questions have been retrieved
                             if (mQns.size() == snapshot.getChildrenCount()) setUIRef();
@@ -127,8 +126,6 @@ public class ForumFragment extends Fragment {
     }
 
     private void setUIRef() {
-        Log.d("RECYCLER","CREATING ITEMS");
-        Log.d("RECYCLER",String.valueOf(mQns.size()));
         //Reference of RecyclerView
         forumRecyclerView = root.findViewById(R.id.forumQuestList);
         //Linear Layout Manager
@@ -142,7 +139,10 @@ public class ForumFragment extends Fragment {
             //Handling clicks
             @Override
             public void onItemClicked(ForumQuestion qn) {
-                Toast.makeText(getContext(), qn.getQuestionTitle(), Toast.LENGTH_SHORT).show();
+//                Intent i = new Intent(getActivity(), ForumQuestionDetails.class);
+//                i.putExtra("users",usersListWithName);
+//                i.putExtra("question",qn);
+//                startActivity(i);
             }
         });
         //Set adapter to RecyclerView
@@ -152,7 +152,7 @@ public class ForumFragment extends Fragment {
     private void createNewQn() {
         final String randomQnID = "QN"+UUID.randomUUID().toString();
         Date date = new Date();
-        ForumQuestion qn = new ForumQuestion("What is Love?", "I wanna know know know know WHAT IS LOVE", uid, date.getTime(),0,randomQnID);
+        ForumQuestion qn = new ForumQuestion("What is Love?", "I wanna know know know know WHAT IS LOVE", userProfile.getUsername(),uid, date.getTime(),0,randomQnID);
         forumRef.child(randomQnID).setValue(qn);
     }
 

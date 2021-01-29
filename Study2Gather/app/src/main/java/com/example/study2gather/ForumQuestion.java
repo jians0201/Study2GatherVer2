@@ -2,17 +2,20 @@ package com.example.study2gather;
 
 import android.net.Uri;
 
-public class ForumQuestion {
-    private String questionTitle, questionID, questionAuthor, questionDescription;
+import java.io.Serializable;
+
+public class ForumQuestion implements Serializable {
+    private String questionTitle, questionID, questionAuthor, questionDescription, questionAuthorID;
     private long timestamp;
     private int ansCount;
     private Uri qnProfilePic;
 
     public ForumQuestion() {}
 
-    public ForumQuestion(String questionTitle, String questionDescription, String questionAuthor, long timestamp, int ansCount, String questionID) {
+    public ForumQuestion(String questionTitle, String questionDescription, String questionAuthor, String questionAuthorID, long timestamp, int ansCount, String questionID) {
         this.questionTitle = questionTitle;
         this.questionAuthor = questionAuthor;
+        this.questionAuthorID = questionAuthorID;
         this.timestamp = timestamp;
         this.ansCount = ansCount;
         this.questionID = questionID;
@@ -73,5 +76,13 @@ public class ForumQuestion {
 
     public void setQuestionDescription(String questionDescription) {
         this.questionDescription = questionDescription;
+    }
+
+    public String getQuestionAuthorID() {
+        return questionAuthorID;
+    }
+
+    public void setQuestionAuthorID(String questionAuthorID) {
+        this.questionAuthorID = questionAuthorID;
     }
 }

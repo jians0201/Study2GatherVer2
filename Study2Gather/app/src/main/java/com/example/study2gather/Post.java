@@ -4,18 +4,19 @@ import android.net.Uri;
 
 public class Post {
     private Uri postProfilePic, postPic;
-    private String postAuthor, postCaption, postPicPath, postID;
+    private String postAuthor, postAuthorID, postCaption, postPicPath, postID;
     private long postLikeCount, timestamp;
 
     public Post() {}
 
-    public Post(String postAuthor, String postCaption, long postLikeCount, long timestamp, String postPicPath, String postID) {
+    public Post(String postAuthor, String postAuthorID, String postCaption, long postLikeCount, long timestamp, String postPicPath, String postID) {
         this.postAuthor = postAuthor;
         this.postCaption = postCaption;
         this.timestamp = timestamp;
         this.postLikeCount = postLikeCount;
         this.postPicPath = postPicPath;
         this.postID = postID;
+        this.postAuthorID = postAuthorID;
     }
 
     public String getPostCaption() { return postCaption; }
@@ -52,5 +53,13 @@ public class Post {
 
     public void setPostID(String postID) {
         this.postID = postID;
+    }
+
+    public String getPostAuthorID() {
+        return postAuthorID;
+    }
+
+    public void setPostAuthorID(String postAuthorID) {
+        this.postAuthorID = postAuthorID;
     }
 }
