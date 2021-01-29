@@ -62,7 +62,7 @@ public class ForumFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         forumViewModel = new ViewModelProvider(this).get(ForumViewModel.class);
         root = inflater.inflate(R.layout.fragment_forum, container, false);
-        btnNewQn = root.findViewById(R.id.fab);
+        btnNewQn = root.findViewById(R.id.forumQuestCreateFAB);
         profilePicsRef = FirebaseStorage.getInstance().getReference("profileImages");
         user = FirebaseAuth.getInstance().getCurrentUser();
         uid = user.getUid();
@@ -88,7 +88,7 @@ public class ForumFragment extends Fragment {
 //            public void onCancelled(@NonNull DatabaseError error) {}
 //        });
 
-        //get posts and pics
+        //get qns and pics
         forumRef.orderByChild("timestamp").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -117,9 +117,10 @@ public class ForumFragment extends Fragment {
         btnNewQn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                createNewQn();
-//                Intent i = new Intent(getActivity(), HomeCreatePost.class);
-//                startActivity(i);
+//                createNewQn();
+                Intent i = new Intent(getActivity(), ForumCreateQuestion.class);
+                i.putExtra("username", userProfile.getUsername());
+                startActivity(i);
             }
         });
 
