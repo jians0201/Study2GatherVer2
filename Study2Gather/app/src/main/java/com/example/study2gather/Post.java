@@ -9,21 +9,6 @@ public class Post {
 
     public Post() {}
 
-    public Post(String postAuthor, String postCaption, long postLikeCount, long timestamp) {
-        this.postAuthor = postAuthor;
-        this.postCaption = postCaption;
-        this.timestamp = timestamp;
-        this.postLikeCount = postLikeCount;
-    }
-
-    public Post(String postAuthor, String postCaption, long postLikeCount, long timestamp, String postPicPath) {
-        this.postAuthor = postAuthor;
-        this.postCaption = postCaption;
-        this.timestamp = timestamp;
-        this.postLikeCount = postLikeCount;
-        this.postPicPath = postPicPath;
-    }
-
     public Post(String postAuthor, String postCaption, long postLikeCount, long timestamp, String postPicPath, String postID) {
         this.postAuthor = postAuthor;
         this.postCaption = postCaption;

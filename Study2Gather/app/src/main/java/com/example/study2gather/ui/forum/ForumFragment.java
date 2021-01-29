@@ -93,7 +93,6 @@ public class ForumFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 mQns.clear();
                 for (DataSnapshot ds : snapshot.getChildren()) {
-                    Log.d("POST",ds.getKey());
                     ForumQuestion qn = ds.getValue(ForumQuestion.class);
                     //get user profile pic
                     profilePicsRef.child(qn.getQuestionAuthor()+"_profile.jpg").getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
@@ -124,23 +123,6 @@ public class ForumFragment extends Fragment {
             }
         });
 
-//        Date d = new Date();
-//        mQns.add(new ForumQuestion("What is Love?","Bob",d.getTime(),0,"EJAAPJSOJF"));
-//        mQns.add(new ForumQuestion("What is Love?","Bob",d.getTime(),0,"EJAAPJSOJF"));
-//        mQns.add(new ForumQuestion("What is Love?","Bob",d.getTime(),0,"EJAAPJSOJF"));
-//        mQns.add(new ForumQuestion("What is Love?","Bob",d.getTime(),0,"EJAAPJSOJF"));
-//        mQns.add(new ForumQuestion("What is Love?","Bob",d.getTime(),0,"EJAAPJSOJF"));
-//        mQns.add(new ForumQuestion("What is Love?","Bob",d.getTime(),0,"EJAAPJSOJF"));
-//        mQns.add(new ForumQuestion("What is Love?","Bob",d.getTime(),0,"EJAAPJSOJF"));
-//        mQns.add(new ForumQuestion("What is Love?","Bob",d.getTime(),0,"EJAAPJSOJF"));
-//        mQns.add(new ForumQuestion("What is Love?","Bob",d.getTime(),0,"EJAAPJSOJF"));
-//        mQns.add(new ForumQuestion("What is Love?","Bob",d.getTime(),0,"EJAAPJSOJF"));
-//        mQns.add(new ForumQuestion("What is Love?","Bob",d.getTime(),0,"EJAAPJSOJF"));
-//        mQns.add(new ForumQuestion("What is Love?","Bob",d.getTime(),0,"EJAAPJSOJF"));
-//        mQns.add(new ForumQuestion("What is Love?","Bob",d.getTime(),0,"EJAAPJSOJF"));
-//        mQns.add(new ForumQuestion("What is Love?","Bob",d.getTime(),0,"EJAAPJSOJF"));
-//        setUIRef();
-
         return root;
     }
 
@@ -159,7 +141,9 @@ public class ForumFragment extends Fragment {
         ForumRecyclerItemArrayAdapter myRecyclerViewAdapter = new ForumRecyclerItemArrayAdapter(mQns, new ForumRecyclerItemArrayAdapter.MyRecyclerViewItemClickListener() {
             //Handling clicks
             @Override
-            public void onItemClicked(ForumQuestion qn) { Toast.makeText(getContext(), qn.getQuestionTitle(), Toast.LENGTH_SHORT).show(); }
+            public void onItemClicked(ForumQuestion qn) {
+                Toast.makeText(getContext(), qn.getQuestionTitle(), Toast.LENGTH_SHORT).show();
+            }
         });
         //Set adapter to RecyclerView
         forumRecyclerView.setAdapter(myRecyclerViewAdapter);
@@ -168,7 +152,7 @@ public class ForumFragment extends Fragment {
     private void createNewQn() {
         final String randomQnID = "QN"+UUID.randomUUID().toString();
         Date date = new Date();
-        ForumQuestion qn = new ForumQuestion("What is Love?", uid, date.getTime(),0,randomQnID);
+        ForumQuestion qn = new ForumQuestion("What is Love?", "I wanna know know know know WHAT IS LOVE", uid, date.getTime(),0,randomQnID);
         forumRef.child(randomQnID).setValue(qn);
     }
 

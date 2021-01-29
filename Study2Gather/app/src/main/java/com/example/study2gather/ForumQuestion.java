@@ -3,27 +3,20 @@ package com.example.study2gather;
 import android.net.Uri;
 
 public class ForumQuestion {
-    private String questionTitle, questionID;
+    private String questionTitle, questionID, questionAuthor, questionDescription;
     private long timestamp;
-    private String questionAuthor;
     private int ansCount;
     private Uri qnProfilePic;
 
     public ForumQuestion() {}
 
-    public ForumQuestion(String questionTitle, String questionAuthor, long timestamp, int ansCount) {
-        this.questionTitle = questionTitle;
-        this.questionAuthor = questionAuthor;
-        this.timestamp = timestamp;
-        this.ansCount = ansCount;
-    }
-
-    public ForumQuestion(String questionTitle, String questionAuthor, long timestamp, int ansCount, String questionID) {
+    public ForumQuestion(String questionTitle, String questionDescription, String questionAuthor, long timestamp, int ansCount, String questionID) {
         this.questionTitle = questionTitle;
         this.questionAuthor = questionAuthor;
         this.timestamp = timestamp;
         this.ansCount = ansCount;
         this.questionID = questionID;
+        this.questionDescription = questionDescription;
     }
 
     public String getQuestionTitle() {
@@ -72,5 +65,13 @@ public class ForumQuestion {
 
     public void setQuestionID(String questionID) {
         this.questionID = questionID;
+    }
+
+    public String getQuestionDescription() {
+        return questionDescription;
+    }
+
+    public void setQuestionDescription(String questionDescription) {
+        this.questionDescription = questionDescription;
     }
 }
