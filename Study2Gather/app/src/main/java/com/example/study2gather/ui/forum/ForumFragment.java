@@ -113,7 +113,7 @@ public class ForumFragment extends Fragment {
             public void onCancelled(@NonNull DatabaseError error) {}
         });
 
-        //add post btn
+        //add question btn
         btnNewQn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -142,22 +142,13 @@ public class ForumFragment extends Fragment {
             @Override
             public void onItemClicked(ForumQuestion qn) {
                 Intent i = new Intent(getActivity(), ForumQuestionDetails.class);
-//                i.putExtra("question",qn);
                 i.putExtra("question", (Serializable) qn);
+                i.putExtra("username", userProfile.getUsername()); //remove later
                 startActivity(i);
             }
         });
         //Set adapter to RecyclerView
         forumRecyclerView.setAdapter(myRecyclerViewAdapter);
     }
-
-    private void createNewQn() {
-        final String randomQnID = "QN"+UUID.randomUUID().toString();
-        Date date = new Date();
-        ForumQuestion qn = new ForumQuestion("What is Love?", "I wanna know know know know WHAT IS LOVE", userProfile.getUsername(),uid, date.getTime(),0,randomQnID);
-        forumRef.child(randomQnID).setValue(qn);
-    }
-
-
 
 }

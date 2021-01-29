@@ -15,6 +15,7 @@ import com.example.study2gather.R;
 import com.example.study2gather.ui.home.HomeCreatePost;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -35,6 +36,9 @@ public class ForumCreateQuestion extends AppCompatActivity implements View.OnCli
     private DatabaseReference forumRef;
 
     private String uid, username;
+
+    public ForumCreateQuestion() {
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
