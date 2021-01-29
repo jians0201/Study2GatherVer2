@@ -8,7 +8,7 @@
     android:orientation="vertical">
 
     <LinearLayout
-        android:id="@+id/forumQuestCreateTopLayout"
+        android:id="@+id/homePostCreateTopLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -31,7 +31,7 @@
             android:layout_weight="1" />
 
         <Button
-            android:id="@+id/forumQuestCreateButton"
+            android:id="@+id/homePostCreateButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="onClick"
@@ -49,11 +49,11 @@
     </LinearLayout>
 
     <ScrollView
-        android:id="@+id/forumQuestCreateMidLayout"
+        android:id="@+id/homePostCreateMidLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/homePostCreateBotLayout"
-        android:layout_below="@+id/forumQuestCreateTopLayout"
+        android:layout_below="@+id/homePostCreateTopLayout"
         android:orientation="vertical"
         android:padding="10dp">
 
@@ -74,7 +74,7 @@
                     app:cardCornerRadius="250dp">
 
                     <ImageView
-                        android:id="@+id/forumQuestCreateProfilePic"
+                        android:id="@+id/homePostCreateProfilePic"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:scaleType="centerCrop" />

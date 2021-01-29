@@ -33,8 +33,7 @@ public class ForumQuestionDetails extends AppCompatActivity {
     private StorageReference profilePicsRef;
 
     private ForumQuestion question;
-    private HashMap<String, String> usersListWithName;
-//    private ArrayList<ForumQuestionAnswer> mQns = new ArrayList<>();
+//    private ArrayList<ForumQuestionAnswer> mAns = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,16 +52,6 @@ public class ForumQuestionDetails extends AppCompatActivity {
 //        uid = user.getUid();
         answersRef = FirebaseDatabase.getInstance().getReference("ForumAnswers");
 //        forumRef = FirebaseDatabase.getInstance().getReference("Forum");
-
-        //get qn author profile pic
-//        profilePicsRef.child(question.getQuestionAuthorID()+"_profile.jpg").getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
-//            @Override
-//            public void onComplete(@NonNull Task<Uri> task) {
-//                if (task.isSuccessful()) {
-//                    question.setQnProfilePic(task.getResult());
-//                }
-//            }
-//        });
 
         if (question.getQnProfilePic() != null) {
             Picasso.get().load(question.getQnProfilePic()).into(iVQnAuthorPic);

@@ -40,8 +40,8 @@ import java.util.Date;
 import java.util.UUID;
 
 public class HomeCreatePost extends AppCompatActivity implements View.OnClickListener {
-    private ImageButton iBtnBack, iBtnInsertImg, iBtnInsertImgCamera;
-    private Button btnCreatePost;
+//    private ImageButton iBtnBack, iBtnInsertImg, iBtnInsertImgCamera;
+//    private Button btnCreatePost;
     private ImageView iVProfilePic, iVPostPic;
     private EditText eTPostText;
 
@@ -60,11 +60,11 @@ public class HomeCreatePost extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_post_create);
 
-        iBtnBack = findViewById(R.id.homePostCreateClearButton);
-        iBtnInsertImg = findViewById(R.id.homePostCreateInsertImgButton);
-        iBtnInsertImgCamera = findViewById(R.id.homePostCreateAddImgButtonCamera);
-        btnCreatePost = findViewById(R.id.forumQuestCreateButton);
-        iVProfilePic = findViewById(R.id.forumQuestCreateProfilePic);
+//        iBtnBack = findViewById(R.id.homePostCreateClearButton);
+//        iBtnInsertImg = findViewById(R.id.homePostCreateInsertImgButton);
+//        iBtnInsertImgCamera = findViewById(R.id.homePostCreateAddImgButtonCamera);
+//        btnCreatePost = findViewById(R.id.forumQuestCreateButton);
+        iVProfilePic = findViewById(R.id.homePostCreateProfilePic);
         iVPostPic = findViewById(R.id.homePostCreatePostPic);
         eTPostText = findViewById(R.id.homePostCreateText);
 
@@ -146,10 +146,10 @@ public class HomeCreatePost extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onClick(View v) {
         switch(v.getId()) {
-            case R.id.forumQuestCreateClearButton:
+            case R.id.homePostCreateClearButton:
                 finish();
                 break;
-            case R.id.forumQuestCreateButton:
+            case R.id.homePostCreateButton:
                 String postText = eTPostText.getText().toString().trim();
                 if (iVPostPic.getDrawable()!=null && !postText.isEmpty()) {
                     Toast.makeText(HomeCreatePost.this, "Creating Post", Toast.LENGTH_SHORT).show();
