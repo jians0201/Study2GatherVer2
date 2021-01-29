@@ -78,6 +78,10 @@
             <br /><br />A: My supervisor was great when it came to answering any relevant questions when it related to the IRB. If I needed any guidance on how to submit a continuing review, do a study status update through RAMS-IRB, or needed to develop an amendment I learned how to do it the day of typically. My level of involvement in site feasibility meetings was very minimal, and for a suggestion I would recommend ensuring assigned CRCs such as myself was involved in the start-up process with the PI and along with the sponsor funding the research.
     </string>
 
+    / #Forum Create Question Page
+    <string name="forumQuestCreateButton">Ask</string>
+    <string name="forumQuestCreateHint">Start your question with "What", "How", "Why", etc.</string>
+
     / #Courses Page
     <string name="coursesTitle">Courses</string>
     <string name="coursesTabTitle">Courses</string>

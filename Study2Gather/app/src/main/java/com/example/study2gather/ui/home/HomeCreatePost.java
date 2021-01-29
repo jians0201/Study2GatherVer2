@@ -7,7 +7,6 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
-import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -23,18 +22,14 @@ import android.widget.Toast;
 
 import com.example.study2gather.Post;
 import com.example.study2gather.R;
-import com.example.study2gather.ui.profile.ProfileEdit;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -68,10 +63,10 @@ public class HomeCreatePost extends AppCompatActivity implements View.OnClickLis
         iBtnBack = findViewById(R.id.homePostCreateClearButton);
         iBtnInsertImg = findViewById(R.id.homePostCreateInsertImgButton);
         iBtnInsertImgCamera = findViewById(R.id.homePostCreateAddImgButtonCamera);
-        btnCreatePost = findViewById(R.id.homePostCreateButton);
-        iVProfilePic = findViewById(R.id.homePostCreateProfilePic);
+        btnCreatePost = findViewById(R.id.forumQuestCreateButton);
+        iVProfilePic = findViewById(R.id.forumQuestCreateProfilePic);
         iVPostPic = findViewById(R.id.homePostCreatePostPic);
-        eTPostText = findViewById(R.id.editTextTextMultiLine);
+        eTPostText = findViewById(R.id.homePostCreateText);
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         uid = user.getUid();
@@ -150,10 +145,10 @@ public class HomeCreatePost extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onClick(View v) {
         switch(v.getId()) {
-            case R.id.homePostCreateClearButton:
+            case R.id.forumQuestCreateClearButton:
                 finish();
                 break;
-            case R.id.homePostCreateButton:
+            case R.id.forumQuestCreateButton:
                 String postText = eTPostText.getText().toString().trim();
                 if (iVPostPic.getDrawable()!=null && !postText.isEmpty()) {
                     Toast.makeText(HomeCreatePost.this, "Creating Post", Toast.LENGTH_SHORT).show();
