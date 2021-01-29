@@ -20,7 +20,7 @@
         android:id="@+id/frameLayout2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/message_bubble_send">
+        android:background="@drawable/ic_message_bubble_send">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="wrap_content"

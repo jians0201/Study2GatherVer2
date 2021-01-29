@@ -11,6 +11,7 @@
     <string name="loginPasswordLabel">Password</string>
     <string name="loginLoginBtn">Login</string>
     <string name="loginRegisterBtn">Register</string>
+    <string name="loginForgotPasswordBtn">Forgot Password</string>
     // Error Text
     <string name="loginEmptyError">Field can\'t be empty!</string>
     <string name="loginEmailError">Enter a valid Email!</string>
