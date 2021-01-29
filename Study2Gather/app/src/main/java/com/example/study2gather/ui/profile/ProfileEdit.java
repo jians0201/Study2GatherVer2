@@ -2,6 +2,7 @@ package com.example.study2gather.ui.profile;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -30,6 +31,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
@@ -129,6 +131,8 @@ public class ProfileEdit extends AppCompatActivity implements View.OnClickListen
         // R.menu.mymenu is a reference to an xml file named mymenu.xml which should be inside your res/menu directory.
         // If you don't have res/menu, just create a directory named "menu" inside res
         getMenuInflater().inflate(R.menu.profile_edit_menu, menu);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_clear_white_24dp);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -136,7 +140,10 @@ public class ProfileEdit extends AppCompatActivity implements View.OnClickListen
     @Override
     public boolean onOptionsItemSelected(MenuItem item) { //for the tick btn
         int id = item.getItemId();
-        if (id == R.id.profileEditDoneBtn) {
+        if (item.getItemId() == android.R.id.home ) {
+            finish();
+            return true;
+        }else if (id == R.id.profileEditDoneBtn) {
             //Add validation here before calling update profile
             updateProfile();
         }

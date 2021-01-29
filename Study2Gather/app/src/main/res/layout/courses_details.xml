@@ -30,13 +30,14 @@
                 android:background="@drawable/border_bottom">
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1.5"
                     android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/coursesDetailsName"
-                        android:layout_width="250dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/exo_extrabold"
                         android:text="@string/coursesCourseDetailName"
@@ -79,15 +80,11 @@
 
                 </LinearLayout>
 
-                <Space
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
-
                 <Button
                     android:id="@+id/coursesDetailsSubButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
                     android:backgroundTint="@color/purple_700"
                     android:fontFamily="@font/exo_extrabold"
                     android:insetTop="0dp"
@@ -96,17 +93,19 @@
                     android:minHeight="0dp"
                     android:text="@string/coursesCourseDetailSubbed"
                     android:textColor="@color/white"
-                    android:textSize="13sp" />
+                    android:textSize="16sp"
+                    app:cornerRadius="9999dp" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:paddingStart="15dp"
-                android:paddingEnd="15dp"
-                android:gravity="center_vertical">
+                android:paddingEnd="15dp">
 
                 <TextView
                     android:id="@+id/coursesDetailsLecture"
@@ -125,8 +124,10 @@
                     android:id="@+id/coursesDetailsDownloadButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/rounded_corner"
                     android:backgroundTint="@color/purple_700"
-                    app:srcCompat="@drawable/ic_arrow_circle_down_white_18dp" />
+                    android:padding="5dp"
+                    app:srcCompat="@drawable/ic_arrow_circle_down_white_24dp" />
             </LinearLayout>
 
             <LinearLayout

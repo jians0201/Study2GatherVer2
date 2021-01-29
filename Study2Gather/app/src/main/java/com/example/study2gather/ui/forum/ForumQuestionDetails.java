@@ -5,6 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -38,6 +41,7 @@ public class ForumQuestionDetails extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
         setContentView(R.layout.forum_quest_details);
         tVQnTitle = findViewById(R.id.forumQuestionDetailsQuest);
         tVQnDesc = findViewById(R.id.forumQuestionDetailsDet);
@@ -65,5 +69,24 @@ public class ForumQuestionDetails extends AppCompatActivity {
         Timestamp ts = new Timestamp(question.getTimestamp());
         tVQnTimestamp.setText(String.valueOf(ts));
         tVAnsCount.setText(String.valueOf(question.getAnsCount()));
+    }
+
+    // create an action bar button
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_arrow_back_white_24dp);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    // handle button activities
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) { //for the tick btn
+        int id = item.getItemId();
+        if (item.getItemId() == android.R.id.home ) {
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

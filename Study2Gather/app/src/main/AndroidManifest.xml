@@ -11,11 +11,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Study2Gather"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.forum.ForumCreateQuestion"></activity>
-        <activity android:name=".ui.forum.ForumQuestionDetails" />
-        <activity
-            android:name=".ui.home.HomeCreatePost"
-            android:theme="@style/Theme.MaterialComponents.NoActionBar" />
         <activity
             android:name=".Splash"
             android:theme="@style/Theme.MaterialComponents.NoActionBar">
@@ -33,6 +28,14 @@
             android:theme="@style/Theme.MaterialComponents.NoActionBar" />
         <activity android:name=".MainActivity" />
         <activity
+            android:name=".ui.home.HomeCreatePost"
+            android:theme="@style/Theme.MaterialComponents.NoActionBar" />
+        <activity
+            android:name=".ui.forum.ForumCreateQuestion"
+            android:theme="@style/Theme.MaterialComponents.NoActionBar" />
+        <activity
+            android:name=".ui.forum.ForumQuestionDetails" />
+        <activity
             android:name=".ui.courses.CoursesDetails"
             android:label="@string/coursesTitle"
             android:parentActivityName=".MainActivity">
@@ -44,7 +47,6 @@
             android:name=".ui.profile.ProfileEdit"
             android:label="@string/profileEditTitle"
             android:theme="@style/Theme.MaterialComponents" />
-
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

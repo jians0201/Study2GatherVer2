@@ -86,12 +86,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:background="@drawable/rounded_corner_border_thin"
                 android:drawableLeft="@drawable/ic_comment_white_18dp"
                 android:drawablePadding="10dp"
-                android:drawableTint="@color/purple_700"
                 android:fontFamily="@font/exo_extrabold"
+                android:paddingLeft="10dp"
+                android:paddingTop="5dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="5dp"
                 android:text="@string/forumCommentCount"
-                android:textColor="@color/purple_700"
+                android:textColor="@color/white"
                 android:textSize="16sp" />
 
         </LinearLayout>
