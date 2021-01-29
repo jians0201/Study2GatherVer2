@@ -7,7 +7,6 @@
     android:background="@color/black">
 
     <LinearLayout
-        android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -19,33 +18,23 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#191919"
-            android:orientation="vertical"
-            android:padding="10dp">
-
-            <TextView
-                android:id="@+id/forumQuestionDetailsQuest"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/exo_extrabold"
-                android:text="@string/forumQuestion"
-                android:textColor="@color/white"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/forumQuestionDetailsDet"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:fontFamily="@font/exo"
-                android:text="@string/forumQuestionDetails" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
             android:gravity="center"
             android:orientation="horizontal"
-            android:padding="10dp">
+            android:paddingLeft="6dp"
+            android:paddingTop="10dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="10dp">
+
+            <ImageButton
+                android:id="@+id/forumQuestionDetailsBackBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:onClick="onClick"
+                android:padding="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_arrow_back_white_24dp" />
 
             <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
@@ -119,37 +108,74 @@
 
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/forumQuestionDetailsAnswer"
-            android:layout_width="wrap_content"
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#191919"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/forumQuestionDetailsQuest"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/exo_extrabold"
+                        android:text="@string/forumQuestion"
+                        android:textColor="@color/white"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/forumQuestionDetailsDet"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/exo"
+                        android:text="@string/forumQuestionDetails" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/forumQuestionDetailsAnswer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/rounded_corner_border"
+                    android:fontFamily="@font/exo_extrabold"
+                    android:paddingLeft="15dp"
+                    android:paddingTop="5dp"
+                    android:paddingRight="15dp"
+                    android:paddingBottom="5dp"
+                    android:text="@string/forumQuestionDetailsAnswer"
+                    android:textColor="@color/white"
+                    android:textSize="24sp"
+                    tools:layout_editor_absoluteY="188dp" />
+            </LinearLayout>
+        </ScrollView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/forumAnsList"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/rounded_corner_border"
-            android:fontFamily="@font/exo_extrabold"
-            android:paddingLeft="15dp"
-            android:paddingTop="5dp"
-            android:paddingRight="15dp"
-            android:paddingBottom="5dp"
-            android:text="@string/forumQuestionDetailsAnswer"
-            android:textColor="@color/white"
-            android:textSize="24sp"
-            tools:layout_editor_absoluteY="188dp" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0">
+
+        </androidx.recyclerview.widget.RecyclerView>
 
     </LinearLayout>
-
-    <!--    </ScrollView>-->
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/forumAnsList"
-        android:layout_width="411dp"
-        android:layout_height="448dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent">
-
-    </androidx.recyclerview.widget.RecyclerView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/forumQuestAnsFAB"
@@ -162,4 +188,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/ic_answer_quest_white_24dp"
         app:tint="@color/white" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -39,6 +39,11 @@
     <string name="registerSexError">Select a Gender!</string>
     <string name="registerDOBError">Enter a Date of Birth!</string>
 
+    // #Forgot Password Page
+    <string name="forgotPasswordTitle">Reset Password</string>
+    <style name="forgotPasswordEmailLabel">Email</style>
+    <string name="forgotPasswordResetButton">Reset</string>
+
     // #Home Page
     <string name="homeTitle">Home</string>
     <string name="homeTabTitle">Home</string>

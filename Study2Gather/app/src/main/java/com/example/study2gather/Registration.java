@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.TextView;
@@ -47,7 +48,7 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
     private TextView DOBTextField, rgSexLabel, rgDOBLabel;
     private ProgressBar pgbar;
     private RadioButton rgSexMale, rgSexFemale;
-    private Button backBtn;
+    private ImageButton backBtn;
 
     private FirebaseAuth fAuth;
     private FirebaseDatabase fDb;

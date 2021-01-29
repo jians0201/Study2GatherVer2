@@ -8,16 +8,19 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.study2gather.ForumAnswer;
 import com.example.study2gather.ForumQuestion;
 import com.example.study2gather.R;
+import com.example.study2gather.ui.home.HomeCreatePost;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -39,7 +42,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.UUID;
 
-public class ForumQuestionDetails extends AppCompatActivity {
+public class ForumQuestionDetails extends AppCompatActivity implements View.OnClickListener  {
     private TextView tVQnTitle, tVQnDesc, tVQnAuthor, tVQnTimestamp, tVAnsCount;
     private ImageView iVQnAuthorPic;
     private FloatingActionButton btnNewAns;
@@ -56,7 +59,6 @@ public class ForumQuestionDetails extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
         setContentView(R.layout.forum_quest_details);
         tVQnTitle = findViewById(R.id.forumQuestionDetailsQuest);
         tVQnDesc = findViewById(R.id.forumQuestionDetailsDet);
@@ -162,10 +164,26 @@ public class ForumQuestionDetails extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) { //for the tick btn
         int id = item.getItemId();
-        if (item.getItemId() == android.R.id.home ) {
+        if (item.getItemId() == android.R.id.home) {
             finish();
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void createNewForumAnswer() {
+        Date date = new Date();
+        final String randomAnsID = "ans"+ UUID.randomUUID().toString();
+        ForumAnswer answer = new ForumAnswer(username, uid, "Its a^2 + b^2 = c^2, where c is the longest side of the right angled triangle.",question.getQuestionID(),randomAnsID,date.getTime());
+        answersRef.child(randomAnsID).setValue(answer);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch(v.getId()) {
+            case R.id.forumQuestionDetailsBackBtn:
+                finish();
+                break;
+        }
     }
 }
