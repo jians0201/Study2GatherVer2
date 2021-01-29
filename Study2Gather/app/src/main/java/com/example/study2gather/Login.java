@@ -7,6 +7,7 @@ import android.util.Patterns;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -24,7 +25,7 @@ import java.util.Objects;
 
 public class Login extends AppCompatActivity implements View.OnClickListener{
 
-    private ConstraintLayout loginLayout;
+    private LinearLayout linearLayoutLogin;
     private TextInputLayout loginEmail, loginPword;
     private ProgressBar pgbar;
 
@@ -39,14 +40,14 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
         super.onCreate(savedInstanceState);
         // Launch the layout -> splash.xml
         setContentView(R.layout.login);
-        loginLayout = findViewById(R.id.loginLayout);
+        linearLayoutLogin = findViewById(R.id.linearLayoutLogin);
         loginEmail = findViewById(R.id.loginEmailAddress);
         loginPword = findViewById(R.id.loginPassword);
         pgbar = findViewById(R.id.loginProgressBar);
         fAuth = FirebaseAuth.getInstance();
 
         anim = AnimationUtils.loadAnimation(this, R.anim.fade);
-        loginLayout.startAnimation(anim);
+        linearLayoutLogin.startAnimation(anim);
     }
 
     private boolean validateEmail() {

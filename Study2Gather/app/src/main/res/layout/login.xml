@@ -6,6 +6,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/splashAppName"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/splashBgDesc"
+        android:src="@drawable/splash_app_name"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0" />
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="0dp"
@@ -16,7 +29,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
-        android:id="@+id/linearLayout"
+        android:id="@+id/linearLayoutLogin"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center_horizontal"
@@ -91,7 +104,7 @@
                 android:paddingTop="0dp"
                 android:text="@string/loginForgotPasswordBtn"
                 android:textAlignment="viewEnd"
-                android:textColor="#FFFFFF"
+                android:textColor="#0E86EE"
                 android:textSize="12sp" />
 
         </LinearLayout>

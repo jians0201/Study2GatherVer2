@@ -21,4 +21,17 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/splashAppName"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/splashBgDesc"
+        android:src="@drawable/splash_app_name"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
