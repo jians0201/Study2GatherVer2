@@ -124,76 +124,17 @@
                 android:textColor="@color/purple_700"
                 android:textSize="24sp" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:padding="10dp">
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="10dp"
-                    app:cardCornerRadius="250dp">
-
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
-                        android:layout_gravity="center"
-                        app:cardCornerRadius="250dp">
-
-                        <ImageView
-                            android:id="@+id/forumQuestionDetailsAnswerUserProfilePic"
-                            android:layout_width="35dp"
-                            android:layout_height="35dp"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/tanzuko" />
-
-                    </androidx.cardview.widget.CardView>
-
-                </androidx.cardview.widget.CardView>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/forumQuestionDetailsAnswerAnswerUser"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:fontFamily="@font/exo_extrabold"
-                        android:text="@string/forumAnswerUsername"
-                        android:textColor="#FFFFFF"
-                        android:textSize="14sp" />
-
-                    <TextView
-                        android:id="@+id/forumQuestionDetailsAnswerTime"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:fontFamily="@font/exo"
-                        android:text="@string/forumAnswerTime"
-                        android:textColor="#FFFFFF"
-                        android:textSize="10sp" />
-                </LinearLayout>
-
-                <Space
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
-
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/forumQuestionDetailsAnswerDetails"
-                android:layout_width="match_parent"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/forumAnsList"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:background="#191919"
-                android:padding="10dp"
-                android:text="@string/forumQuestionDetailsAnswerDetails" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0" />
+
         </LinearLayout>
     </ScrollView>
 
@@ -207,5 +148,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:tint="@color/white"
-        app:srcCompat="@drawable/ic_add_white_24dp" />
+        app:srcCompat="@drawable/ic_answer_quest_white_24dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

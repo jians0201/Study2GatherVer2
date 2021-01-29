@@ -52,7 +52,6 @@
         android:id="@+id/forumQuestCreateMidLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/homePostCreateBotLayout"
         android:layout_below="@+id/forumQuestCreateTopLayout"
         android:orientation="vertical"
         android:padding="10dp">
@@ -95,7 +94,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/exo_extrabold"
                     android:gravity="center_horizontal"
-                    android:text="Title"
+                    android:text="@string/forumQuestCreateTitleLabel"
                     android:textSize="18sp" />
 
                 <androidx.cardview.widget.CardView
@@ -126,7 +125,7 @@
                     android:layout_marginTop="10dp"
                     android:fontFamily="@font/exo_extrabold"
                     android:gravity="center_horizontal"
-                    android:text="Description"
+                    android:text="@string/forumQuestCreateDescLabel"
                     android:textSize="18sp" />
 
                 <androidx.cardview.widget.CardView

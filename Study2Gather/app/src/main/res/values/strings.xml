@@ -80,8 +80,14 @@
 
     / #Forum Create Question Page
     <string name="forumQuestCreateButton">Ask</string>
+    <string name="forumQuestCreateTitleLabel">Title</string>
     <string name="forumQuestCreateTitleHint">Start your question with "What", "How", "Why", etc.</string>
+    <string name="forumQuestCreateDescLabel">Description</string>
     <string name="forumQuestCreateDescHint">Elaborate your question.</string>
+
+    / #Forum Create Question Page
+    <string name="forumAnsCreateButton">Answer</string>
+    <string name="forumAnsCreateHint">Elaborate your answer.</string>
 
     / #Courses Page
     <string name="coursesTitle">Courses</string>
