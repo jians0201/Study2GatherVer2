@@ -89,17 +89,66 @@
                 android:orientation="vertical"
                 android:paddingLeft="10dp">
 
-                <EditText
-                    android:id="@+id/forumQuestCreateTitle"
+                <TextView
+                    android:id="@+id/forumQuestCreateTitleLabel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/exo_extrabold"
+                    android:gravity="center_horizontal"
+                    android:text="Title"
+                    android:textSize="18sp" />
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:cardCornerRadius="9999dp">
+
+                    <EditText
+                        android:id="@+id/forumQuestCreateTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@null"
+                        android:fontFamily="@font/exo"
+                        android:gravity="start|top"
+                        android:hint="@string/forumQuestCreateTitleHint"
+                        android:inputType="textMultiLine" />
+
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:id="@+id/forumQuestCreateDescLabel"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:background="@null"
-                    android:ems="10"
-                    android:fontFamily="@font/exo"
-                    android:gravity="start|top"
-                    android:hint="@string/forumQuestCreateHint"
-                    android:inputType="textMultiLine" />
+                    android:fontFamily="@font/exo_extrabold"
+                    android:gravity="center_horizontal"
+                    android:text="Description"
+                    android:textSize="18sp" />
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:cardCornerRadius="9999dp">
+
+                    <EditText
+                        android:id="@+id/forumQuestCreateDesc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@null"
+                        android:fontFamily="@font/exo"
+                        android:gravity="start|top"
+                        android:hint="@string/forumQuestCreateDescHint"
+                        android:inputType="textMultiLine" />
+
+                </androidx.cardview.widget.CardView>
 
             </LinearLayout>
         </LinearLayout>

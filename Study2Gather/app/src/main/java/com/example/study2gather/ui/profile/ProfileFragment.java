@@ -59,7 +59,7 @@ public class ProfileFragment extends Fragment {
         profileBirthday = root.findViewById(R.id.profileBirthday);
         profileSchool = root.findViewById(R.id.profileSchool);
         profileLocation = root.findViewById(R.id.profileLocation);
-        btnEditProfile = root.findViewById(R.id.fabEditProfile);
+        btnEditProfile = root.findViewById(R.id.profileEditFAB);
         btnLogout = root.findViewById(R.id.profileLogout);
 
         user = FirebaseAuth.getInstance().getCurrentUser();

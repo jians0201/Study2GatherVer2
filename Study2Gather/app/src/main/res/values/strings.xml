@@ -80,7 +80,8 @@
 
     / #Forum Create Question Page
     <string name="forumQuestCreateButton">Ask</string>
-    <string name="forumQuestCreateHint">Start your question with "What", "How", "Why", etc.</string>
+    <string name="forumQuestCreateTitleHint">Start your question with "What", "How", "Why", etc.</string>
+    <string name="forumQuestCreateDescHint">Elaborate your question.</string>
 
     / #Courses Page
     <string name="coursesTitle">Courses</string>
