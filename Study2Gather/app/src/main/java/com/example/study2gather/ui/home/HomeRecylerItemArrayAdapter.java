@@ -4,8 +4,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -91,7 +94,19 @@ public class HomeRecylerItemArrayAdapter extends RecyclerView.Adapter<HomeRecyle
         } else {
             likeCount = String.format("%.1f", Float.valueOf(postLikeCount/1000000000))+"B";
         }
-            holder.textViewPostLikeCount.setText(likeCount);
+        holder.textViewPostLikeCount.setText(likeCount);
+
+        holder.toggleButtonLikeBtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    // The toggle is enabled
+                    Log.d("LIKED",mPosts.get(position).getPostID());
+                } else {
+                    // The toggle is disabled
+                    Log.d("UNLIKED",mPosts.get(position).getPostID());
+                }
+            }
+        });
     }
 
     @Override
@@ -113,6 +128,7 @@ public class HomeRecylerItemArrayAdapter extends RecyclerView.Adapter<HomeRecyle
     class MyViewHolder extends RecyclerView.ViewHolder {
         private ImageView imageViewPostUserPic, imageViewPostPic;
         private TextView textViewPostUsername, textViewPostTime, textViewPostCaption, textViewPostLikeCount;
+        private ToggleButton toggleButtonLikeBtn;
 
         MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -122,6 +138,7 @@ public class HomeRecylerItemArrayAdapter extends RecyclerView.Adapter<HomeRecyle
             textViewPostCaption = itemView.findViewById(R.id.homePostCaption);
             imageViewPostPic = itemView.findViewById(R.id.homePostPic);
             textViewPostLikeCount = itemView.findViewById(R.id.homePostLikeCount);
+            toggleButtonLikeBtn = itemView.findViewById(R.id.homePostLikeButton);
         }
     }
 

@@ -93,7 +93,7 @@
         android:orientation="horizontal">
 
         <ToggleButton
-            android:id="@+id/button_favorite"
+            android:id="@+id/homePostLikeButton"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:background="@drawable/ic_toggle_favourite_bg"
