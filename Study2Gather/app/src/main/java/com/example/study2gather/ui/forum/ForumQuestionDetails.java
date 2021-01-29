@@ -51,7 +51,7 @@ public class ForumQuestionDetails extends AppCompatActivity {
 
     private ForumQuestion question;
     private ArrayList<ForumAnswer> mAns = new ArrayList<>();
-    private String uid, username; //remove username later
+    private String uid, username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +72,7 @@ public class ForumQuestionDetails extends AppCompatActivity {
         uid = user.getUid();
         answersRef = FirebaseDatabase.getInstance().getReference("ForumAnswers");
 //        forumRef = FirebaseDatabase.getInstance().getReference("Forum");
-        username = getIntent().getStringExtra("username"); //remove later
+        username = getIntent().getStringExtra("username");
 
         if (question.getQnProfilePic() != null) {
             Picasso.get().load(question.getQnProfilePic()).into(iVQnAuthorPic);
@@ -116,9 +116,10 @@ public class ForumQuestionDetails extends AppCompatActivity {
         btnNewAns.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent i = new Intent(ForumQuestionDetails.this, );
-//                startActivity(i);
-                createNewForumAnswer();
+                Intent i = new Intent(ForumQuestionDetails.this, ForumCreateAnswer.class);
+                i.putExtra("username", username);
+                i.putExtra("questionID", question.getQuestionID());
+                startActivity(i);
             }
         });
 
@@ -143,12 +144,7 @@ public class ForumQuestionDetails extends AppCompatActivity {
         ForumQuestionDetalsRecyclerItemArrayAdapter myRecyclerViewAdapter = new ForumQuestionDetalsRecyclerItemArrayAdapter(mAns, new ForumQuestionDetalsRecyclerItemArrayAdapter.MyRecyclerViewItemClickListener() {
             //Handling clicks
             @Override
-            public void onItemClicked(ForumAnswer ans) {
-//                Intent i = new Intent(getActivity(), ForumQuestionDetails.class);
-//                i.putExtra("question", (Serializable) qn);
-//                i.putExtra("username", userProfile.getUsername()); //remove later
-//                startActivity(i);
-            }
+            public void onItemClicked(ForumAnswer ans) {}
         });
         //Set adapter to RecyclerView
         forumAnswerRecyclerView.setAdapter(myRecyclerViewAdapter);
@@ -172,12 +168,4 @@ public class ForumQuestionDetails extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-    private void createNewForumAnswer() {
-        Date date = new Date();
-        final String randomAnsID = "ans"+ UUID.randomUUID().toString();
-        ForumAnswer answer = new ForumAnswer(username, uid, "Its a^2 + b^2 = c^2, where c is the longest side of the right angled triangle.",question.getQuestionID(),randomAnsID,date.getTime());
-        answersRef.child(randomAnsID).setValue(answer);
-    }
-
-
 }

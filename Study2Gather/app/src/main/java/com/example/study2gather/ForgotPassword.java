@@ -28,12 +28,12 @@ public class ForgotPassword extends AppCompatActivity {
 //        txtresetpword = findViewById(R.id.txtresetPassword);
 //        btnresetpword = findViewById(R.id.btnresetPassword);
         auth = FirebaseAuth.getInstance();
-        btnresetpword.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                resetPassword();
-            }
-        });
+//        btnresetpword.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                resetPassword();
+//            }
+//        });
     }
 
     private void resetPassword() {

@@ -3,23 +3,28 @@ package com.example.study2gather.ui.forum;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.study2gather.ForumAnswer;
 import com.example.study2gather.ForumQuestion;
 import com.example.study2gather.R;
-import com.example.study2gather.ui.home.HomeCreatePost;
+import com.example.study2gather.UserObj;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
@@ -27,32 +32,31 @@ import com.squareup.picasso.Picasso;
 import java.util.Date;
 import java.util.UUID;
 
-public class ForumCreateQuestion extends AppCompatActivity implements View.OnClickListener {
+public class ForumCreateAnswer extends AppCompatActivity implements View.OnClickListener {
     private ImageView iVProfilePic;
-    private EditText eTQnTitle, eTQnDesc;
+    private EditText eTAnsText;
 
     private FirebaseUser user;
     private StorageReference profilePicRef;
-    private DatabaseReference forumRef;
+    private DatabaseReference answersRef, forumRef;
 
-    private String uid, username;
-
-    public ForumCreateQuestion() {
-    }
+    private String uid, username, questionID;
+    private int qnAnsCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.forum_quest_create);
-        iVProfilePic = findViewById(R.id.forumQuestCreateProfilePic);
-        eTQnTitle = findViewById(R.id.forumQuestCreateTitle);
-        eTQnDesc = findViewById(R.id.forumQuestCreateDesc);
+        setContentView(R.layout.forum_ans_create);
+        iVProfilePic = findViewById(R.id.forumAnsCreateProfilePic);
+        eTAnsText = findViewById(R.id.forumAnsCreateText);
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         uid = user.getUid();
         profilePicRef = FirebaseStorage.getInstance().getReference("profileImages").child(uid+"_profile.jpg");
         forumRef = FirebaseDatabase.getInstance().getReference("Forum");
+        answersRef = FirebaseDatabase.getInstance().getReference("ForumAnswers");
         username = getIntent().getStringExtra("username");
+        questionID = getIntent().getStringExtra("questionID");
 
         //get existing user profile photo
         profilePicRef.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
@@ -72,26 +76,34 @@ public class ForumCreateQuestion extends AppCompatActivity implements View.OnCli
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.forumQuestCreateClearButton:
+            case R.id.forumAnsCreateClearButton:
                 finish();
                 break;
-            case R.id.forumQuestCreateButton:
-                String qnTitle = eTQnTitle.getText().toString().trim();
-                String qnDesc = eTQnDesc.getText().toString().trim();
-                if (!qnTitle.isEmpty() && !qnDesc.isEmpty()) {
-                    Toast.makeText(ForumCreateQuestion.this, "Creating Question", Toast.LENGTH_SHORT).show();
-                    createNewForumQuestion(qnTitle, qnDesc);
+            case R.id.forumAnsCreateButton:
+                String ansText = eTAnsText.getText().toString().trim();
+                if (!ansText.isEmpty()) {
+                    Toast.makeText(ForumCreateAnswer.this, "Creating Answer", Toast.LENGTH_SHORT).show();
+                    createNewForumAnswer(ansText);
                 }
                 break;
         }
     }
 
-    private void createNewForumQuestion(String qnTitle, String qnDesc) {
-        final String randomQnID = "qn"+UUID.randomUUID().toString();
+    private void createNewForumAnswer(String ansText) {
+        //Create Answer
+        final String randomAnsID = "ans"+ UUID.randomUUID().toString();
         Date date = new Date();
-        ForumQuestion qn = new ForumQuestion(qnTitle, qnDesc, username, uid, date.getTime(),0, randomQnID);
-        forumRef.child(randomQnID).setValue(qn);
+        ForumAnswer ans = new ForumAnswer(username,uid,ansText,questionID,randomAnsID,date.getTime());
+        answersRef.child(randomAnsID).setValue(ans);
+        //Add to ansCount of question
+        forumRef.child(questionID).child("ansCount").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) { qnAnsCount = snapshot.getValue(Integer.class); }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) { Toast.makeText(ForumCreateAnswer.this,"Something Went Wrong",Toast.LENGTH_LONG).show(); }
+        });
+        Log.d("ANS COUNT",String.valueOf(qnAnsCount));
+        forumRef.child(questionID).child("ansCount").setValue(qnAnsCount+1);
         finish();
     }
-
 }
