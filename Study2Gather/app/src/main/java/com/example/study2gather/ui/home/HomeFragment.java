@@ -146,7 +146,9 @@ public class HomeFragment extends Fragment {
         HomeRecylerItemArrayAdapter myRecyclerViewAdapter = new HomeRecylerItemArrayAdapter(mPosts, new HomeRecylerItemArrayAdapter.MyRecyclerViewItemClickListener() {
             //Handling clicks
             @Override
-            public void onItemClicked(Post post) { Toast.makeText(getContext(), post.getPostCaption(), Toast.LENGTH_SHORT).show(); }
+            public void onItemClicked(Post post) {
+//                Toast.makeText(getContext(), post.getPostCaption(), Toast.LENGTH_SHORT).show();
+            }
         });
         //Set adapter to RecyclerView
         homeRecyclerView.setAdapter(myRecyclerViewAdapter);

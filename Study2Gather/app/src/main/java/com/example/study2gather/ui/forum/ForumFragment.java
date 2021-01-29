@@ -37,6 +37,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -139,10 +140,10 @@ public class ForumFragment extends Fragment {
             //Handling clicks
             @Override
             public void onItemClicked(ForumQuestion qn) {
-//                Intent i = new Intent(getActivity(), ForumQuestionDetails.class);
-//                i.putExtra("users",usersListWithName);
+                Intent i = new Intent(getActivity(), ForumQuestionDetails.class);
 //                i.putExtra("question",qn);
-//                startActivity(i);
+                i.putExtra("question", (Serializable) qn);
+                startActivity(i);
             }
         });
         //Set adapter to RecyclerView

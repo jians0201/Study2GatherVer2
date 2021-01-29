@@ -18,13 +18,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ForumQuestionDetails extends AppCompatActivity {
-    private TextView tVQnTitle, tVQnDesc, tVQnAuthor, tVQnTimestamp;
+    private TextView tVQnTitle, tVQnDesc, tVQnAuthor, tVQnTimestamp, tVAnsCount;
     private ImageView iVQnAuthorPic;
 
     private DatabaseReference answersRef;
@@ -43,10 +44,10 @@ public class ForumQuestionDetails extends AppCompatActivity {
         tVQnDesc = findViewById(R.id.forumQuestionDetailsDet);
         tVQnAuthor = findViewById(R.id.forumQuestionAskUser);
         tVQnTimestamp = findViewById(R.id.forumQuestionDetailsAskTime);
+        tVAnsCount = findViewById(R.id.forumCommentCount);
         iVQnAuthorPic = findViewById(R.id.forumQuestionDetailsAskUserProfilePic);
 
         question = (ForumQuestion) getIntent().getSerializableExtra("question");
-        usersListWithName = (HashMap<String, String>) getIntent().getSerializableExtra("users");
         profilePicsRef = FirebaseStorage.getInstance().getReference("profileImages");
 //        user = FirebaseAuth.getInstance().getCurrentUser();
 //        uid = user.getUid();
@@ -54,20 +55,26 @@ public class ForumQuestionDetails extends AppCompatActivity {
 //        forumRef = FirebaseDatabase.getInstance().getReference("Forum");
 
         //get qn author profile pic
-        profilePicsRef.child(question.getQuestionAuthorID()+"_profile.jpg").getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
-            @Override
-            public void onComplete(@NonNull Task<Uri> task) {
-                if (task.isSuccessful()) {
-                    question.setQnProfilePic(task.getResult());
-                }
-                question.setQuestionAuthor(usersListWithName.get(question.getQuestionAuthor()));
-            }
-        });
+//        profilePicsRef.child(question.getQuestionAuthorID()+"_profile.jpg").getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+//            @Override
+//            public void onComplete(@NonNull Task<Uri> task) {
+//                if (task.isSuccessful()) {
+//                    question.setQnProfilePic(task.getResult());
+//                }
+//            }
+//        });
+
+        if (question.getQnProfilePic() != null) {
+            Picasso.get().load(question.getQnProfilePic()).into(iVQnAuthorPic);
+        } else {
+            iVQnAuthorPic.setImageResource(R.drawable.no_image);
+        }
 
         tVQnTitle.setText(question.getQuestionTitle());
         tVQnDesc.setText(question.getQuestionDescription());
         tVQnAuthor.setText(question.getQuestionAuthor());
         Timestamp ts = new Timestamp(question.getTimestamp());
         tVQnTimestamp.setText(String.valueOf(ts));
+        tVAnsCount.setText(String.valueOf(question.getAnsCount()));
     }
 }

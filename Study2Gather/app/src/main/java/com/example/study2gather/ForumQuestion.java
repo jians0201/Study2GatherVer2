@@ -1,10 +1,12 @@
 package com.example.study2gather;
 
 import android.net.Uri;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import java.io.Serializable;
 
-public class ForumQuestion implements Serializable {
+public class ForumQuestion implements Serializable, Parcelable {
     private String questionTitle, questionID, questionAuthor, questionDescription, questionAuthorID;
     private long timestamp;
     private int ansCount;
@@ -21,6 +23,46 @@ public class ForumQuestion implements Serializable {
         this.questionID = questionID;
         this.questionDescription = questionDescription;
     }
+
+    protected ForumQuestion(Parcel in) {
+        questionTitle = in.readString();
+        questionID = in.readString();
+        questionAuthor = in.readString();
+        questionDescription = in.readString();
+        questionAuthorID = in.readString();
+        timestamp = in.readLong();
+        ansCount = in.readInt();
+        qnProfilePic = in.readParcelable(Uri.class.getClassLoader());
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(questionTitle);
+        dest.writeString(questionID);
+        dest.writeString(questionAuthor);
+        dest.writeString(questionDescription);
+        dest.writeString(questionAuthorID);
+        dest.writeLong(timestamp);
+        dest.writeInt(ansCount);
+        dest.writeParcelable(qnProfilePic, flags);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<ForumQuestion> CREATOR = new Creator<ForumQuestion>() {
+        @Override
+        public ForumQuestion createFromParcel(Parcel in) {
+            return new ForumQuestion(in);
+        }
+
+        @Override
+        public ForumQuestion[] newArray(int size) {
+            return new ForumQuestion[size];
+        }
+    };
 
     public String getQuestionTitle() {
         return questionTitle;
