@@ -156,7 +156,7 @@ public class ProfileEdit extends AppCompatActivity implements View.OnClickListen
     @Override
     public boolean onOptionsItemSelected(MenuItem item) { //for the return and tick btn
         int id = item.getItemId();
-        if (item.getItemId() == android.R.id.home ) {
+        if (id == android.R.id.home ) {
             finish();
             return true;
         }else if (id == R.id.profileEditDoneBtn) {
@@ -398,13 +398,6 @@ public class ProfileEdit extends AppCompatActivity implements View.OnClickListen
                 }
             });
             changedProfile = false;
-        }else{
-            userRef.child(uid).setValue(userProfile).addOnCompleteListener(new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
-                    Toast.makeText(ProfileEdit.this, "There are no new changes", Toast.LENGTH_SHORT).show();
-                }
-            });
         }
     }
 }

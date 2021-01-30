@@ -36,7 +36,6 @@ import java.util.HashMap;
 import java.util.UUID;
 
 public class MessagesFragment extends Fragment {
-
     private MessagesViewModel messagesViewModel;
     private FloatingActionButton btnNewMessage;
     private RecyclerView messagesRecyclerView;
@@ -155,7 +154,6 @@ public class MessagesFragment extends Fragment {
         //Set adapter to RecyclerView
         messagesRecyclerView.setAdapter(myRecyclerViewAdapter);
     }
-
 
     public void createNewChat() {
         final String randomChatId = "chat"+UUID.randomUUID().toString();

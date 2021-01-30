@@ -127,8 +127,8 @@
     <string name="messagesBrief">Muda Muda Muda!</string>
 
     / #Messages Create Page
-    <string name="messagesCreateChatTitle">New Message</string>
-    <string name="messagesCreateChatBtnTitle">Chat</string>
+    <string name="messagesCreateChatTitle">Create New Chat</string>
+    <string name="messagesCreateChatBtnTitle">New Chat</string>
     <string name="messagesChatCreateToLabel">To</string>
 
     / #Chat Page

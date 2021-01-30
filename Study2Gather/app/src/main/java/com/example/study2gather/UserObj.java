@@ -1,10 +1,12 @@
 package com.example.study2gather;
 
+import android.net.Uri;
 import java.util.ArrayList;
 
 public class UserObj {
-    private String username, email, password, gender, dob, school, location;
+    private String username, email, password, gender, dob, school, location, userID;
     private ArrayList<String> likedPosts;
+    private Uri profilePic;
 
     public UserObj() {}
 
@@ -88,5 +90,21 @@ public class UserObj {
 
     public void removeLikedPost(String postID) {
         this.likedPosts.remove(new String(postID));
+    }
+
+    public String getUserID() {
+        return userID;
+    }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
+    }
+
+    public Uri getProfilePic() {
+        return profilePic;
+    }
+
+    public void setProfilePic(Uri profilePic) {
+        this.profilePic = profilePic;
     }
 }
