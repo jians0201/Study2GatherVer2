@@ -99,7 +99,7 @@ public class MessagesFragment extends Fragment {
                 for (DataSnapshot ds : snapshot.getChildren()) {
                     Chat chat = ds.getValue(Chat.class);
                     otherMembersInChat = chat.getOtherMembers(uid);
-                    Log.d("Num of other members", String.valueOf(otherMembersInChat.size()));
+//                    Log.d("Num of other members", String.valueOf(otherMembersInChat.size()));
                     //get chat pic (pfp of other user for normal 2 person chat
                     if (otherMembersInChat.size() == 1) {
                         profilePicsRef.child(otherMembersInChat.get(0)+"_profile.jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {

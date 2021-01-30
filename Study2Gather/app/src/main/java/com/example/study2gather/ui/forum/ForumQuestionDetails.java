@@ -127,6 +127,7 @@ public class ForumQuestionDetails extends AppCompatActivity {
                 Intent i = new Intent(ForumQuestionDetails.this, ForumCreateAnswer.class);
 //                i.putExtra("username", username);
                 i.putExtra("questionID", question.getQuestionID());
+                i.putExtra("questionAnsCount", question.getAnsCount());
                 startActivity(i);
             }
         });

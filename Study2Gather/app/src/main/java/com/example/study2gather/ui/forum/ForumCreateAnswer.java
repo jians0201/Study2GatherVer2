@@ -41,7 +41,7 @@ public class ForumCreateAnswer extends AppCompatActivity implements View.OnClick
     private DatabaseReference answersRef, forumRef;
 
     private String uid, questionID;
-    private int qnAnsCount;
+    private int questionAnsCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +57,7 @@ public class ForumCreateAnswer extends AppCompatActivity implements View.OnClick
         answersRef = FirebaseDatabase.getInstance().getReference("ForumAnswers");
 //        username = getIntent().getStringExtra("username");
         questionID = getIntent().getStringExtra("questionID");
+        questionAnsCount = getIntent().getIntExtra("questionAnsCount",0);
 
         //get existing user profile photo
         profilePicRef.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
@@ -71,6 +72,13 @@ public class ForumCreateAnswer extends AppCompatActivity implements View.OnClick
                 }
             }
         });
+
+//        forumRef.child(questionID).child("ansCount").addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) { qnAnsCount = snapshot.getValue(Integer.class); }
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) { Toast.makeText(ForumCreateAnswer.this,"Something Went Wrong",Toast.LENGTH_LONG).show(); }
+//        });
     }
 
     @Override
@@ -96,14 +104,7 @@ public class ForumCreateAnswer extends AppCompatActivity implements View.OnClick
         ForumAnswer ans = new ForumAnswer(uid,ansText,questionID,randomAnsID,date.getTime());
         answersRef.child(randomAnsID).setValue(ans);
         //Add to ansCount of question
-        forumRef.child(questionID).child("ansCount").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) { qnAnsCount = snapshot.getValue(Integer.class); }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) { Toast.makeText(ForumCreateAnswer.this,"Something Went Wrong",Toast.LENGTH_LONG).show(); }
-        });
-        Log.d("ANS COUNT",String.valueOf(qnAnsCount));
-        forumRef.child(questionID).child("ansCount").setValue(qnAnsCount+1);
+        forumRef.child(questionID).child("ansCount").setValue(questionAnsCount+1);
         finish();
     }
 }
