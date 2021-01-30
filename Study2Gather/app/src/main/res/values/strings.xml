@@ -153,6 +153,8 @@
     <string name="profileEditDOBBtn">Calendar</string>
     <string name="profileEditSchoolLabel">School</string>
     <string name="profileEditLocationLabel">Location</string>
+    <string name="profileEditDetectLocation">Detect</string>
+
     / #Error Text
     <string name="profileEditEmptyError">Field can\'t be empty!</string>
     <string name="profileEditUsernameError">Username must be 4–18 characters!</string>

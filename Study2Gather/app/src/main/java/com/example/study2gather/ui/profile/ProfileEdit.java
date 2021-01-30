@@ -1,7 +1,9 @@
 package com.example.study2gather.ui.profile;
 
+import android.Manifest;
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -23,7 +25,12 @@ import android.content.DialogInterface;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.study2gather.R;
 import com.example.study2gather.Registration;
 import com.example.study2gather.UserObj;
@@ -46,6 +53,9 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.Calendar;
 import java.util.Date;
 
@@ -65,6 +75,12 @@ public class ProfileEdit extends AppCompatActivity implements View.OnClickListen
     private Uri newimguri;
 
     private String userDOB;
+
+    // For location detection
+    private static final int REQUEST_CODE_PERMISSION = 2;
+    String mPermission = Manifest.permission.ACCESS_FINE_LOCATION;
+    // LocationTracker class
+    LocationTracker gps;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -171,6 +187,7 @@ public class ProfileEdit extends AppCompatActivity implements View.OnClickListen
         }
     }
 
+    // Handling button clicks
     @Override
     public void onClick(View v) {
         switch(v.getId()) {
@@ -204,11 +221,71 @@ public class ProfileEdit extends AppCompatActivity implements View.OnClickListen
                 dpd.getDatePicker().setMaxDate(new Date().getTime());
                 dpd.show();
                 break;
+                // Handles for profile picture edit
             case R.id.profileEditPicBtn:
                 Intent i = new Intent();
                 i.setType("image/'");
                 i.setAction(Intent.ACTION_GET_CONTENT);
                 startActivityForResult(i,1);
+                break;
+                // Handles for detecting current location
+            case R.id.profileDetectLocation:
+                try {
+                    if (ActivityCompat.checkSelfPermission(this, mPermission)
+                            != PackageManager.PERMISSION_GRANTED) {
+
+                        ActivityCompat.requestPermissions(this, new String[]{mPermission},
+                                REQUEST_CODE_PERMISSION);
+                        // If any permission above not allowed by user, this condition will
+                        // execute every time, else your else part will work
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                gps = new LocationTracker(ProfileEdit.this);
+
+                // check if GPS enabled
+                if (gps.canGetLocation()) {
+
+                    double latitude = gps.getLatitude();
+                    double longitude = gps.getLongitude();
+
+                    // \n is for new line
+//                    Toast.makeText(getApplicationContext(), "Your Location is - \nLat: "
+//                            + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
+
+                    String url = "https://api.bigdatacloud.net/data/reverse-geocode-client?latitude="+latitude+"&longitude="+longitude+"&localityLanguage=en";
+
+                    JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
+                            (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+
+                                @Override
+                                public void onResponse(JSONObject response) {
+                                   try{
+                                        profileLocation.setText(response.getString("city")+", "+response.getString("countryName"));
+                                    }catch(JSONException e){
+                                        e.printStackTrace();
+                                    }
+                                }
+                            }, new Response.ErrorListener() {
+                                @Override
+                                public void onErrorResponse(VolleyError error) {
+                                    // TODO: Handle error
+
+                                }
+                            });
+
+                    // Access the RequestQueue through your singleton class.
+                    MySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest);
+                } else {
+                    // can't get location
+                    // GPS or Network is not enabled
+                    // Ask user to enable GPS/network in settings
+                    gps.showSettingsAlert();
+                }
+
+
                 break;
         }
     }
