@@ -72,7 +72,6 @@ public class MessagesCreateChat extends AppCompatActivity {
                 mUsers.clear();
                 for(DataSnapshot ds : snapshot.getChildren()) {
                     if (!ds.getKey().equals(uid)) {
-//                        Log.d("UserId",ds.getKey());
                         UserObj user = ds.getValue(UserObj.class);
                         //get user profile pic
                         profilePicsRef.child(ds.getKey()+"_profile.jpg").getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
@@ -83,7 +82,7 @@ public class MessagesCreateChat extends AppCompatActivity {
                                 }
                                 mUsers.add(user);
                                 //only populate questions once all questions have been retrieved
-//                                if (mUsers.size() == snapshot.getChildrenCount()) setUIRef();
+                                if (mUsers.size() == snapshot.getChildrenCount()-1) setUIRef();
                             }
                         });
                     }
@@ -117,30 +116,29 @@ public class MessagesCreateChat extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-//    private void setUIRef() {
-//        //Reference of RecyclerView
-//        newChatUsersRecyclerView = findViewById(R.id.messagesChatCreateUserList);
-//        //Linear Layout Manager
-//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(MessagesCreateChat.this, RecyclerView.VERTICAL, false);
-//        //Set Layout Manager to RecyclerView
-//        newChatUsersRecyclerView.setLayoutManager(linearLayoutManager);
-//        //reverse posts so most recent on top
-////        Collections.reverse(mPosts);
-//
-//        //Create adapter
-//        MessagesRecyclerItemArrayAdapter myRecyclerViewAdapter = new MessagesRecyclerItemArrayAdapter(mUsers, new MessagesRecyclerItemArrayAdapter.MyRecyclerViewItemClickListener()
-//        {
-//            //Handling clicks
-//            @Override
-//            public void onItemClicked(Chat message)
-//            {
-//                Toast.makeText(MessagesCreateChat.this, message.getChatTitle(), Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//
-//        //Set adapter to RecyclerView
-//        newChatUsersRecyclerView.setAdapter(myRecyclerViewAdapter);
-//    }
+    private void setUIRef() {
+        //Reference of RecyclerView
+        newChatUsersRecyclerView = findViewById(R.id.messagesChatCreateUserList);
+        //Linear Layout Manager
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(MessagesCreateChat.this, RecyclerView.VERTICAL, false);
+        //Set Layout Manager to RecyclerView
+        newChatUsersRecyclerView.setLayoutManager(linearLayoutManager);
+        //reverse posts so most recent on top
+//        Collections.reverse(mPosts);
+        //Create adapter
+        MessagesCreateChatRecyclerItemArrayAdapter myRecyclerViewAdapter = new MessagesCreateChatRecyclerItemArrayAdapter(mUsers, new MessagesCreateChatRecyclerItemArrayAdapter.MyRecyclerViewItemClickListener()
+        {
+            //Handling clicks
+            @Override
+            public void onItemClicked(UserObj user)
+            {
+                Toast.makeText(MessagesCreateChat.this, user.getUsername(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        //Set adapter to RecyclerView
+        newChatUsersRecyclerView.setAdapter(myRecyclerViewAdapter);
+    }
 
     public void createNewChat() {
         Toast.makeText(MessagesCreateChat.this,"Creating New Chat", Toast.LENGTH_SHORT).show();

@@ -57,7 +57,6 @@ public class HomeRecylerItemArrayAdapter extends RecyclerView.Adapter<HomeRecyle
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
 
         //Set Post User Profile Picture
-//        holder.imageViewPostUserPic.setImageResource(mPosts.get(position).getPostUserPic());
         if (mPosts.get(position).getPostProfilePic() != null) {
             Picasso.get().load(mPosts.get(position).getPostProfilePic()).into(holder.imageViewPostUserPic);
         } else {

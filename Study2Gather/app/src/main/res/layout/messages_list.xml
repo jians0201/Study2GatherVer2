@@ -58,7 +58,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/exo"
-                android:text="@string/messagesBrief"
                 android:textColor="#FFFFFF"
                 android:textSize="12sp" />
         </LinearLayout>

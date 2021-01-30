@@ -21,8 +21,8 @@ public class MessagesRecyclerItemArrayAdapter extends RecyclerView.Adapter<Messa
     private ArrayList<Chat> mChats;
     private MyRecyclerViewItemClickListener mItemClickListener;
 
-    public MessagesRecyclerItemArrayAdapter(ArrayList<Chat> countries, MyRecyclerViewItemClickListener itemClickListener) {
-        this.mChats = countries;
+    public MessagesRecyclerItemArrayAdapter(ArrayList<Chat> chats, MyRecyclerViewItemClickListener itemClickListener) {
+        this.mChats = chats;
         this.mItemClickListener = itemClickListener;
     }
 
@@ -49,14 +49,18 @@ public class MessagesRecyclerItemArrayAdapter extends RecyclerView.Adapter<Messa
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         //Set Chat Title
-//        Log.d("TITLE A",mChats.get(position).getChatTitle());
         holder.chatTarget.setText(mChats.get(position).getChatTitle());
 
         //Set Latest Message
         holder.latestMessage.setText(mChats.get(position).getLastMsg());
 
         //Set Chat Pic
-        Picasso.get().load(mChats.get(position).getChatPic()).into(holder.profilePic);
+        if (mChats.get(position).getChatPic() != null) {
+            Picasso.get().load(mChats.get(position).getChatPic()).into(holder.profilePic);
+        } else {
+            holder.profilePic.setImageResource(R.drawable.no_image);
+        }
+//        Picasso.get().load(mChats.get(position).getChatPic()).into(holder.profilePic);
     }
 
     @Override
