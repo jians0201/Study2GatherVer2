@@ -259,6 +259,14 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
+            <Button
+                android:id="@+id/profileDetectLocation"
+                android:layout_width="165dp"
+                android:layout_height="wrap_content"
+                android:onClick="onClick"
+                android:text="@string/profileEditDetectLocation" />
+
         </LinearLayout>
     </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
