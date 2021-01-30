@@ -72,13 +72,6 @@ public class ForumCreateAnswer extends AppCompatActivity implements View.OnClick
                 }
             }
         });
-
-//        forumRef.child(questionID).child("ansCount").addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) { qnAnsCount = snapshot.getValue(Integer.class); }
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) { Toast.makeText(ForumCreateAnswer.this,"Something Went Wrong",Toast.LENGTH_LONG).show(); }
-//        });
     }
 
     @Override
