@@ -62,4 +62,12 @@ public class Post {
     public void setPostAuthorID(String postAuthorID) {
         this.postAuthorID = postAuthorID;
     }
+
+    public void likePost() {
+        this.postLikeCount += 1;
+    }
+
+    public void unlikePost() {
+        this.postLikeCount -= 1;
+    }
 }

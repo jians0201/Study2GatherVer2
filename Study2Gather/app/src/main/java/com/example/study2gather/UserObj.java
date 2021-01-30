@@ -1,7 +1,10 @@
 package com.example.study2gather;
 
+import java.util.ArrayList;
+
 public class UserObj {
     private String username, email, password, gender, dob, school, location;
+    private ArrayList<String> likedPosts;
 
     public UserObj() {}
 
@@ -70,4 +73,20 @@ public class UserObj {
     public String getLocation() { return location; }
 
     public void setLocation(String location) { this.location = location; }
+
+    public ArrayList<String> getLikedPosts() {
+        return likedPosts;
+    }
+
+    public void setLikedPosts(ArrayList<String> likedPosts) {
+        this.likedPosts = likedPosts;
+    }
+
+    public void addLikedPost(String postID) {
+        this.likedPosts.add(postID);
+    }
+
+    public void removeLikedPost(String postID) {
+        this.likedPosts.remove(new String(postID));
+    }
 }

@@ -153,4 +153,9 @@ public class HomeFragment extends Fragment {
         //Set adapter to RecyclerView
         homeRecyclerView.setAdapter(myRecyclerViewAdapter);
     }
+
+    public void addLikedPost(String postID) {
+        userProfile.addLikedPost(postID);
+        //save to firebase
+    }
 }

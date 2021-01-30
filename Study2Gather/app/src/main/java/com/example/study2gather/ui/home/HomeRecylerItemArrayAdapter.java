@@ -15,6 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.study2gather.Post;
 import com.example.study2gather.R;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
 import java.sql.Timestamp;
@@ -24,6 +26,7 @@ public class HomeRecylerItemArrayAdapter extends RecyclerView.Adapter<HomeRecyle
 
     private ArrayList<Post> mPosts;
     private MyRecyclerViewItemClickListener mItemClickListener;
+    private String likeCountStr;
 
     public HomeRecylerItemArrayAdapter(ArrayList<Post> posts, MyRecyclerViewItemClickListener itemClickListener) {
         this.mPosts = posts;
@@ -81,30 +84,26 @@ public class HomeRecylerItemArrayAdapter extends RecyclerView.Adapter<HomeRecyle
             holder.imageViewPostPic.setImageResource(R.drawable.no_image);
         }
 
-
         //Set Post Like Count
-        String likeCount = "";
-        long postLikeCount =  mPosts.get(position).getPostLikeCount();
-        if (postLikeCount < 1000) {
-            likeCount = String.valueOf(postLikeCount);
-        } else if (postLikeCount < 1000000) {
-            likeCount = String.format("%.1f", Float.valueOf(postLikeCount/1000))+"K";
-        } else if (postLikeCount < 1000000000) {
-            likeCount = String.format("%.1f", Float.valueOf(postLikeCount/1000000))+"M";
-        } else {
-            likeCount = String.format("%.1f", Float.valueOf(postLikeCount/1000000000))+"B";
-        }
-        holder.textViewPostLikeCount.setText(likeCount);
+        likeCountStr = getLikeCountString(mPosts.get(position).getPostLikeCount());
+        holder.textViewPostLikeCount.setText(likeCountStr);
 
         holder.toggleButtonLikeBtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                // if post is liked/unliked, +/- 1 from the post like count in firebase and add the postID to the liked post array in userProfile Object
+                DatabaseReference postsRef = FirebaseDatabase.getInstance().getReference("Posts");
                 if (isChecked) {
                     // The toggle is enabled
-                    Log.d("LIKED",mPosts.get(position).getPostID());
+//                    Log.d("LIKED",mPosts.get(position).getPostID());
+                    mPosts.get(position).likePost();
                 } else {
                     // The toggle is disabled
-                    Log.d("UNLIKED",mPosts.get(position).getPostID());
+//                    Log.d("UNLIKED",mPosts.get(position).getPostID());
+                    mPosts.get(position).unlikePost();
                 }
+                postsRef.child(mPosts.get(position).getPostID()).child("postLikeCount").setValue(mPosts.get(position).getPostLikeCount());
+                likeCountStr = getLikeCountString(mPosts.get(position).getPostLikeCount());
+                holder.textViewPostLikeCount.setText(likeCountStr);
             }
         });
     }
@@ -145,5 +144,19 @@ public class HomeRecylerItemArrayAdapter extends RecyclerView.Adapter<HomeRecyle
     //RecyclerView Click Listener
     public interface MyRecyclerViewItemClickListener {
         void onItemClicked(Post post);
+    }
+
+    public String getLikeCountString(long likeCount) {
+        String likeCountStr = "";
+        if (likeCount < 1000) {
+            likeCountStr = String.valueOf(likeCount);
+        } else if (likeCount < 1000000) {
+            likeCountStr = String.format("%.1f", Float.valueOf(likeCount/1000))+"K";
+        } else if (likeCount < 1000000000) {
+            likeCountStr = String.format("%.1f", Float.valueOf(likeCount/1000000))+"M";
+        } else {
+            likeCountStr = String.format("%.1f", Float.valueOf(likeCount/1000000000))+"B";
+        }
+        return likeCountStr;
     }
 }
