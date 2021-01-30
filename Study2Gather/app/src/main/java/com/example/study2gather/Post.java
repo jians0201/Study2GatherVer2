@@ -9,8 +9,7 @@ public class Post {
 
     public Post() {}
 
-    public Post(String postAuthor, String postAuthorID, String postCaption, long postLikeCount, long timestamp, String postPicPath, String postID) {
-        this.postAuthor = postAuthor;
+    public Post(String postAuthorID, String postCaption, long postLikeCount, long timestamp, String postPicPath, String postID) {
         this.postCaption = postCaption;
         this.timestamp = timestamp;
         this.postLikeCount = postLikeCount;

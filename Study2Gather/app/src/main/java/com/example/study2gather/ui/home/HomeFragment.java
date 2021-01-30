@@ -53,7 +53,7 @@ public class HomeFragment extends Fragment {
     private ArrayList<Post> mPosts = new ArrayList<>();
     private String uid;
     private UserObj userProfile;
-//    private HashMap<String, String> usersListWithName;
+    private HashMap<String, String> usersListWithName;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
@@ -65,9 +65,9 @@ public class HomeFragment extends Fragment {
         uid = user.getUid();
         usersRef = FirebaseDatabase.getInstance().getReference("Users");
         postsRef = FirebaseDatabase.getInstance().getReference("Posts");
-//        usersListWithName = new HashMap<String, String>();
+        usersListWithName = new HashMap<String, String>();
 
-//        //get own info
+        //get own info
         usersRef.child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) { userProfile = snapshot.getValue(UserObj.class); }
@@ -76,14 +76,14 @@ public class HomeFragment extends Fragment {
         });
 
         //get all users info
-//        usersRef.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                for(DataSnapshot ds : snapshot.getChildren()) { usersListWithName.put(ds.getKey(),ds.child("username").getValue(String.class)); }
-//            }
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {}
-//        });
+        usersRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot ds : snapshot.getChildren()) { usersListWithName.put(ds.getKey(),ds.child("username").getValue(String.class)); }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {}
+        });
 
         //get posts and pics
         postsRef.orderByChild("timestamp").addValueEventListener(new ValueEventListener() {
@@ -107,6 +107,7 @@ public class HomeFragment extends Fragment {
                                     if (task.isSuccessful()) {
                                         p.setPostProfilePic(task.getResult());
                                     }
+                                    p.setPostAuthor(usersListWithName.get(p.getPostAuthorID()));
                                     mPosts.add(p);
                                     //only populate posts once all posts have been retrieved
                                     if (mPosts.size() == snapshot.getChildrenCount()) setUIRef();
@@ -125,7 +126,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getActivity(), HomeCreatePost.class);
-                i.putExtra("username",userProfile.getUsername());
+//                i.putExtra("username",userProfile.getUsername());
                 startActivity(i);
             }
         });

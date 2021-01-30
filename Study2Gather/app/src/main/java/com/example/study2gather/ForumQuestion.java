@@ -14,9 +14,8 @@ public class ForumQuestion implements Serializable, Parcelable {
 
     public ForumQuestion() {}
 
-    public ForumQuestion(String questionTitle, String questionDescription, String questionAuthor, String questionAuthorID, long timestamp, int ansCount, String questionID) {
+    public ForumQuestion(String questionTitle, String questionDescription, String questionAuthorID, long timestamp, int ansCount, String questionID) {
         this.questionTitle = questionTitle;
-        this.questionAuthor = questionAuthor;
         this.questionAuthorID = questionAuthorID;
         this.timestamp = timestamp;
         this.ansCount = ansCount;

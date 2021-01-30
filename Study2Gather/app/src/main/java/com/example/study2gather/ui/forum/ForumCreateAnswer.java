@@ -40,7 +40,7 @@ public class ForumCreateAnswer extends AppCompatActivity implements View.OnClick
     private StorageReference profilePicRef;
     private DatabaseReference answersRef, forumRef;
 
-    private String uid, username, questionID;
+    private String uid, questionID;
     private int qnAnsCount;
 
     @Override
@@ -55,7 +55,7 @@ public class ForumCreateAnswer extends AppCompatActivity implements View.OnClick
         profilePicRef = FirebaseStorage.getInstance().getReference("profileImages").child(uid+"_profile.jpg");
         forumRef = FirebaseDatabase.getInstance().getReference("Forum");
         answersRef = FirebaseDatabase.getInstance().getReference("ForumAnswers");
-        username = getIntent().getStringExtra("username");
+//        username = getIntent().getStringExtra("username");
         questionID = getIntent().getStringExtra("questionID");
 
         //get existing user profile photo
@@ -93,7 +93,7 @@ public class ForumCreateAnswer extends AppCompatActivity implements View.OnClick
         //Create Answer
         final String randomAnsID = "ans"+ UUID.randomUUID().toString();
         Date date = new Date();
-        ForumAnswer ans = new ForumAnswer(username,uid,ansText,questionID,randomAnsID,date.getTime());
+        ForumAnswer ans = new ForumAnswer(uid,ansText,questionID,randomAnsID,date.getTime());
         answersRef.child(randomAnsID).setValue(ans);
         //Add to ansCount of question
         forumRef.child(questionID).child("ansCount").addListenerForSingleValueEvent(new ValueEventListener() {

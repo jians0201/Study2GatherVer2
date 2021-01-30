@@ -57,7 +57,7 @@ public class ForumFragment extends Fragment {
     private ArrayList<ForumQuestion> mQns = new ArrayList<>();
     private String uid;
     private UserObj userProfile;
-//    private HashMap<String, String> usersListWithName;
+    private HashMap<String, String> usersListWithName;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         forumViewModel = new ViewModelProvider(this).get(ForumViewModel.class);
@@ -68,7 +68,7 @@ public class ForumFragment extends Fragment {
         uid = user.getUid();
         usersRef = FirebaseDatabase.getInstance().getReference("Users");
         forumRef = FirebaseDatabase.getInstance().getReference("Forum");
-//        usersListWithName = new HashMap<String, String>();
+        usersListWithName = new HashMap<String, String>();
 
         //get own info
         usersRef.child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -79,14 +79,14 @@ public class ForumFragment extends Fragment {
         });
 
         //get all users info
-//        usersRef.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                for(DataSnapshot ds : snapshot.getChildren()) { usersListWithName.put(ds.getKey(),ds.child("username").getValue(String.class)); }
-//            }
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {}
-//        });
+        usersRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot ds : snapshot.getChildren()) { usersListWithName.put(ds.getKey(),ds.child("username").getValue(String.class)); }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {}
+        });
 
         //get qns and pics
         forumRef.orderByChild("timestamp").addValueEventListener(new ValueEventListener() {
@@ -102,6 +102,7 @@ public class ForumFragment extends Fragment {
                             if (task.isSuccessful()) {
                                 qn.setQnProfilePic(task.getResult());
                             }
+                            qn.setQuestionAuthor(usersListWithName.get(qn.getQuestionAuthorID()));
                             mQns.add(qn);
                             //only populate questions once all questions have been retrieved
                             if (mQns.size() == snapshot.getChildrenCount()) setUIRef();
@@ -119,7 +120,8 @@ public class ForumFragment extends Fragment {
             public void onClick(View v) {
 //                createNewQn();
                 Intent i = new Intent(getActivity(), ForumCreateQuestion.class);
-                i.putExtra("username", userProfile.getUsername());
+//                i.putExtra("username", userProfile.getUsername());
+                i.putExtra("usersListWithName", usersListWithName);
                 startActivity(i);
             }
         });
@@ -143,7 +145,7 @@ public class ForumFragment extends Fragment {
             public void onItemClicked(ForumQuestion qn) {
                 Intent i = new Intent(getActivity(), ForumQuestionDetails.class);
                 i.putExtra("question", (Serializable) qn);
-                i.putExtra("username", userProfile.getUsername()); //remove later
+                i.putExtra("usersListWithName", usersListWithName);
                 startActivity(i);
             }
         });

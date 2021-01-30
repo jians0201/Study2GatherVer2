@@ -9,8 +9,7 @@ public class ForumAnswer {
 
     public ForumAnswer() {}
 
-    public ForumAnswer(String answerAuthor, String answerAuthorID, String answerText, String questionID, String answerID, long timestamp) {
-        this.answerAuthor = answerAuthor;
+    public ForumAnswer(String answerAuthorID, String answerText, String questionID, String answerID, long timestamp) {
         this.answerAuthorID = answerAuthorID;
         this.answerText = answerText;
         this.questionID = questionID;

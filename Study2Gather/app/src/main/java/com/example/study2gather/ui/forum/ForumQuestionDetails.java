@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -42,10 +43,11 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.UUID;
 
-public class ForumQuestionDetails extends AppCompatActivity implements View.OnClickListener  {
+public class ForumQuestionDetails extends AppCompatActivity {
     private TextView tVQnTitle, tVQnDesc, tVQnAuthor, tVQnTimestamp, tVAnsCount;
     private ImageView iVQnAuthorPic;
     private FloatingActionButton btnNewAns;
+    private ImageButton btnBack;
     private RecyclerView forumAnswerRecyclerView;
 
     private DatabaseReference answersRef;
@@ -54,7 +56,8 @@ public class ForumQuestionDetails extends AppCompatActivity implements View.OnCl
 
     private ForumQuestion question;
     private ArrayList<ForumAnswer> mAns = new ArrayList<>();
-    private String uid, username;
+    private String uid;
+    private HashMap<String, String> usersListWithName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +70,7 @@ public class ForumQuestionDetails extends AppCompatActivity implements View.OnCl
         tVAnsCount = findViewById(R.id.forumCommentCount);
         iVQnAuthorPic = findViewById(R.id.forumQuestionDetailsAskUserProfilePic);
         btnNewAns = findViewById(R.id.forumQuestAnsFAB);
+        btnBack = findViewById(R.id.forumQuestionDetailsBackBtn);
 
         question = (ForumQuestion) getIntent().getSerializableExtra("question");
         profilePicsRef = FirebaseStorage.getInstance().getReference("profileImages");
@@ -74,7 +78,8 @@ public class ForumQuestionDetails extends AppCompatActivity implements View.OnCl
         uid = user.getUid();
         answersRef = FirebaseDatabase.getInstance().getReference("ForumAnswers");
 //        forumRef = FirebaseDatabase.getInstance().getReference("Forum");
-        username = getIntent().getStringExtra("username");
+//        username = getIntent().getStringExtra("username");
+        usersListWithName = (HashMap<String, String>) getIntent().getSerializableExtra("usersListWithName");
 
         if (question.getQnProfilePic() != null) {
             Picasso.get().load(question.getQnProfilePic()).into(iVQnAuthorPic);
@@ -90,47 +95,49 @@ public class ForumQuestionDetails extends AppCompatActivity implements View.OnCl
         tVAnsCount.setText(String.valueOf(question.getAnsCount()));
 
         //get ans and pics
-//        answersRef.orderByChild("timestamp").addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                mAns.clear();
-//                for (DataSnapshot ds : snapshot.getChildren()) {
-//                    ForumAnswer ans = ds.getValue(ForumAnswer.class);
-//                    //get user profile pic
-//                    profilePicsRef.child(ans.getAnswerAuthorID()+"_profile.jpg").getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
-//                        @Override
-//                        public void onComplete(@NonNull Task<Uri> task) {
-//                            if (task.isSuccessful()) {
-//                                ans.setAnswerProfilePic(task.getResult());
-//                            }
-//                            mAns.add(ans);
-//                            //only populate questions once all questions have been retrieved
-//                            if (mAns.size() == snapshot.getChildrenCount()) setUIRef();
-//                        }
-//                    });
-//                }
-//            }
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {}
-//        });
+        answersRef.orderByChild("questionID").equalTo(question.getQuestionID()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                mAns.clear();
+                for (DataSnapshot ds : snapshot.getChildren()) {
+                    ForumAnswer ans = ds.getValue(ForumAnswer.class);
+                    //get user profile pic
+                    profilePicsRef.child(ans.getAnswerAuthorID()+"_profile.jpg").getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Uri> task) {
+                            if (task.isSuccessful()) {
+                                ans.setAnswerProfilePic(task.getResult());
+                            }
+                            ans.setAnswerAuthor(usersListWithName.get(ans.getAnswerAuthorID()));
+                            mAns.add(ans);
+                            //only populate questions once all questions have been retrieved
+                            if (mAns.size() == snapshot.getChildrenCount()) setUIRef();
+                        }
+                    });
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {}
+        });
 
         //add ans button
         btnNewAns.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(ForumQuestionDetails.this, ForumCreateAnswer.class);
-                i.putExtra("username", username);
+//                i.putExtra("username", username);
                 i.putExtra("questionID", question.getQuestionID());
                 startActivity(i);
             }
         });
 
-        Date date = new Date();
-        final String randomAnsID = "ans"+ UUID.randomUUID().toString();
-        mAns.add(new ForumAnswer(username, uid, "Its a^2 + b^2 = c^2, where c is the longest side of the right angled triangle.",question.getQuestionID(),randomAnsID,date.getTime()));
-        mAns.add(new ForumAnswer(username, uid, "Its a^2 + b^2 = c^2, where c is the longest side of the right angled triangle.",question.getQuestionID(),randomAnsID,date.getTime()));
-        mAns.add(new ForumAnswer(username, uid, "Its a^2 + b^2 = c^2, where c is the longest side of the right angled triangle.",question.getQuestionID(),randomAnsID,date.getTime()));
-        setUIRef();
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
     }
 
     private void setUIRef() {
@@ -169,21 +176,5 @@ public class ForumQuestionDetails extends AppCompatActivity implements View.OnCl
             return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    private void createNewForumAnswer() {
-        Date date = new Date();
-        final String randomAnsID = "ans"+ UUID.randomUUID().toString();
-        ForumAnswer answer = new ForumAnswer(username, uid, "Its a^2 + b^2 = c^2, where c is the longest side of the right angled triangle.",question.getQuestionID(),randomAnsID,date.getTime());
-        answersRef.child(randomAnsID).setValue(answer);
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch(v.getId()) {
-            case R.id.forumQuestionDetailsBackBtn:
-                finish();
-                break;
-        }
     }
 }

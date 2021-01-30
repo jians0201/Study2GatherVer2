@@ -73,7 +73,7 @@ public class HomeCreatePost extends AppCompatActivity implements View.OnClickLis
         profilePicRef = FirebaseStorage.getInstance().getReference("profileImages").child(uid+"_profile.jpg");
         imagesRef = FirebaseStorage.getInstance().getReference("images");
         postsRef = FirebaseDatabase.getInstance().getReference("Posts");
-        username = getIntent().getStringExtra("username");
+//        username = getIntent().getStringExtra("username");
 
         //get existing user profile photo
         profilePicRef.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
@@ -112,7 +112,7 @@ public class HomeCreatePost extends AppCompatActivity implements View.OnClickLis
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     Toast.makeText(HomeCreatePost.this, "Post Image Uploaded Successfully", Toast.LENGTH_SHORT).show();
                     Date date = new Date();
-                    Post post = new Post(username, uid, postText, 0, date.getTime(),random+".jpg",randomPostID);
+                    Post post = new Post(uid, postText, 0, date.getTime(),random+".jpg",randomPostID);
                     postsRef.child(randomPostID).setValue(post);
                     finish();
                 }
@@ -130,7 +130,7 @@ public class HomeCreatePost extends AppCompatActivity implements View.OnClickLis
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     Toast.makeText(HomeCreatePost.this, "Post Image Uploaded Successfully", Toast.LENGTH_SHORT).show();
                     Date date = new Date();
-                    Post post = new Post(username, uid, postText, 0, date.getTime(),random+".jpeg",randomPostID);
+                    Post post = new Post(uid, postText, 0, date.getTime(),random+".jpeg",randomPostID);
                     postsRef.child(randomPostID).setValue(post);
                     finish();
                 }

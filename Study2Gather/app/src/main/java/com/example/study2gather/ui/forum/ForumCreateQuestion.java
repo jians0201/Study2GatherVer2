@@ -25,6 +25,7 @@ import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.UUID;
 
 public class ForumCreateQuestion extends AppCompatActivity implements View.OnClickListener {
@@ -35,7 +36,7 @@ public class ForumCreateQuestion extends AppCompatActivity implements View.OnCli
     private StorageReference profilePicRef;
     private DatabaseReference forumRef;
 
-    private String uid, username;
+    private String uid;
 
     public ForumCreateQuestion() {
     }
@@ -52,7 +53,7 @@ public class ForumCreateQuestion extends AppCompatActivity implements View.OnCli
         uid = user.getUid();
         profilePicRef = FirebaseStorage.getInstance().getReference("profileImages").child(uid+"_profile.jpg");
         forumRef = FirebaseDatabase.getInstance().getReference("Forum");
-        username = getIntent().getStringExtra("username");
+//        username = getIntent().getStringExtra("username");
 
         //get existing user profile photo
         profilePicRef.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
@@ -89,7 +90,7 @@ public class ForumCreateQuestion extends AppCompatActivity implements View.OnCli
     private void createNewForumQuestion(String qnTitle, String qnDesc) {
         final String randomQnID = "qn"+UUID.randomUUID().toString();
         Date date = new Date();
-        ForumQuestion qn = new ForumQuestion(qnTitle, qnDesc, username, uid, date.getTime(),0, randomQnID);
+        ForumQuestion qn = new ForumQuestion(qnTitle, qnDesc, uid, date.getTime(),0, randomQnID);
         forumRef.child(randomQnID).setValue(qn);
         finish();
     }
