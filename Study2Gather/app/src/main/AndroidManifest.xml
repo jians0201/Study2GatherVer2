@@ -36,8 +36,7 @@
             android:theme="@style/Theme.MaterialComponents.NoActionBar" />
         <activity
             android:name=".ForgotPassword"
-            android:label="@string/forgotPasswordTitle"
-            android:theme="@style/Theme.MaterialComponents" />
+            android:label="@string/forgotPasswordTitle" />
         <activity android:name=".MainActivity" />
         <activity
             android:name=".ui.home.HomeCreatePost"
@@ -64,8 +63,7 @@
             android:label="@string/messagesCreateChatTitle" />
         <activity
             android:name=".ui.profile.ProfileEdit"
-            android:label="@string/profileEditTitle"
-            android:theme="@style/Theme.MaterialComponents" />
+            android:label="@string/profileEditTitle" />
 
         <meta-data
             android:name="preloaded_fonts"

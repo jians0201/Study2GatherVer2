@@ -40,8 +40,8 @@
     <string name="registerDOBError">Enter a Date of Birth!</string>
 
     // #Forgot Password Page
-    <string name="forgotPasswordTitle">Enter Email</string>
-    <style name="forgotPasswordEmailLabel">Email</style>
+    <string name="forgotPasswordTitle">Reset Password</string>
+    <string name="forgotPasswordEmailLabel">Email</string>
     <string name="forgotPasswordResetButton">Reset</string>
 
     // #Home Page
@@ -129,7 +129,7 @@
     / #Messages Create Page
     <string name="messagesCreateChatTitle">Create New Chat</string>
     <string name="messagesCreateChatBtnTitle">New Chat</string>
-    <string name="messagesChatCreateToLabel">To</string>
+    <string name="messagesChatCreateToLabel">To:</string>
 
     / #Chat Page
     <string name="messagesChatUser">Goku</string>
