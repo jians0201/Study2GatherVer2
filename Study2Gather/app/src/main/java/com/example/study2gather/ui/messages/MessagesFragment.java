@@ -18,7 +18,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.study2gather.Chat;
 import com.example.study2gather.R;
 import com.example.study2gather.UserObj;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -47,7 +49,7 @@ public class MessagesFragment extends Fragment {
 
     private String uid;
     private ArrayList<Chat> mChats;
-    private ArrayList<String> otherMembersInChat;
+    private ArrayList<String> otherMembersInChat, usersWithExistingChat;
     private UserObj userProfile;
     private HashMap<String, String> usersListWithName;
 
@@ -56,6 +58,7 @@ public class MessagesFragment extends Fragment {
         root = inflater.inflate(R.layout.fragment_messages, container, false);
         btnNewMessage = root.findViewById(R.id.messagesChatCreateFAB);
         usersListWithName = new HashMap<String, String>();
+        usersWithExistingChat = new ArrayList<String>();
         mChats = new ArrayList<Chat>();
         chatsRef = FirebaseDatabase.getInstance().getReference("Chats");
         usersRef = FirebaseDatabase.getInstance().getReference("Users");
@@ -98,10 +101,13 @@ public class MessagesFragment extends Fragment {
                     otherMembersInChat = chat.getOtherMembers(uid);
                     //get chat pic (pfp of other user for normal 2 person chat
                     if (otherMembersInChat.size() == 1) {
-                        profilePicsRef.child(otherMembersInChat.get(0)+"_profile.jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        usersWithExistingChat.add(otherMembersInChat.get(0));
+                        profilePicsRef.child(otherMembersInChat.get(0)+"_profile.jpg").getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
                             @Override
-                            public void onSuccess(Uri uri) { //only works if profile pic was found
-                                chat.setChatPic(uri);
+                            public void onComplete(@NonNull Task<Uri> task) {
+                                if (task.isSuccessful()) {
+                                    chat.setChatPic(task.getResult());
+                                }
                                 mChats.add(chat);
                                 if (mChats.size() == snapshot.getChildrenCount()) setUIRef();
                             }
@@ -118,8 +124,8 @@ public class MessagesFragment extends Fragment {
         btnNewMessage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                createNewChat();
                 Intent i = new Intent(getActivity(), MessagesCreateChat.class);
+                i.putExtra("usersWithExistingChat",usersWithExistingChat);
                 startActivity(i);
             }
         });
@@ -136,7 +142,6 @@ public class MessagesFragment extends Fragment {
         messagesRecyclerView.setLayoutManager(linearLayoutManager);
         //reverse posts so most recent on top
 //        Collections.reverse(mPosts);
-
         //Create adapter
         MessagesRecyclerItemArrayAdapter myRecyclerViewAdapter = new MessagesRecyclerItemArrayAdapter(mChats, new MessagesRecyclerItemArrayAdapter.MyRecyclerViewItemClickListener()
         {
@@ -150,14 +155,5 @@ public class MessagesFragment extends Fragment {
 
         //Set adapter to RecyclerView
         messagesRecyclerView.setAdapter(myRecyclerViewAdapter);
-    }
-
-    public void createNewChat() {
-        final String randomChatId = "chat"+UUID.randomUUID().toString();
-        HashMap<String, Boolean> membersList = new HashMap<String, Boolean>();
-        membersList.put(uid,true);
-        membersList.put("fK3oDIa4osYZbxYCqyW1krNpQuO2",true);
-        Chat chat = new Chat("Tanjiro",randomChatId, membersList);
-        chatsRef.child(randomChatId).setValue(chat);
     }
 }

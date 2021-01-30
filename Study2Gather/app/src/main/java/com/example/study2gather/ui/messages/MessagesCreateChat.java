@@ -46,6 +46,7 @@ public class MessagesCreateChat extends AppCompatActivity {
     private String uid;
 //    private ArrayList<Chat> mChats;
     private ArrayList<UserObj> mUsers;
+    private ArrayList<String> usersWithExistingChat;
     private UserObj userProfile, selectedUser;
 //    private HashMap<String, String> usersListWithName;
 
@@ -62,6 +63,7 @@ public class MessagesCreateChat extends AppCompatActivity {
         profilePicsRef = FirebaseStorage.getInstance().getReference("profileImages");
         user = FirebaseAuth.getInstance().getCurrentUser();
         uid = user.getUid();
+        usersWithExistingChat = getIntent().getStringArrayListExtra("usersWithExistingChat");
 
         //get own info
         usersRef.child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -77,7 +79,7 @@ public class MessagesCreateChat extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 mUsers.clear();
                 for(DataSnapshot ds : snapshot.getChildren()) {
-                    if (!ds.getKey().equals(uid)) {
+                    if (!ds.getKey().equals(uid) && !usersWithExistingChat.contains(ds.getKey())) {
                         UserObj user = ds.getValue(UserObj.class);
                         user.setUserID(ds.getKey());
                         //get user profile pic
@@ -90,7 +92,7 @@ public class MessagesCreateChat extends AppCompatActivity {
                                     }
                                     mUsers.add(user);
                                     //only populate questions once all questions have been retrieved
-                                    if (mUsers.size() == snapshot.getChildrenCount()-1) setUIRef();
+                                    if (mUsers.size() == snapshot.getChildrenCount()-usersWithExistingChat.size()-1) setUIRef();
                                 }
                             });
 //                        } catch (StorageException e) {}
