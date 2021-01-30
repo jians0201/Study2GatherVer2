@@ -159,7 +159,7 @@
     <string name="profileEditSchoolLabel">School</string>
     <string name="profileEditLocationLabel">Location</string>
     <string name="profileEditDoneBtnTitle">Done</string>
-    <string name="profileEditDetectLocation">Detect</string>
+    <string name="profileEditDetectLocation">Detect Location</string>
     
     / #Error Text
     <string name="profileEditEmptyError">Field can\'t be empty!</string>
