@@ -91,7 +91,7 @@
     <string name="forumQuestCreateDescHint">Elaborate your question.</string>
 
     / #Forum Create Question Page
-    <string name="forumAnsCreateButton">Answer</string>
+    <string name="forumAnsCreateButton">Answers</string>
     <string name="forumAnsCreateHint">Elaborate your answer.</string>
 
     / #Courses Page
@@ -126,6 +126,11 @@
     <string name="messagesSender">Tanjiro</string>
     <string name="messagesBrief">Muda Muda Muda!</string>
 
+    / #Messages Create Page
+    <string name="messagesCreateChatTitle">New message</string>
+    <string name="messagesCreateChatBtnTitle">Chat</string>
+    <string name="messagesChatCreateToLabel">To</string>
+
     / #Chat Page
     <string name="messagesChatUser">Goku</string>
 
@@ -153,6 +158,7 @@
     <string name="profileEditDOBBtn">Calendar</string>
     <string name="profileEditSchoolLabel">School</string>
     <string name="profileEditLocationLabel">Location</string>
+    <string name="profileEditDoneBtnTitle">Done</string>
     / #Error Text
     <string name="profileEditEmptyError">Field can\'t be empty!</string>
     <string name="profileEditUsernameError">Username must be 4–18 characters!</string>

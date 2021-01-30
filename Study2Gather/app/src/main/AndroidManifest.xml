@@ -28,7 +28,8 @@
             android:theme="@style/Theme.MaterialComponents.NoActionBar" />
         <activity
             android:name=".ForgotPassword"
-            android:label="@string/forgotPasswordTitle" />
+            android:label="@string/forgotPasswordTitle"
+            android:theme="@style/Theme.MaterialComponents" />
         <activity android:name=".MainActivity" />
         <activity
             android:name=".ui.home.HomeCreatePost"
@@ -50,6 +51,9 @@
                 android:name="android.support.MainActivity"
                 android:value="com.example.study2gather" />
         </activity>
+        <activity
+            android:name=".ui.messages.MessagesCreateChat"
+            android:label="@string/messagesCreateChatTitle" />
         <activity
             android:name=".ui.profile.ProfileEdit"
             android:label="@string/profileEditTitle"

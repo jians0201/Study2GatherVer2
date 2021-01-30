@@ -138,7 +138,7 @@ public class ProfileEdit extends AppCompatActivity implements View.OnClickListen
 
     // handle button activities
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) { //for the tick btn
+    public boolean onOptionsItemSelected(MenuItem item) { //for the return and tick btn
         int id = item.getItemId();
         if (item.getItemId() == android.R.id.home ) {
             finish();

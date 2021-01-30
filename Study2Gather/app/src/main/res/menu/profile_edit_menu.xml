@@ -6,6 +6,6 @@
         android:id="@+id/profileEditDoneBtn"
         android:icon="@drawable/ic_done_white_24dp"
         android:iconTint="@color/purple_700"
-        android:title="Done"
+        android:title="@string/profileEditDoneBtnTitle"
         app:showAsAction="always" />
 </menu>
