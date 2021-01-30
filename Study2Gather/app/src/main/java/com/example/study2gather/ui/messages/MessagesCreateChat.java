@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -25,14 +26,17 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageException;
 import com.google.firebase.storage.StorageReference;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 
 public class MessagesCreateChat extends AppCompatActivity {
     private RecyclerView newChatUsersRecyclerView;
+    private TextView tVSelectedUser;
 
     private DatabaseReference chatsRef, usersRef;
     private FirebaseUser user;
@@ -41,7 +45,7 @@ public class MessagesCreateChat extends AppCompatActivity {
     private String uid;
 //    private ArrayList<Chat> mChats;
     private ArrayList<UserObj> mUsers;
-    private UserObj userProfile;
+    private UserObj userProfile, selectedUser;
 //    private HashMap<String, String> usersListWithName;
 
     @Override
@@ -49,6 +53,7 @@ public class MessagesCreateChat extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         // Launch the layout -> profile_edit.xml
         setContentView(R.layout.messages_chat_create);
+        tVSelectedUser = findViewById(R.id.messagesChatCreateSelectedUser);
 
         mUsers = new ArrayList<UserObj>();
         chatsRef = FirebaseDatabase.getInstance().getReference("Chats");
@@ -73,18 +78,22 @@ public class MessagesCreateChat extends AppCompatActivity {
                 for(DataSnapshot ds : snapshot.getChildren()) {
                     if (!ds.getKey().equals(uid)) {
                         UserObj user = ds.getValue(UserObj.class);
+                        user.setUserID(ds.getKey());
                         //get user profile pic
-                        profilePicsRef.child(ds.getKey()+"_profile.jpg").getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Uri> task) {
-                                if (task.isSuccessful()) {
-                                    user.setProfilePic(task.getResult());
+//                        try {
+                            profilePicsRef.child(ds.getKey()+"_profile.jpg").getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Uri> task) {
+                                    if (task.isSuccessful()) {
+                                        user.setProfilePic(task.getResult());
+                                    }
+                                    mUsers.add(user);
+                                    //only populate questions once all questions have been retrieved
+                                    if (mUsers.size() == snapshot.getChildrenCount()-1) setUIRef();
                                 }
-                                mUsers.add(user);
-                                //only populate questions once all questions have been retrieved
-                                if (mUsers.size() == snapshot.getChildrenCount()-1) setUIRef();
-                            }
-                        });
+                            });
+//                        } catch (StorageException e) {}
+
                     }
                 }
             }
@@ -107,10 +116,10 @@ public class MessagesCreateChat extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == android.R.id.home ) {
+        if (id == android.R.id.home) {
             finish();
             return true;
-        } else if (id == R.id.messagesChatCreateBtn) {
+        } else if (id == R.id.messagesChatCreateBtn && selectedUser!=null) {
             createNewChat(); //check if target user was selected
         }
         return super.onOptionsItemSelected(item);
@@ -132,7 +141,8 @@ public class MessagesCreateChat extends AppCompatActivity {
             @Override
             public void onItemClicked(UserObj user)
             {
-                Toast.makeText(MessagesCreateChat.this, user.getUsername(), Toast.LENGTH_SHORT).show();
+                tVSelectedUser.setText(user.getUsername());
+                selectedUser = user;
             }
         });
 
@@ -142,11 +152,12 @@ public class MessagesCreateChat extends AppCompatActivity {
 
     public void createNewChat() {
         Toast.makeText(MessagesCreateChat.this,"Creating New Chat", Toast.LENGTH_SHORT).show();
-//        final String randomChatId = "chat"+ UUID.randomUUID().toString();
-//        HashMap<String, Boolean> membersList = new HashMap<String, Boolean>();
-//        membersList.put(uid,true);
-//        membersList.put("fK3oDIa4osYZbxYCqyW1krNpQuO2",true);
-//        Chat chat = new Chat("Tanjiro",randomChatId, membersList);
-//        chatsRef.child(randomChatId).setValue(chat);
+        final String randomChatId = "chat"+ UUID.randomUUID().toString();
+        HashMap<String, Boolean> membersList = new HashMap<String, Boolean>();
+        membersList.put(uid,true);
+        membersList.put(selectedUser.getUserID(),true);
+        Chat chat = new Chat(selectedUser.getUsername(),randomChatId, membersList);
+        chatsRef.child(randomChatId).setValue(chat);
+        finish();
     }
 }
