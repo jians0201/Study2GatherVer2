@@ -79,7 +79,8 @@
                 android:layout_marginTop="10dp"
                 android:foregroundGravity="center"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintVertical_bias="1.0">
+                app:layout_constraintVertical_bias="1.0"
+                android:nestedScrollingEnabled="false">
 
             </androidx.recyclerview.widget.RecyclerView>
 
