@@ -41,8 +41,9 @@
 
     // #Forgot Password Page
     <string name="forgotPasswordTitle">Reset Password</string>
+    <string name="forgotPasswordBrief">Don\'t worry. Enter your account email and we\'ll send you a link to reset your password. 😉</string>
     <string name="forgotPasswordEmailLabel">Email</string>
-    <string name="forgotPasswordResetButton">Reset</string>
+    <string name="forgotPasswordResetButton">Send Link</string>
 
     // #Home Page
     <string name="homeTitle">Home</string>

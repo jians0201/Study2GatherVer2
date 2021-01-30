@@ -20,6 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:gravity="center_vertical"
+            android:minHeight="35dp"
             android:orientation="horizontal">
 
             <TextView
@@ -29,7 +30,7 @@
                 android:layout_marginLeft="10dp"
                 android:fontFamily="@font/exo_extrabold"
                 android:text="@string/messagesChatCreateToLabel"
-                android:textColor="@color/white"
+                android:textColor="@color/grey"
                 android:textSize="18sp" />
 
             <TextView
@@ -37,9 +38,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:padding="10dp"
+                android:background="@drawable/rounded_corner_border_thin"
+                android:fontFamily="@font/exo_extrabold"
+                android:paddingLeft="10dp"
+                android:paddingTop="1dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="3dp"
                 android:textColor="@color/white"
-                tools:background="@drawable/rounded_corner_border_thin" />
+                android:textSize="20sp"
+                android:visibility="gone" />
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView

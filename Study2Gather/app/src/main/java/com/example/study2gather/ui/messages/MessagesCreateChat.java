@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -141,6 +142,7 @@ public class MessagesCreateChat extends AppCompatActivity {
             @Override
             public void onItemClicked(UserObj user)
             {
+                tVSelectedUser.setVisibility(View.VISIBLE);
                 tVSelectedUser.setText(user.getUsername());
                 selectedUser = user;
             }
