@@ -20,6 +20,7 @@ public class MessagesCreateChat extends AppCompatActivity {
     // create an action bar button
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.messages_create_chat_menu, menu);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_clear_white_24dp);
         return super.onCreateOptionsMenu(menu);
