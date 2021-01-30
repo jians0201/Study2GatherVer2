@@ -37,7 +37,9 @@
         <activity
             android:name=".ForgotPassword"
             android:label="@string/forgotPasswordTitle" />
-        <activity android:name=".MainActivity" />
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/Theme.Study2Gather" />
         <activity
             android:name=".ui.home.HomeCreatePost"
             android:theme="@style/Theme.MaterialComponents.NoActionBar" />

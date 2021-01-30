@@ -57,7 +57,7 @@
 
     </LinearLayout>
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:id="@+id/messageChatMidLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -72,11 +72,20 @@
             android:orientation="vertical">
 
 
-            <!--put recycler view here uwu-->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/messagesMessageList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:foregroundGravity="center"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintVertical_bias="1.0">
+
+            </androidx.recyclerview.widget.RecyclerView>
 
 
         </LinearLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
     <LinearLayout
         android:id="@+id/messageChatBotLayout"
