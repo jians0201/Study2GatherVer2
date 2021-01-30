@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.study2gather.Chat;
 import com.example.study2gather.R;
 import com.squareup.picasso.Picasso;
 
@@ -17,10 +18,10 @@ import java.util.ArrayList;
 
 public class MessagesRecyclerItemArrayAdapter extends RecyclerView.Adapter<MessagesRecyclerItemArrayAdapter.MyViewHolder> {
 
-    private ArrayList<MessagesRecyclerItem> mChats;
+    private ArrayList<Chat> mChats;
     private MyRecyclerViewItemClickListener mItemClickListener;
 
-    public MessagesRecyclerItemArrayAdapter(ArrayList<MessagesRecyclerItem> countries, MyRecyclerViewItemClickListener itemClickListener) {
+    public MessagesRecyclerItemArrayAdapter(ArrayList<Chat> countries, MyRecyclerViewItemClickListener itemClickListener) {
         this.mChats = countries;
         this.mItemClickListener = itemClickListener;
     }
@@ -48,10 +49,11 @@ public class MessagesRecyclerItemArrayAdapter extends RecyclerView.Adapter<Messa
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         //Set Chat Title
-        Log.d("TITLE A",mChats.get(position).getChatTitle());
+//        Log.d("TITLE A",mChats.get(position).getChatTitle());
+        holder.chatTarget.setText(mChats.get(position).getChatTitle());
 
         //Set Latest Message
-        holder.messagesBrief.setText(mChats.get(position).getLastMsg());
+        holder.latestMessage.setText(mChats.get(position).getLastMsg());
 
         //Set Chat Pic
         Picasso.get().load(mChats.get(position).getChatPic()).into(holder.profilePic);
@@ -78,21 +80,21 @@ public class MessagesRecyclerItemArrayAdapter extends RecyclerView.Adapter<Messa
     //RecyclerView View Holder
     class MyViewHolder extends RecyclerView.ViewHolder
     {
-        private TextView messagesSender, messagesBrief;
+        private TextView chatTarget, latestMessage;
         private ImageView profilePic;
 
         MyViewHolder(@NonNull View itemView)
         {
             super(itemView);
-            messagesSender = itemView.findViewById(R.id.forumQuestionAskUser);
-            messagesBrief = itemView.findViewById(R.id.messagesBrief);
-            profilePic = itemView.findViewById(R.id.forumQuestionDetailsAnswerUserProfilePic);
+            chatTarget = itemView.findViewById(R.id.messagesUser);
+            latestMessage = itemView.findViewById(R.id.messagesLatest);
+            profilePic = itemView.findViewById(R.id.messagesUserProfilePic);
         }
     }
 
     //RecyclerView Click Listener
     public interface MyRecyclerViewItemClickListener    {
-        void onItemClicked(MessagesRecyclerItem message);
+        void onItemClicked(Chat message);
     }
 
 }

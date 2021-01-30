@@ -26,20 +26,20 @@ public class ForgotPassword extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.forgot_password);
-//        pgbar = findViewById(R.id.pgbarresetpassword);
-//        txtresetpword = findViewById(R.id.txtresetPassword);
-//        btnresetpword = findViewById(R.id.btnresetPassword);
+        pgbar = findViewById(R.id.forgotPasswordProgressBar);
+        txtresetpword = findViewById(R.id.forgotPasswordEmail);
+        btnresetpword = findViewById(R.id.forgotPasswordResetButton);
         auth = FirebaseAuth.getInstance();
-//        btnresetpword.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                resetPassword();
-//            }
-//        });
+        btnresetpword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String email = txtresetpword.getText().toString().trim();
+                if (!email.isEmpty()) { resetPassword(email); }
+            }
+        });
     }
 
-    private void resetPassword() {
-        String email = txtresetpword.getText().toString().trim();
+    private void resetPassword(String email) {
         //add validations
         pgbar.setVisibility(View.VISIBLE);
         auth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {

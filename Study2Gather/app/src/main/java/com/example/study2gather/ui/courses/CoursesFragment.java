@@ -4,22 +4,13 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
 
 import com.example.study2gather.R;
-import com.example.study2gather.ui.courses.CoursesViewModel;
-import com.example.study2gather.ui.messages.MessagesRecyclerItem;
-import com.example.study2gather.ui.messages.MessagesRecyclerItemArrayAdapter;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class CoursesFragment extends Fragment {
 
