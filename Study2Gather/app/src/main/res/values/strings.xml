@@ -66,7 +66,7 @@
         So I\'m going to attend my first ever interview for a job tomorrow. What are the tricky interview questions and how to answer them.
     </string>
 
-    <string name="forumQuestionDetailsAnswer">Answer</string>
+    <string name="forumQuestionDetailsAnswer">Answers</string>
     <string name="forumAnswerUsername">What is love? :(</string>
     <string name="forumAnswerTime">2 hours ago</string>
     <string name="forumQuestionDetailsAnswerDetails">
@@ -127,7 +127,7 @@
     <string name="messagesBrief">Muda Muda Muda!</string>
 
     / #Messages Create Page
-    <string name="messagesCreateChatTitle">Create New Chat</string>
+    <string name="messagesCreateChatTitle">New Message</string>
     <string name="messagesCreateChatBtnTitle">Chat</string>
     <string name="messagesChatCreateToLabel">To</string>
 

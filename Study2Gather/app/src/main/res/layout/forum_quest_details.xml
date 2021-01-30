@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,170 +8,178 @@
     android:background="@color/black">
 
     <LinearLayout
-        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#191919"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:paddingLeft="6dp"
-        android:paddingTop="10dp"
-        android:paddingRight="10dp"
-        android:paddingBottom="10dp">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <ImageButton
-            android:id="@+id/forumQuestionDetailsBackBtn"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/forumQuestDetailsTopBar"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:onClick="onClick"
-            android:padding="10dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_arrow_back_white_24dp" />
+            android:background="#191919"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingLeft="6dp"
+            android:paddingTop="10dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="10dp">
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            app:cardCornerRadius="250dp">
+            <ImageButton
+                android:id="@+id/forumQuestionDetailsBackBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:onClick="onClick"
+                android:padding="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_arrow_back_white_24dp" />
 
             <androidx.cardview.widget.CardView
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
                 app:cardCornerRadius="250dp">
 
-                <ImageView
-                    android:id="@+id/forumQuestionDetailsAskUserProfilePic"
+                <androidx.cardview.widget.CardView
                     android:layout_width="35dp"
                     android:layout_height="35dp"
-                    android:scaleType="centerCrop" />
+                    android:layout_gravity="center"
+                    app:cardCornerRadius="250dp">
+
+                    <ImageView
+                        android:id="@+id/forumQuestionDetailsAskUserProfilePic"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:scaleType="centerCrop" />
+
+                </androidx.cardview.widget.CardView>
 
             </androidx.cardview.widget.CardView>
 
-        </androidx.cardview.widget.CardView>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+                <TextView
+                    android:id="@+id/forumQuestionAskUser"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/exo_extrabold"
+                    android:text="@string/forumAskUsername"
+                    android:textColor="#FFFFFF"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/forumQuestionDetailsAskTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/exo"
+                    android:text="@string/forumAskTime"
+                    android:textColor="#FFFFFF"
+                    android:textSize="10sp" />
+            </LinearLayout>
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
 
             <TextView
-                android:id="@+id/forumQuestionAskUser"
+                android:id="@+id/forumCommentCount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:background="@drawable/rounded_corner_border_thin"
+                android:drawableLeft="@drawable/ic_comment_white_18dp"
+                android:drawablePadding="3dp"
                 android:fontFamily="@font/exo_extrabold"
-                android:text="@string/forumAskUsername"
-                android:textColor="#FFFFFF"
-                android:textSize="14sp" />
+                android:paddingLeft="10dp"
+                android:paddingTop="5dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="5dp"
+                android:text="@string/forumCommentCount"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
 
-            <TextView
-                android:id="@+id/forumQuestionDetailsAskTime"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:fontFamily="@font/exo"
-                android:text="@string/forumAskTime"
-                android:textColor="#FFFFFF"
-                android:textSize="10sp" />
         </LinearLayout>
 
-        <Space
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-
-        <TextView
-            android:id="@+id/forumCommentCount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="@drawable/rounded_corner_border_thin"
-            android:drawableLeft="@drawable/ic_comment_white_18dp"
-            android:drawablePadding="3dp"
-            android:fontFamily="@font/exo_extrabold"
-            android:paddingLeft="10dp"
-            android:paddingTop="5dp"
-            android:paddingRight="10dp"
-            android:paddingBottom="5dp"
-            android:text="@string/forumCommentCount"
-            android:textColor="@color/white"
-            android:textSize="16sp" />
-
-    </LinearLayout>
-
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true">
-
-        <LinearLayout
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nestedScrollView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:fillViewport="true">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:background="#191919"
-                android:orientation="vertical"
-                android:padding="10dp">
+                android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/forumQuestionDetailsQuest"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/exo_extrabold"
-                    android:text="@string/forumQuestion"
-                    android:textColor="@color/white"
-                    android:textSize="18sp" />
-
-                <TextView
-                    android:id="@+id/forumQuestionDetailsDet"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:fontFamily="@font/exo"
-                    android:text="@string/forumQuestionDetails" />
+                    android:background="#191919"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/forumQuestionDetailsQuest"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/exo_extrabold"
+                        android:text="@string/forumQuestion"
+                        android:textColor="@color/white"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/forumQuestionDetailsDet"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/exo"
+                        android:text="@string/forumQuestionDetails" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/forumQuestionDetailsAnswer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/rounded_corner_border"
+                    android:fontFamily="@font/exo_extrabold"
+                    android:paddingLeft="15dp"
+                    android:paddingTop="5dp"
+                    android:paddingRight="15dp"
+                    android:paddingBottom="5dp"
+                    android:text="@string/forumQuestionDetailsAnswer"
+                    android:textColor="@color/white"
+                    android:textSize="24sp"
+                    tools:layout_editor_absoluteY="188dp" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/forumAnsList"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:nestedScrollingEnabled="false"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0">
+
+                </androidx.recyclerview.widget.RecyclerView>
+
             </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
 
-            <TextView
-                android:id="@+id/forumQuestionDetailsAnswer"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/rounded_corner_border"
-                android:fontFamily="@font/exo_extrabold"
-                android:paddingLeft="15dp"
-                android:paddingTop="5dp"
-                android:paddingRight="15dp"
-                android:paddingBottom="5dp"
-                android:text="@string/forumQuestionDetailsAnswer"
-                android:textColor="@color/white"
-                android:textSize="24sp"
-                tools:layout_editor_absoluteY="188dp" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/forumAnsList"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:nestedScrollingEnabled="false"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0">
-
-            </androidx.recyclerview.widget.RecyclerView>
-
-        </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
+    </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/forumQuestAnsFAB"
