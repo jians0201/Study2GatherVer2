@@ -48,6 +48,7 @@
     // #Home Page
     <string name="homeTitle">Home</string>
     <string name="homeTabTitle">Home</string>
+    <string name="homeNoNewPostLabel">There\'s no new post currently. \nCheck back later!</string>
 
     // #Home Create Post Page
     <string name="homePostCreateButton">Post</string>
@@ -61,11 +62,13 @@
     <string name="forumAskUsername">Dance The Night Away :D</string>
     <string name="forumCommentCount">1</string>
     <string name="forumAskTime">3 hours ago</string>
+    <string name="forumNoNewTopicLabel">There\'s no new topic currently. \nCheck back later!</string>
 
     / #Forum Details Page
-    <string name="forumQuestionDetails">
+    <string name="forumQuestDetails">
         So I\'m going to attend my first ever interview for a job tomorrow. What are the tricky interview questions and how to answer them.
     </string>
+    <string name="forumQuestDetailsCreateAnsLabel">Know the answer? \nHit the floating button to answer!</string>
 
     <string name="forumQuestionDetailsAnswer">Answers</string>
     <string name="forumAnswerUsername">What is love? :(</string>
@@ -91,7 +94,7 @@
     <string name="forumQuestCreateDescLabel">Description</string>
     <string name="forumQuestCreateDescHint">Elaborate your question.</string>
 
-    / #Forum Create Question Page
+    / #Forum Create Answer Page
     <string name="forumAnsCreateButton">Answers</string>
     <string name="forumAnsCreateHint">Elaborate your answer.</string>
 
@@ -126,6 +129,7 @@
     <string name="messagesTabTitle">Messages</string>
     <string name="messagesSender">Tanjiro</string>
     <string name="messagesBrief">Muda Muda Muda!</string>
+    <string name="messagesCreateNewChatLabel">Create new chat with friend by tapping the \"+\" icon!</string>
 
     / #Messages Create Page
     <string name="messagesCreateChatTitle">Create New Chat</string>

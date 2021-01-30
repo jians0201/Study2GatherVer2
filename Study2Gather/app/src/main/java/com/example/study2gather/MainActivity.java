@@ -1,6 +1,10 @@
 package com.example.study2gather;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.widget.TextView;
+import android.widget.Toolbar;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.navigation.NavController;
