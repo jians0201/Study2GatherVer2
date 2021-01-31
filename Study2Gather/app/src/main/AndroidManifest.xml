@@ -54,12 +54,7 @@
             android:theme="@style/Theme.MaterialComponents.NoActionBar" />
         <activity
             android:name=".ui.courses.CoursesDetails"
-            android:label="@string/coursesTitle"
-            android:parentActivityName=".MainActivity">
-            <meta-data
-                android:name="android.support.MainActivity"
-                android:value="com.example.study2gather" />
-        </activity>
+            android:label="@string/coursesTitle" />
         <activity
             android:name=".ui.messages.MessagesChat"
             android:theme="@style/Theme.MaterialComponents.NoActionBar" />

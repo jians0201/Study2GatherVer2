@@ -3,6 +3,8 @@ package com.example.study2gather.ui.courses;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -36,7 +38,6 @@ public class CoursesDetails extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.courses_details);
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         iVCourseImage = findViewById(R.id.coursesDetailsImg);
         tVCourseName = findViewById(R.id.coursesDetailsName);
         tVCourseType = findViewById(R.id.coursesDetailsCourseCategory);
@@ -78,6 +79,25 @@ public class CoursesDetails extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    // create an action bar button
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_arrow_back_white_24dp);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    // handle button activities
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) { //for the return btn
+        int id = item.getItemId();
+        if (id == android.R.id.home ) {
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void setUIRefWYL() {
