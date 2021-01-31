@@ -110,6 +110,8 @@
 
     <string name="coursesCourseDetailName">Introduction to Computer Science and Programming in Python</string>
     <string name="coursesCourseDetailAuthor">Kamado Tanjiro</string>
+    <string name="coursesCourseDetailDescLabel">Description</string>
+    <string name="coursesCourseDetailDescDropDownBtn">Show</string>
     <string name="coursesCourseDetailDesc">Learn Python Programming the Easy Way! /n/nIf you want to learn how to write Python programs that can be used on Linux, Mac, and Unix operating systems, code python like a pro, solve real-world problems, or automate repetitive and complex tasks, click the subscribe button!</string>
     <string name="coursesCourseDetailsWYLLabel">What You Will Learn</string>
     <string name="coursesCourseDetailsWYLDetails">How to prepare your computer for programming in Python.</string>
