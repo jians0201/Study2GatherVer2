@@ -6,6 +6,7 @@ public class Post {
     private Uri postProfilePic, postPic;
     private String postAuthor, postAuthorID, postCaption, postPicPath, postID;
     private long postLikeCount, timestamp;
+    private boolean liked = false;
 
     public Post() {}
 
@@ -67,6 +68,15 @@ public class Post {
     }
 
     public void unlikePost() {
-        this.postLikeCount -= 1;
+        if (this.postLikeCount>0) this.postLikeCount -= 1;
+
+    }
+
+    public boolean isLiked() {
+        return liked;
+    }
+
+    public void setLiked(boolean liked) {
+        this.liked = liked;
     }
 }

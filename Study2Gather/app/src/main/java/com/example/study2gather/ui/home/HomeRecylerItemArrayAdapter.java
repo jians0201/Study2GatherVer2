@@ -26,11 +26,12 @@ public class HomeRecylerItemArrayAdapter extends RecyclerView.Adapter<HomeRecyle
 
     private ArrayList<Post> mPosts;
     private MyRecyclerViewItemClickListener mItemClickListener;
-    private String likeCountStr;
+    private String likeCountStr, uid;
 
-    public HomeRecylerItemArrayAdapter(ArrayList<Post> posts, MyRecyclerViewItemClickListener itemClickListener) {
+    public HomeRecylerItemArrayAdapter(String uid, ArrayList<Post> posts, MyRecyclerViewItemClickListener itemClickListener) {
         this.mPosts = posts;
         this.mItemClickListener = itemClickListener;
+        this.uid = uid;
     }
 
     @NonNull
@@ -55,7 +56,6 @@ public class HomeRecylerItemArrayAdapter extends RecyclerView.Adapter<HomeRecyle
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-
         //Set Post User Profile Picture
         if (mPosts.get(position).getPostProfilePic() != null) {
             Picasso.get().load(mPosts.get(position).getPostProfilePic()).into(holder.imageViewPostUserPic);
@@ -87,21 +87,24 @@ public class HomeRecylerItemArrayAdapter extends RecyclerView.Adapter<HomeRecyle
         likeCountStr = getLikeCountString(mPosts.get(position).getPostLikeCount());
         holder.textViewPostLikeCount.setText(likeCountStr);
 
+        holder.toggleButtonLikeBtn.setChecked(mPosts.get(position).isLiked());
+
         holder.toggleButtonLikeBtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                // if post is liked/unliked, +/- 1 from the post like count in firebase and add the postID to the liked post array in userProfile Object
                 DatabaseReference postsRef = FirebaseDatabase.getInstance().getReference("Posts");
+                DatabaseReference likesRef = FirebaseDatabase.getInstance().getReference("Likes");
+                Post post = mPosts.get(position);
                 if (isChecked) {
-                    // The toggle is enabled
-//                    Log.d("LIKED",mPosts.get(position).getPostID());
-                    mPosts.get(position).likePost();
+                    post.likePost();
+                    likesRef.child(post.getPostID()).child(uid).setValue(true);
                 } else {
-                    // The toggle is disabled
-//                    Log.d("UNLIKED",mPosts.get(position).getPostID());
-                    mPosts.get(position).unlikePost();
+                    post.unlikePost();
+                    likesRef.child(post.getPostID()).child(uid).removeValue();
                 }
-                postsRef.child(mPosts.get(position).getPostID()).child("postLikeCount").setValue(mPosts.get(position).getPostLikeCount());
-                likeCountStr = getLikeCountString(mPosts.get(position).getPostLikeCount());
+                post.setLiked(isChecked);
+//                holder.toggleButtonLikeBtn.setChecked(isChecked);
+                postsRef.child(post.getPostID()).child("postLikeCount").setValue(post.getPostLikeCount());
+                likeCountStr = getLikeCountString(post.getPostLikeCount());
                 holder.textViewPostLikeCount.setText(likeCountStr);
             }
         });

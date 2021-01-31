@@ -3,6 +3,7 @@ package com.example.study2gather.ui.home;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +31,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -39,7 +41,7 @@ public class HomeFragment extends Fragment {
     private RecyclerView homeRecyclerView;
     private View root;
 
-    private DatabaseReference postsRef, usersRef;
+    private DatabaseReference postsRef, usersRef, likesRef;
     private FirebaseUser user;
     private StorageReference imagesRef, profilePicsRef;
 
@@ -47,6 +49,7 @@ public class HomeFragment extends Fragment {
     private String uid;
     private User userProfile;
     private HashMap<String, String> usersListWithName = new HashMap<String, String>();
+    private ArrayList<String> likedPosts = new ArrayList<String>();
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_home, container, false);
@@ -57,6 +60,7 @@ public class HomeFragment extends Fragment {
         uid = user.getUid();
         usersRef = FirebaseDatabase.getInstance().getReference("Users");
         postsRef = FirebaseDatabase.getInstance().getReference("Posts");
+        likesRef = FirebaseDatabase.getInstance().getReference("Likes");
 
         //get own info
         usersRef.child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -76,37 +80,49 @@ public class HomeFragment extends Fragment {
             public void onCancelled(@NonNull DatabaseError error) {}
         });
 
-        //get posts and pics
-        postsRef.orderByChild("timestamp").addValueEventListener(new ValueEventListener() {
+        //get all liked posts by user
+        likesRef.orderByChild(uid).equalTo(true).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                mPosts.clear();
-                for (DataSnapshot ds : snapshot.getChildren()) {
-                    Post p = ds.getValue(Post.class);
-                    //get post pic
-                    StorageReference postPic = FirebaseStorage.getInstance().getReference("images").child(p.getPostPicPath());
-                    postPic.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Uri> task) {
-                            if (task.isSuccessful()) {
-                                p.setPostPic(task.getResult());
-                            }
-                            //get user profile pic
-                            profilePicsRef.child(p.getPostAuthorID()+"_profile.jpg").getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+                likedPosts.clear();
+                for (DataSnapshot ds : snapshot.getChildren()) { likedPosts.add(ds.getKey()); }
+                //get posts and pics
+                postsRef.orderByChild("timestamp").addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        mPosts.clear();
+                        for (DataSnapshot ds : snapshot.getChildren()) {
+                            Post p = ds.getValue(Post.class);
+                            //get post pic
+                            StorageReference postPic = FirebaseStorage.getInstance().getReference("images").child(p.getPostPicPath());
+                            postPic.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Uri> task) {
                                     if (task.isSuccessful()) {
-                                        p.setPostProfilePic(task.getResult());
+                                        p.setPostPic(task.getResult());
                                     }
-                                    p.setPostAuthor(usersListWithName.get(p.getPostAuthorID()));
-                                    mPosts.add(p);
-                                    //only populate posts once all posts have been retrieved
-                                    if (mPosts.size() == snapshot.getChildrenCount()) setUIRef();
+                                    //get user profile pic
+                                    profilePicsRef.child(p.getPostAuthorID()+"_profile.jpg").getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Uri> task) {
+                                            if (task.isSuccessful()) {
+                                                p.setPostProfilePic(task.getResult());
+                                            }
+                                            p.setPostAuthor(usersListWithName.get(p.getPostAuthorID()));
+                                            //check if post is liked by user
+                                            if (likedPosts.contains(p.getPostID())) p.setLiked(true);
+                                            mPosts.add(p);
+                                            //only populate posts once all posts have been retrieved
+                                            if (mPosts.size() == snapshot.getChildrenCount()) setUIRef();
+                                        }
+                                    });
                                 }
                             });
                         }
-                    });
-                }
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {}
+                });
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {}
@@ -135,7 +151,7 @@ public class HomeFragment extends Fragment {
         //reverse posts so most recent on top
 //        Collections.reverse(mPosts); //not working
         //Create adapter
-        HomeRecylerItemArrayAdapter myRecyclerViewAdapter = new HomeRecylerItemArrayAdapter(mPosts, new HomeRecylerItemArrayAdapter.MyRecyclerViewItemClickListener() {
+        HomeRecylerItemArrayAdapter myRecyclerViewAdapter = new HomeRecylerItemArrayAdapter(uid, mPosts, new HomeRecylerItemArrayAdapter.MyRecyclerViewItemClickListener() {
             //Handling clicks
             @Override
             public void onItemClicked(Post post) {
