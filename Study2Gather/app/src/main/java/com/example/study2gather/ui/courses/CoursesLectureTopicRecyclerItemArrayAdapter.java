@@ -52,7 +52,7 @@ public class CoursesLectureTopicRecyclerItemArrayAdapter extends RecyclerView.Ad
     @Override
     public void onBindViewHolder(@NonNull CoursesLectureTopicRecyclerItemArrayAdapter.MyViewHolder holder, int position) {
         //Set Course Lecture Topic
-        holder.courseLectureTopic.setText(mCourseLectureTopics.get(position).getCourseLTtitle());
+        holder.courseLectureTopic.setText("Lecture "+String.valueOf(position+1)+" - "+mCourseLectureTopics.get(position).getCourseLTtitle());
 
         //Set onClickListener for Download Button
         holder.coursesLectureTopicDownloadLink.setOnClickListener(new View.OnClickListener() {

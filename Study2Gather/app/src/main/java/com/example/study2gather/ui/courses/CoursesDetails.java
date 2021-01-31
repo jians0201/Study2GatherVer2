@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.study2gather.Course;
@@ -25,10 +26,11 @@ public class CoursesDetails extends AppCompatActivity {
     private TextView tVCourseName, tVCourseType, tVCourseLecturesNum, tVCourseDescription;
     private RecyclerView coursesWYLRecyclerView, coursesLectureTopicRecyclerView;
     private Button btnCoursesDetailsDropDown;
+    private LinearLayout lLCoursesToggleSection;
 
     private Course course;
     private ArrayList<String> mCoursesWYL;
-    private ArrayList<CourseLectureTopic> mCoursesLectureTopics;
+    private ArrayList<CourseLectureTopic> mCoursesLectureTopics = new ArrayList<CourseLectureTopic>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +43,7 @@ public class CoursesDetails extends AppCompatActivity {
         tVCourseLecturesNum = findViewById(R.id.coursesDetailsCourseTotalLecture);
         tVCourseDescription = findViewById(R.id.coursesDetailsDesc);
         btnCoursesDetailsDropDown = findViewById(R.id.coursesDetailsDescDropDownBtn);
+        lLCoursesToggleSection = findViewById(R.id.coursesDetailsToggleSection);
 
         course = (Course) getIntent().getSerializableExtra("course");
         if (course.getCoursePic() != null) {
@@ -57,16 +60,22 @@ public class CoursesDetails extends AppCompatActivity {
         setUIRefWYL();
 
         String tempLectureLink = course.getCourseLectureLinks().get(0);
-        Log.d("Lecture Link",tempLectureLink);
         for (String topic : course.getCourseLectureTopics()) {
             mCoursesLectureTopics.add(new CourseLectureTopic(topic,tempLectureLink));
         }
-//        setUIRefLectureTopic();
+        Log.d("Topics",String.valueOf(mCoursesLectureTopics.size()));
+        setUIRefLectureTopic();
 
         btnCoursesDetailsDropDown.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                btnCoursesDetailsDropDown.setText(R.string.coursesCourseDetailDescDropDownBtn);
+                if (lLCoursesToggleSection.getVisibility() == View.VISIBLE) {
+                    btnCoursesDetailsDropDown.setText(R.string.coursesCourseDetailDescDropDownBtnOn);
+                    lLCoursesToggleSection.setVisibility(View.GONE);
+                } else {
+                    btnCoursesDetailsDropDown.setText(R.string.coursesCourseDetailDescDropDownBtnOff);
+                    lLCoursesToggleSection.setVisibility(View.VISIBLE);
+                }
             }
         });
     }
