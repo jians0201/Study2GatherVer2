@@ -108,7 +108,6 @@ public class ForumFragment extends Fragment {
             public void onClick(View v) {
 //                createNewQn();
                 Intent i = new Intent(getActivity(), ForumCreateQuestion.class);
-//                i.putExtra("username", userProfile.getUsername());
                 i.putExtra("usersListWithName", usersListWithName);
                 startActivity(i);
             }

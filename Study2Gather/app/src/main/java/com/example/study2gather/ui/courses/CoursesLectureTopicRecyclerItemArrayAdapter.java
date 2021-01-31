@@ -1,5 +1,6 @@
 package com.example.study2gather.ui.courses;
 
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.study2gather.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -55,19 +58,15 @@ public class CoursesLectureTopicRecyclerItemArrayAdapter extends RecyclerView.Ad
         holder.courseLectureTopic.setText("Lecture "+String.valueOf(position+1)+" - "+mCourseLectureTopics.get(position).getCourseLTtitle());
 
         //Set onClickListener for Download Button
-        holder.coursesLectureTopicDownloadLink.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d("DOWNLOAD BUTTON","CLICKED");
-//                StorageReference LectureSlidesPdf = FirebaseStorage.getInstance().getReference("courses").child(mCourseLectureTopics.get(position).getCourseLTLink());
-//                try {
-//                    File localPdfFile = File.createTempFile("lecture1", "pdf");
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-            }
-        });
+//        holder.coursesLectureTopicDownloadLink.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//            }
+//        });
     }
+
+
 
     @Override
     public int getItemCount() {
