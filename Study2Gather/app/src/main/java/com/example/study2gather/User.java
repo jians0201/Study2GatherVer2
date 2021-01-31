@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 public class User {
     private String username, email, password, gender, dob, school, location, userID;
-    private ArrayList<String> likedPosts;
     private Uri profilePic;
 
     public User() {}
@@ -75,22 +74,6 @@ public class User {
     public String getLocation() { return location; }
 
     public void setLocation(String location) { this.location = location; }
-
-    public ArrayList<String> getLikedPosts() {
-        return likedPosts;
-    }
-
-    public void setLikedPosts(ArrayList<String> likedPosts) {
-        this.likedPosts = likedPosts;
-    }
-
-    public void addLikedPost(String postID) {
-        this.likedPosts.add(postID);
-    }
-
-    public void removeLikedPost(String postID) {
-        this.likedPosts.remove(new String(postID));
-    }
 
     public String getUserID() {
         return userID;
