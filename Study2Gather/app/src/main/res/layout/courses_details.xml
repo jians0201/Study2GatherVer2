@@ -135,7 +135,7 @@
                         android:minWidth="0dp"
                         android:minHeight="0dp"
                         android:onClick="onClick"
-                        android:text="@string/coursesCourseDetailDescDropDownBtn"
+                        android:text="@string/coursesCourseDetailDescDropDownBtnOn"
                         android:textAllCaps="false"
                         android:textColor="@color/white"
                         android:textSize="10sp"
