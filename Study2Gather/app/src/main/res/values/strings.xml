@@ -107,6 +107,7 @@
     <string name="coursesCourseName">Introduction to Computer Science and Programming in Python</string>
     <string name="coursesCourseCategory">Programming Language</string>
     <string name="coursesCourseTotalLecture">35 Lectures</string>
+    <string name="coursesNoNewCourseLabel">There\'s no new course currently. \nCheck back later!</string>
 
     / #Courses Details Page
     <string name="coursesDetailsTitle">Course Details</string>
