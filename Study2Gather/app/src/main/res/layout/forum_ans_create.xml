@@ -14,7 +14,9 @@
         android:layout_alignParentTop="true"
         android:gravity="center"
         android:orientation="horizontal"
-        android:paddingRight="10dp">
+        android:paddingTop="10dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="10dp">
 
         <ImageButton
             android:id="@+id/forumAnsCreateClearButton"
@@ -42,6 +44,7 @@
             android:minHeight="0dp"
             android:onClick="onClick"
             android:text="@string/forumAnsCreateButton"
+            android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="20sp"
             app:cornerRadius="9999dp" />
@@ -91,7 +94,7 @@
                 <EditText
                     android:id="@+id/forumAnsCreateText"
                     android:layout_width="match_parent"
-                    android:layout_height="550dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:background="@null"
                     android:fontFamily="@font/exo"

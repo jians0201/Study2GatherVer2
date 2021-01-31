@@ -3,9 +3,11 @@ package com.example.study2gather.ui.forum;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -68,6 +70,11 @@ public class ForumCreateQuestion extends AppCompatActivity implements View.OnCli
                 }
             }
         });
+
+        //focus the text view and show keyboard
+        eTQnTitle.requestFocus();
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.showSoftInput(eTQnTitle, InputMethodManager.SHOW_IMPLICIT);
     }
 
     @Override

@@ -26,12 +26,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginEnd="8dp"
+                android:layout_marginEnd="16dp"
                 android:layout_marginBottom="10dp"
                 android:fontFamily="@font/exo"
                 android:maxWidth="250dp"
-                android:text="Hi, what's up Hasan?"
-                android:textColor="#000000"
+                android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -44,8 +43,7 @@
         android:id="@+id/messageTimeReceived"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="3dp"
-        android:text="5.30p.m."
-        android:textSize="12sp" />
+        android:layout_marginStart="5dp"
+        android:textSize="10sp" />
 
 </LinearLayout>

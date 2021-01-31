@@ -14,7 +14,9 @@
         android:layout_alignParentTop="true"
         android:gravity="center"
         android:orientation="horizontal"
-        android:paddingRight="10dp">
+        android:paddingTop="10dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="10dp">
 
         <ImageButton
             android:id="@+id/forumQuestCreateClearButton"
@@ -42,6 +44,7 @@
             android:minHeight="0dp"
             android:onClick="onClick"
             android:text="@string/forumQuestCreateButton"
+            android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="20sp"
             app:cornerRadius="9999dp" />
@@ -134,7 +137,7 @@
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_height="400dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     app:cardCornerRadius="20dp">
 

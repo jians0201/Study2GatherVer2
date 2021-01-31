@@ -19,7 +19,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Study2Gather"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.messages.MessagesChat"></activity>
         <activity
             android:name=".Splash"
             android:theme="@style/Theme.MaterialComponents.NoActionBar">
@@ -61,6 +60,9 @@
                 android:name="android.support.MainActivity"
                 android:value="com.example.study2gather" />
         </activity>
+        <activity
+            android:name=".ui.messages.MessagesChat"
+            android:theme="@style/Theme.MaterialComponents.NoActionBar" />
         <activity
             android:name=".ui.messages.MessagesCreateChat"
             android:label="@string/messagesCreateChatTitle" />
