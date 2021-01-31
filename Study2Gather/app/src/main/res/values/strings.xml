@@ -95,7 +95,7 @@
     <string name="forumQuestCreateDescHint">Elaborate your question.</string>
 
     / #Forum Create Answer Page
-    <string name="forumAnsCreateButton">Answers</string>
+    <string name="forumAnsCreateButton">Answer</string>
     <string name="forumAnsCreateHint">Elaborate your answer.</string>
 
     / #Courses Page
@@ -165,7 +165,7 @@
     <string name="profileEditLocationLabel">Location</string>
     <string name="profileEditDoneBtnTitle">Done</string>
     <string name="profileEditDetectLocation">Detect Location</string>
-    
+
     / #Error Text
     <string name="profileEditEmptyError">Field can\'t be empty!</string>
     <string name="profileEditUsernameError">Username must be 4–18 characters!</string>

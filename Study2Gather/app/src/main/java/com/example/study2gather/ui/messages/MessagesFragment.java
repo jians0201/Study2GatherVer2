@@ -3,7 +3,6 @@ package com.example.study2gather.ui.messages;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,9 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.study2gather.Chat;
 import com.example.study2gather.R;
-import com.example.study2gather.UserObj;
+import com.example.study2gather.User;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -32,14 +30,13 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-import java.lang.reflect.Array;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.UUID;
 
 public class MessagesFragment extends Fragment {
-    private MessagesViewModel messagesViewModel;
-    private FloatingActionButton btnNewMessage;
+
+    private FloatingActionButton btnNewChat;
     private RecyclerView messagesRecyclerView;
     private View root;
 
@@ -48,35 +45,24 @@ public class MessagesFragment extends Fragment {
     private StorageReference profilePicsRef;
 
     private String uid;
-    private ArrayList<Chat> mChats;
-    private ArrayList<String> otherMembersInChat, usersWithExistingChat;
-    private UserObj userProfile;
-    private HashMap<String, String> usersListWithName;
+    private ArrayList<Chat> mChats = new ArrayList<Chat>();
+    private ArrayList<String> otherMembersInChat, usersWithExistingChat = new ArrayList<String>();
+    private User userProfile;
+    private HashMap<String, String> usersListWithName = new HashMap<String, String>();
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        messagesViewModel = new ViewModelProvider(this).get(MessagesViewModel.class);
         root = inflater.inflate(R.layout.fragment_messages, container, false);
-        btnNewMessage = root.findViewById(R.id.messagesChatCreateFAB);
-        usersListWithName = new HashMap<String, String>();
-        usersWithExistingChat = new ArrayList<String>();
-        mChats = new ArrayList<Chat>();
+        btnNewChat = root.findViewById(R.id.messagesChatCreateFAB);
         chatsRef = FirebaseDatabase.getInstance().getReference("Chats");
         usersRef = FirebaseDatabase.getInstance().getReference("Users");
         profilePicsRef = FirebaseStorage.getInstance().getReference("profileImages");
         user = FirebaseAuth.getInstance().getCurrentUser();
         uid = user.getUid();
 
-//        chatsRef.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) { if (snapshot.exists()) maxId = (snapshot.getChildrenCount()); }
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {}
-//        });
-
         //get own info
         usersRef.child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) { userProfile = snapshot.getValue(UserObj.class); }
+            public void onDataChange(@NonNull DataSnapshot snapshot) { userProfile = snapshot.getValue(User.class); }
             @Override
             public void onCancelled(@NonNull DatabaseError error) { Toast.makeText(getContext(),"Something Went Wrong",Toast.LENGTH_LONG).show(); }
         });
@@ -108,6 +94,7 @@ public class MessagesFragment extends Fragment {
                                 if (task.isSuccessful()) {
                                     chat.setChatPic(task.getResult());
                                 }
+                                chat.setChatTitle(usersListWithName.get(otherMembersInChat.get(0)));
                                 mChats.add(chat);
                                 if (mChats.size() == snapshot.getChildrenCount()) setUIRef();
                             }
@@ -121,7 +108,7 @@ public class MessagesFragment extends Fragment {
             public void onCancelled(@NonNull DatabaseError error) {}
         });
 
-        btnNewMessage.setOnClickListener(new View.OnClickListener() {
+        btnNewChat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getActivity(), MessagesCreateChat.class);
@@ -147,9 +134,12 @@ public class MessagesFragment extends Fragment {
         {
             //Handling clicks
             @Override
-            public void onItemClicked(Chat message)
+            public void onItemClicked(Chat chat)
             {
-                Toast.makeText(getContext(), message.getChatTitle(), Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(getActivity(), MessagesChat.class);
+                i.putExtra("chat", (Serializable) chat);
+//                i.putExtra("usersListWithName", usersListWithName);
+                startActivity(i);
             }
         });
 

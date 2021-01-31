@@ -14,9 +14,10 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/forumQuestCreateClearButton"
+            android:id="@+id/messagesChatBackButton"
             android:layout_width="50dp"
             android:layout_height="50dp"
+            android:onClick="onClick"
             android:background="@android:color/transparent"
             android:drawableLeft="@drawable/ic_arrow_back_white_24dp"
             app:layout_constraintStart_toStartOf="parent"
@@ -35,7 +36,7 @@
                 app:cardCornerRadius="250dp">
 
                 <ImageView
-                    android:id="@+id/forumQuestionDetailsAnswerUserProfilePic"
+                    android:id="@+id/messagesChatProfilePic"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:scaleType="centerCrop"
@@ -80,7 +81,7 @@
                 android:foregroundGravity="center"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintVertical_bias="1.0"
-                android:nestedScrollingEnabled="false">
+                android:nestedScrollingEnabled="true">
 
             </androidx.recyclerview.widget.RecyclerView>
 
@@ -100,7 +101,7 @@
         android:paddingBottom="10dp">
 
         <EditText
-            android:id="@+id/editText2"
+            android:id="@+id/messageChatMessageContent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -111,7 +112,8 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cardView4"
+            android:id="@+id/messageChatSendBtn"
+            android:onClick="onClick"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0"

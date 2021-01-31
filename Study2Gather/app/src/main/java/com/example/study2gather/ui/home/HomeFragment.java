@@ -1,11 +1,8 @@
 package com.example.study2gather.ui.home;
 
-import android.content.ContentResolver;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,9 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.study2gather.Post;
 import com.example.study2gather.R;
-import com.example.study2gather.UserObj;
+import com.example.study2gather.User;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -35,13 +31,10 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
 import java.util.HashMap;
 
 public class HomeFragment extends Fragment {
 
-    private HomeViewModel homeViewModel;
     private FloatingActionButton btnNewPost;
     private RecyclerView homeRecyclerView;
     private View root;
@@ -52,11 +45,10 @@ public class HomeFragment extends Fragment {
 
     private ArrayList<Post> mPosts = new ArrayList<>();
     private String uid;
-    private UserObj userProfile;
-    private HashMap<String, String> usersListWithName;
+    private User userProfile;
+    private HashMap<String, String> usersListWithName = new HashMap<String, String>();
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
         root = inflater.inflate(R.layout.fragment_home, container, false);
         btnNewPost = root.findViewById(R.id.homePostCreateFAB);
         imagesRef = FirebaseStorage.getInstance().getReference("images");
@@ -65,12 +57,11 @@ public class HomeFragment extends Fragment {
         uid = user.getUid();
         usersRef = FirebaseDatabase.getInstance().getReference("Users");
         postsRef = FirebaseDatabase.getInstance().getReference("Posts");
-        usersListWithName = new HashMap<String, String>();
 
         //get own info
         usersRef.child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) { userProfile = snapshot.getValue(UserObj.class); }
+            public void onDataChange(@NonNull DataSnapshot snapshot) { userProfile = snapshot.getValue(User.class); }
             @Override
             public void onCancelled(@NonNull DatabaseError error) { Toast.makeText(getContext(),"Something Went Wrong",Toast.LENGTH_LONG).show(); }
         });

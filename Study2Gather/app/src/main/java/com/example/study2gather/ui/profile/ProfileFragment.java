@@ -15,9 +15,8 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.study2gather.Login;
 import com.example.study2gather.R;
-import com.example.study2gather.UserObj;
+import com.example.study2gather.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -45,12 +44,9 @@ public class ProfileFragment extends Fragment {
     private StorageReference profilePicRef;
 
     private String uid;
-    private UserObj userProfile;
-
-    private ProfileViewModel profileViewModel;
+    private User userProfile;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        profileViewModel = new ViewModelProvider(this).get(ProfileViewModel.class);
         View root = inflater.inflate(R.layout.fragment_profile, container, false);
 
         profilePic = root.findViewById(R.id.forumQuestionDetailsAnswerUserProfilePic);
@@ -84,7 +80,7 @@ public class ProfileFragment extends Fragment {
         userRef.child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                userProfile = snapshot.getValue(UserObj.class);
+                userProfile = snapshot.getValue(User.class);
 //                Log.i("USER CHILDREN",Long.toString( snapshot.getChildrenCount()));
                 if (userProfile != null) {
                     profileName.setText(userProfile.getUsername());

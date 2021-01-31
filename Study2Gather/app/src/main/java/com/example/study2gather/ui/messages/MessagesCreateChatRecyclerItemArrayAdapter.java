@@ -9,19 +9,18 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.study2gather.Chat;
 import com.example.study2gather.R;
-import com.example.study2gather.UserObj;
+import com.example.study2gather.User;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
 public class MessagesCreateChatRecyclerItemArrayAdapter extends RecyclerView.Adapter<MessagesCreateChatRecyclerItemArrayAdapter.MyViewHolder> {
 
-    private ArrayList<UserObj> mUsers;
+    private ArrayList<User> mUsers;
     private MessagesCreateChatRecyclerItemArrayAdapter.MyRecyclerViewItemClickListener mItemClickListener;
 
-    public MessagesCreateChatRecyclerItemArrayAdapter(ArrayList<UserObj> users, MessagesCreateChatRecyclerItemArrayAdapter.MyRecyclerViewItemClickListener itemClickListener) {
+    public MessagesCreateChatRecyclerItemArrayAdapter(ArrayList<User> users, MessagesCreateChatRecyclerItemArrayAdapter.MyRecyclerViewItemClickListener itemClickListener) {
         this.mUsers = users;
         this.mItemClickListener = itemClickListener;
     }
@@ -94,6 +93,6 @@ public class MessagesCreateChatRecyclerItemArrayAdapter extends RecyclerView.Ada
 
     //RecyclerView Click Listener
     public interface MyRecyclerViewItemClickListener    {
-        void onItemClicked(UserObj user);
+        void onItemClicked(User user);
     }
 }

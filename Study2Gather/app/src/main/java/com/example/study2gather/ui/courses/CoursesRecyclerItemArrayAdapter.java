@@ -8,16 +8,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.study2gather.Course;
 import com.example.study2gather.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
 public class CoursesRecyclerItemArrayAdapter extends RecyclerView.Adapter<CoursesRecyclerItemArrayAdapter.MyViewHolder> {
 
-    private ArrayList<CoursesViewModel> mCourses;
+    private ArrayList<Course> mCourses;
     private MyRecyclerViewItemClickListener mItemClickListener;
 
-    public CoursesRecyclerItemArrayAdapter(ArrayList<CoursesViewModel> courses, MyRecyclerViewItemClickListener itemClickListener) {
+    public CoursesRecyclerItemArrayAdapter(ArrayList<Course> courses, MyRecyclerViewItemClickListener itemClickListener) {
         this.mCourses = courses;
         this.mItemClickListener = itemClickListener;
     }
@@ -45,15 +48,20 @@ public class CoursesRecyclerItemArrayAdapter extends RecyclerView.Adapter<Course
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         //Set Course Image
-        holder.coursesRecImg.setImageResource(R.drawable.tanjiro);
+        if (mCourses.get(position).getCoursePic() != null) {
+            Picasso.get().load(mCourses.get(position).getCoursePic()).into(holder.courseImage);
+        } else {
+            holder.courseImage.setImageResource(R.drawable.no_image);
+        }
 
-        //Set Country Name
-        holder.coursesRecTitle.setText(mCourses.get(position).getTitle());
+        //Set Course Name
+        holder.courseName.setText(mCourses.get(position).getCourseName());
 
-        //Set Currency
-        String desc = "Currency: " + mCourses.get(position).getDesc();
-        holder.coursesRecDesc.setText(desc);
+        //Set Course Type
+        holder.courseType.setText(mCourses.get(position).getCourseType());
 
+        //Set Course Lectures Num
+        holder.courseLecturesNum.setText(String.valueOf(mCourses.get(position).getCourseLecturesNum()+" Lectures"));
     }
 
     @Override
@@ -73,21 +81,21 @@ public class CoursesRecyclerItemArrayAdapter extends RecyclerView.Adapter<Course
 
     //RecyclerView View Holder
     class MyViewHolder extends RecyclerView.ViewHolder {
-        private ImageView coursesRecImg;
-        private TextView coursesRecTitle;
-        private TextView coursesRecDesc;
+        private ImageView courseImage;
+        private TextView courseName, courseType, courseLecturesNum;
 
         MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            coursesRecImg = itemView.findViewById(R.id.coursesRecImg);
-            coursesRecTitle = itemView.findViewById(R.id.coursesRecTitle);
-            coursesRecDesc = itemView.findViewById(R.id.coursesRecCourseCategory);
+            courseImage = itemView.findViewById(R.id.coursesRecImg);
+            courseName = itemView.findViewById(R.id.coursesRecTitle);
+            courseType = itemView.findViewById(R.id.coursesRecCourseCategory);
+            courseLecturesNum = itemView.findViewById(R.id.coursesRecCourseTotalLecture);
         }
     }
 
     //RecyclerView Click Listener
     public interface MyRecyclerViewItemClickListener {
-        void onItemClicked(CoursesViewModel courses);
+        void onItemClicked(Course course);
     }
 }
 

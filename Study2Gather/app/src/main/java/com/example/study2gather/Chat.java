@@ -1,12 +1,15 @@
 package com.example.study2gather;
 
 import android.net.Uri;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Chat {
+public class Chat implements Serializable, Parcelable {
     private String chatTitle, lastMsg, chatId;
     private Uri chatPic;
 //    private ArrayList<String> membersList;
@@ -25,16 +28,30 @@ public class Chat {
     }
 
     //for create chat page
-//    public Chat(String chatTitle, String chatId, ArrayList<String> membersList) {
-//        this.chatTitle = chatTitle;
-//        this.chatId = chatId;
-//        this.membersList = membersList;
-//    }
     public Chat(String chatTitle, String chatId, HashMap<String, Boolean> membersList) {
         this.chatTitle = chatTitle;
         this.chatId = chatId;
         this.membersList = membersList;
     }
+
+    protected Chat(Parcel in) {
+        chatTitle = in.readString();
+        lastMsg = in.readString();
+        chatId = in.readString();
+        chatPic = in.readParcelable(Uri.class.getClassLoader());
+    }
+
+    public static final Creator<Chat> CREATOR = new Creator<Chat>() {
+        @Override
+        public Chat createFromParcel(Parcel in) {
+            return new Chat(in);
+        }
+
+        @Override
+        public Chat[] newArray(int size) {
+            return new Chat[size];
+        }
+    };
 
     public String getChatTitle() { return chatTitle; }
 
@@ -56,14 +73,6 @@ public class Chat {
         this.chatId = chatId;
     }
 
-//    public ArrayList<String> getMembersList() {
-//        return membersList;
-//    }
-//
-//    public void setMembersList(ArrayList<String> membersList) {
-//        this.membersList = membersList;
-//    }
-
     public HashMap<String, Boolean> getMembersList() {
         return membersList;
     }
@@ -78,5 +87,18 @@ public class Chat {
             if (!key.equals(uid)) { otherMembers.add(key); }
         }
         return otherMembers;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(chatTitle);
+        dest.writeString(lastMsg);
+        dest.writeString(chatId);
+        dest.writeParcelable(chatPic, flags);
     }
 }

@@ -4,7 +4,6 @@ import android.Manifest;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,9 +11,7 @@ import android.util.Patterns;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
@@ -32,13 +29,11 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.study2gather.R;
-import com.example.study2gather.Registration;
-import com.example.study2gather.UserObj;
+import com.example.study2gather.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
@@ -71,7 +66,7 @@ public class ProfileEdit extends AppCompatActivity implements View.OnClickListen
     private StorageReference profilePicRef;
 
     private String uid, gender;
-    private UserObj userProfile;
+    private User userProfile;
     private Uri newimguri;
 
     private String userDOB;
@@ -120,7 +115,7 @@ public class ProfileEdit extends AppCompatActivity implements View.OnClickListen
         userRef.child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                userProfile = snapshot.getValue(UserObj.class);
+                userProfile = snapshot.getValue(User.class);
                 if (userProfile != null) {
                     profileName.setText(userProfile.getUsername());
                     profileEmail.setText(userProfile.getEmail());

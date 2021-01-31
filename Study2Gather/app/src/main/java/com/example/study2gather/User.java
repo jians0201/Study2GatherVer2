@@ -3,14 +3,14 @@ package com.example.study2gather;
 import android.net.Uri;
 import java.util.ArrayList;
 
-public class UserObj {
+public class User {
     private String username, email, password, gender, dob, school, location, userID;
     private ArrayList<String> likedPosts;
     private Uri profilePic;
 
-    public UserObj() {}
+    public User() {}
 
-    public UserObj(String username, String email, String password, String gender, String dob) {
+    public User(String username, String email, String password, String gender, String dob) {
         this.username = username;
         this.email = email;
         this.password = password;
@@ -18,7 +18,7 @@ public class UserObj {
         this.dob = dob;
     }
 
-    public UserObj(String username, String email, String password, String gender, String dob, String school, String location) {
+    public User(String username, String email, String password, String gender, String dob, String school, String location) {
         this.username = username;
         this.email = email;
         this.password = password;
@@ -107,4 +107,5 @@ public class UserObj {
     public void setProfilePic(Uri profilePic) {
         this.profilePic = profilePic;
     }
+
 }

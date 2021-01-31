@@ -21,48 +21,55 @@
             android:orientation="vertical"
             android:padding="15px">
 
-            <TextView
-                android:id="@+id/coursesMyCoursesLabel"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/exo_extrabold"
-                android:text="@string/coursesMyCoursesLabel"
-                android:textColor="#FFFFFF"
-                android:textSize="13dp" />
+<!--            <TextView-->
+<!--                android:id="@+id/coursesMyCoursesLabel"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:fontFamily="@font/exo_extrabold"-->
+<!--                android:text="@string/coursesMyCoursesLabel"-->
+<!--                android:textColor="#FFFFFF"-->
+<!--                android:textSize="13dp" />-->
 
             <androidx.recyclerview.widget.RecyclerView
-                android:foregroundGravity="center"
-                android:id="@+id/courses_sub_list"
-                android:layout_centerInParent="true"
+                android:id="@+id/coursesRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintVertical_bias="1.0">
-            </androidx.recyclerview.widget.RecyclerView>
-
-            <TextView
-                android:id="@+id/coursesSuggestedCoursesLabel"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/exo_extrabold"
-                android:text="@string/coursesSuggestedCoursesLabel"
-                android:textColor="#FFFFFF"
-                android:textSize="13dp" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:foregroundGravity="center"
-                android:id="@+id/courses_rec_list"
                 android:layout_centerInParent="true"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:foregroundGravity="center"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintVertical_bias="1.0">
-            </androidx.recyclerview.widget.RecyclerView>
+                app:layout_constraintVertical_bias="1.0"></androidx.recyclerview.widget.RecyclerView>
 
+<!--            <TextView-->
+<!--                android:id="@+id/coursesSuggestedCoursesLabel"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:fontFamily="@font/exo_extrabold"-->
+<!--                android:text="@string/coursesSuggestedCoursesLabel"-->
+<!--                android:textColor="#FFFFFF"-->
+<!--                android:textSize="13dp" />-->
+
+<!--            <androidx.recyclerview.widget.RecyclerView-->
+<!--                android:foregroundGravity="center"-->
+<!--                android:id="@+id/courses_rec_list"-->
+<!--                android:layout_centerInParent="true"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                app:layout_constraintHorizontal_bias="0.0"-->
+<!--                app:layout_constraintVertical_bias="1.0">-->
+<!--            </androidx.recyclerview.widget.RecyclerView>-->
 
         </LinearLayout>
-
-
-
     </ScrollView>
+<!--    remove FAB later-->
+<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--        android:id="@+id/coursesCreateFAB"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_gravity="bottom|end"-->
+<!--        android:layout_margin="16dp"-->
+<!--        app:backgroundTint="@color/purple_700"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:tint="@color/white"-->
+<!--        app:srcCompat="@drawable/ic_add_white_24dp" />-->
 </androidx.constraintlayout.widget.ConstraintLayout>

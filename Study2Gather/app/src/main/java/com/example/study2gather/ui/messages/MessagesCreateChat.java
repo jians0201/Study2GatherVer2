@@ -2,7 +2,6 @@ package com.example.study2gather.ui.messages;
 
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.study2gather.Chat;
 import com.example.study2gather.R;
-import com.example.study2gather.UserObj;
+import com.example.study2gather.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -27,10 +26,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageException;
 import com.google.firebase.storage.StorageReference;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
@@ -45,9 +42,9 @@ public class MessagesCreateChat extends AppCompatActivity {
 
     private String uid;
 //    private ArrayList<Chat> mChats;
-    private ArrayList<UserObj> mUsers;
+    private ArrayList<User> mUsers;
     private ArrayList<String> usersWithExistingChat;
-    private UserObj userProfile, selectedUser;
+    private User userProfile, selectedUser;
 //    private HashMap<String, String> usersListWithName;
 
     @Override
@@ -57,7 +54,7 @@ public class MessagesCreateChat extends AppCompatActivity {
         setContentView(R.layout.messages_chat_create);
         tVSelectedUser = findViewById(R.id.messagesChatCreateSelectedUser);
 
-        mUsers = new ArrayList<UserObj>();
+        mUsers = new ArrayList<User>();
         chatsRef = FirebaseDatabase.getInstance().getReference("Chats");
         usersRef = FirebaseDatabase.getInstance().getReference("Users");
         profilePicsRef = FirebaseStorage.getInstance().getReference("profileImages");
@@ -68,7 +65,7 @@ public class MessagesCreateChat extends AppCompatActivity {
         //get own info
         usersRef.child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) { userProfile = snapshot.getValue(UserObj.class); }
+            public void onDataChange(@NonNull DataSnapshot snapshot) { userProfile = snapshot.getValue(User.class); }
             @Override
             public void onCancelled(@NonNull DatabaseError error) { Toast.makeText(MessagesCreateChat.this,"Something Went Wrong",Toast.LENGTH_LONG).show(); }
         });
@@ -80,7 +77,7 @@ public class MessagesCreateChat extends AppCompatActivity {
                 mUsers.clear();
                 for(DataSnapshot ds : snapshot.getChildren()) {
                     if (!ds.getKey().equals(uid) && !usersWithExistingChat.contains(ds.getKey())) {
-                        UserObj user = ds.getValue(UserObj.class);
+                        User user = ds.getValue(User.class);
                         user.setUserID(ds.getKey());
                         //get user profile pic
 //                        try {
@@ -142,7 +139,7 @@ public class MessagesCreateChat extends AppCompatActivity {
         {
             //Handling clicks
             @Override
-            public void onItemClicked(UserObj user)
+            public void onItemClicked(User user)
             {
                 tVSelectedUser.setVisibility(View.VISIBLE);
                 tVSelectedUser.setText(user.getUsername());
