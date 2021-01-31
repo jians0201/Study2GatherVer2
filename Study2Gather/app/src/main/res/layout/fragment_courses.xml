@@ -37,7 +37,8 @@
                 android:layout_centerInParent="true"
                 android:foregroundGravity="center"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintVertical_bias="1.0"></androidx.recyclerview.widget.RecyclerView>
+                app:layout_constraintVertical_bias="1.0">
+            </androidx.recyclerview.widget.RecyclerView>
 
 <!--            <TextView-->
 <!--                android:id="@+id/coursesSuggestedCoursesLabel"-->
@@ -57,6 +58,33 @@
 <!--                app:layout_constraintHorizontal_bias="0.0"-->
 <!--                app:layout_constraintVertical_bias="1.0">-->
 <!--            </androidx.recyclerview.widget.RecyclerView>-->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingBottom="20dp">
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/animationView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="180dp"
+                    android:scaleType="centerCrop"
+                    app:lottie_autoPlay="true"
+                    app:lottie_loop="true"
+                    app:lottie_rawRes="@raw/running" />
+
+                <TextView
+                    android:id="@+id/homeNoNewPostLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/exo_extrabold"
+                    android:text="@string/coursesNoNewCourseLabel"
+                    android:textAlignment="center"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
 
         </LinearLayout>
     </ScrollView>
