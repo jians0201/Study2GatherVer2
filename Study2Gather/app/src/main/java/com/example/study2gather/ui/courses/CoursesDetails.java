@@ -1,5 +1,6 @@
 package com.example.study2gather.ui.courses;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -10,14 +11,21 @@ import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.io.Serializable;
+import java.util.ArrayList;
 
 public class CoursesDetails extends AppCompatActivity {
     private ImageView iVCourseImage;
     private TextView tVCourseName, tVCourseType, tVCourseLecturesNum, tVCourseDescription;
+    private RecyclerView coursesWYLRecyclerView, coursesLecturesRecyclerView;
 
     private StorageReference profilePicsRef;
 
     private Course course;
+    private ArrayList<String> mCoursesWYL;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,5 +48,27 @@ public class CoursesDetails extends AppCompatActivity {
         tVCourseDescription.setText(course.getCourseDesc());
         tVCourseType.setText(course.getCourseType());
         tVCourseLecturesNum.setText(String.valueOf(course.getCourseLecturesNum())+" Lectures");
+
+        mCoursesWYL = course.getCourseLearnTopics();
+        setUIRefWYL();
+    }
+
+    private void setUIRefWYL() {
+        //Reference of RecyclerView
+        coursesWYLRecyclerView = findViewById(R.id.coursesDetailsWYLDetailsList);
+        //Linear Layout Manager
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(CoursesDetails.this, RecyclerView.VERTICAL, false);
+        //Set Layout Manager to RecyclerView
+        coursesWYLRecyclerView.setLayoutManager(linearLayoutManager);
+        //Create adapter
+        CoursesWYLRecyclerItemArrayAdapter myRecyclerViewAdapter = new CoursesWYLRecyclerItemArrayAdapter(mCoursesWYL, new CoursesWYLRecyclerItemArrayAdapter.MyRecyclerViewItemClickListener()
+        {
+            //Handling clicks
+            @Override
+            public void onItemClicked(String courseWYL) {}
+        });
+
+        //Set adapter to RecyclerView
+        coursesWYLRecyclerView.setAdapter(myRecyclerViewAdapter);
     }
 }

@@ -95,36 +95,6 @@ public class CoursesFragment extends Fragment {
             public void onCancelled(@NonNull DatabaseError error) {}
         });
 
-//        btnAddCourse.setOnClickListener(new View.OnClickListener() { //remove later
-//            @Override
-//            public void onClick(View v) {
-                //create course here
-//                final String randomCourseId = "course"+ UUID.randomUUID().toString();
-//                String courseDesc = "Learn Python Programming the Easy Way!<br /><br />If you want to learn how to write Python programs that can be used on Linux, Mac, and Unix operating systems, code python like a pro, solve real-world problems, or automate repetitive and complex tasks, click the subscribe button!";
-//                ArrayList<String> courseLearnTopics = new ArrayList<String>();
-//                courseLearnTopics.add("How to prepare your computer for programming in Python.");
-//                courseLearnTopics.add("Suggested text editors and integrated development environments to use when coding in Python.");
-//                courseLearnTopics.add("How to work with various data types including strings, lists, tuples, dictionaries, booleans, and more.");
-//                courseLearnTopics.add("How to define and use functions.");
-//                courseLearnTopics.add("Important built-in Python functions that you will use often.");
-//                courseLearnTopics.add("What modules are, when you should use them, and how to create your own.");
-//                courseLearnTopics.add("How to organize your Python programs - Learn what goes where.");
-//                ArrayList<String> courseLectureTopics = new ArrayList<String>();
-//                courseLectureTopics.add("Lecture 1 - What is computation?");
-//                courseLectureTopics.add("Lecture 2 - What is computation?");
-//                courseLectureTopics.add("Lecture 3 - What is computation?");
-//                courseLectureTopics.add("Lecture 4 - What is computation?");
-//                courseLectureTopics.add("Lecture 5 - What is computation?");
-//                courseLectureTopics.add("Lecture 6 - What is computation?");
-//                courseLectureTopics.add("Lecture 7 - What is computation?");
-//                courseLectureTopics.add("Lecture 8 - What is computation?");
-//                ArrayList<String> courseLectureLinks = new ArrayList<String>();
-//                courseLectureLinks.add("MIT6_0001F16_Lect1.pdf");
-//                Course course = new Course(randomCourseId, "Introduction to Python Programming","Programming Language",courseDesc,8,courseLearnTopics,courseLectureTopics,courseLectureLinks);
-//                course.setCoursePicPath("1_RJMxLdTHqVBSijKmOO5MAg.jpeg");
-//                coursesRef.child(randomCourseId).setValue(course);
-//            }
-//        });
         //for testing
 //        final String randomCourseId = "course"+ UUID.randomUUID().toString();
 //        String courseDesc = "Learn Python Programming the Easy Way!<br /><br />If you want to learn how to write Python programs that can be used on Linux, Mac, and Unix operating systems, code python like a pro, solve real-world problems, or automate repetitive and complex tasks, click the subscribe button!";
