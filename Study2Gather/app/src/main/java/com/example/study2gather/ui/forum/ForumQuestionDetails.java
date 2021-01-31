@@ -44,10 +44,10 @@ import java.util.HashMap;
 import java.util.UUID;
 
 public class ForumQuestionDetails extends AppCompatActivity {
+    private ImageButton btnBack;
     private TextView tVQnTitle, tVQnDesc, tVQnAuthor, tVQnTimestamp, tVAnsCount;
     private ImageView iVQnAuthorPic;
     private FloatingActionButton btnNewAns;
-    private ImageButton btnBack;
     private RecyclerView forumAnswerRecyclerView;
 
     private DatabaseReference answersRef;
@@ -63,6 +63,7 @@ public class ForumQuestionDetails extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.forum_quest_details);
+        btnBack = findViewById(R.id.forumQuestionDetailsBackBtn);
         tVQnTitle = findViewById(R.id.forumQuestionDetailsQuest);
         tVQnDesc = findViewById(R.id.forumQuestionDetailsDet);
         tVQnAuthor = findViewById(R.id.forumQuestionAskUser);
@@ -70,7 +71,13 @@ public class ForumQuestionDetails extends AppCompatActivity {
         tVAnsCount = findViewById(R.id.forumCommentCount);
         iVQnAuthorPic = findViewById(R.id.forumQuestionDetailsAskUserProfilePic);
         btnNewAns = findViewById(R.id.forumQuestAnsFAB);
-        btnBack = findViewById(R.id.forumQuestionDetailsBackBtn);
+
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         question = (ForumQuestion) getIntent().getSerializableExtra("question");
         profilePicsRef = FirebaseStorage.getInstance().getReference("profileImages");
@@ -131,14 +138,6 @@ public class ForumQuestionDetails extends AppCompatActivity {
                 startActivity(i);
             }
         });
-
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-
     }
 
     private void setUIRef() {

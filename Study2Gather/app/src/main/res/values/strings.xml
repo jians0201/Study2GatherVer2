@@ -108,6 +108,8 @@
     <string name="coursesCourseCategory">Programming Language</string>
     <string name="coursesCourseTotalLecture">35 Lectures</string>
 
+    / #Courses Details Page
+    <string name="coursesDetailsTitle">Course Details</string>
     <string name="coursesCourseDetailName">Introduction to Computer Science and Programming in Python</string>
     <string name="coursesCourseDetailAuthor">Kamado Tanjiro</string>
     <string name="coursesCourseDetailDescLabel">Description</string>

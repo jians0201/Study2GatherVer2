@@ -54,7 +54,8 @@
             android:theme="@style/Theme.MaterialComponents.NoActionBar" />
         <activity
             android:name=".ui.courses.CoursesDetails"
-            android:label="@string/coursesTitle" />
+            android:label="@string/coursesDetailsTitle"
+            android:theme="@style/Theme.MaterialComponents.NoActionBar" />
         <activity
             android:name=".ui.messages.MessagesChat"
             android:theme="@style/Theme.MaterialComponents.NoActionBar" />
