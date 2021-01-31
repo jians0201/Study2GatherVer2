@@ -22,7 +22,7 @@ public class CoursesDetails extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.courses_intro);
+        setContentView(R.layout.courses_details);
 //        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         iVCourseImage = findViewById(R.id.coursesDetailsImg);
         tVCourseName = findViewById(R.id.coursesDetailsName);
