@@ -1,6 +1,7 @@
 package com.example.study2gather.ui.profile;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -31,6 +32,8 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
+import static android.content.Context.MODE_PRIVATE;
+
 public class ProfileFragment extends Fragment {
 
     private Button btnLogout;
@@ -45,6 +48,7 @@ public class ProfileFragment extends Fragment {
 
     private String uid;
     private User userProfile;
+    private SharedPreferences prefs;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_profile, container, false);
@@ -62,6 +66,8 @@ public class ProfileFragment extends Fragment {
         uid = user.getUid();
         userRef = FirebaseDatabase.getInstance().getReference("Users");
         profilePicRef = FirebaseStorage.getInstance().getReference("profileImages").child(uid+"_profile.jpg");
+
+        prefs = getActivity().getSharedPreferences("login",MODE_PRIVATE);
 
         //get existing user profile photo
         profilePicRef.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
@@ -116,6 +122,7 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 FirebaseAuth.getInstance().signOut(); //logout
+                prefs.edit().putBoolean("logged",false).apply();
                 getActivity().finish();
             }
         });

@@ -1,6 +1,7 @@
 package com.example.study2gather;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Patterns;
@@ -29,11 +30,10 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
     private TextInputLayout loginEmail, loginPword;
     private ProgressBar pgbar;
 
-    private Intent i;
-
     private FirebaseAuth fAuth;
 
     private Animation anim;
+    private SharedPreferences prefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,8 +46,13 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
         pgbar = findViewById(R.id.loginProgressBar);
         fAuth = FirebaseAuth.getInstance();
 
+        prefs = getSharedPreferences("login",MODE_PRIVATE);
         anim = AnimationUtils.loadAnimation(this, R.anim.fade);
         linearLayoutLogin.startAnimation(anim);
+        //check if user is already logged in
+        if(prefs.getBoolean("logged",false)){
+            startActivity(new Intent(Login.this, MainActivity.class));
+        }
     }
 
     private boolean validateEmail() {
@@ -90,11 +95,9 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-//                                Toast.makeText(Login.this, "Logged In Successfully", Toast.LENGTH_SHORT).show();
                                 pgbar.setVisibility(View.GONE);
-//                                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser(); //leave it first I might need later on
-                                i = new Intent(getApplicationContext(), MainActivity.class);
-                                startActivity(i);
+                                prefs.edit().putBoolean("logged",true).apply();
+                                startActivity(new Intent(Login.this, MainActivity.class));
                             } else {
                                 Toast.makeText(Login.this, "Failed to login! Email or Password is incorrect!", Toast.LENGTH_LONG).show();
                                 pgbar.setVisibility(View.GONE);
@@ -106,12 +109,10 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                 }
                 break;
             case R.id.loginRegisterButton:
-                i = new Intent(getApplicationContext(), Registration.class);
-                startActivity(i);
+                startActivity(new Intent(Login.this, Registration.class));
                 break;
             case R.id.loginForgotPasswordBtn:
-                i = new Intent(getApplicationContext(), ForgotPassword.class);
-                startActivity(i);
+                startActivity(new Intent(Login.this, ForgotPassword.class));
                 break;
         }
     }
