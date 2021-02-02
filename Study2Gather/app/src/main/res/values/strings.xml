@@ -136,6 +136,8 @@
 
     / #Chat Page
     <string name="messagesChatUser">Goku</string>
+    <string name="messageChatMessageContentHint">Aa</string>
+    <string name="messageChatMessageContentHintOnFocus">Type a message…</string>
 
     / #Profile Page
     <string name="profileTitle">Profile</string>

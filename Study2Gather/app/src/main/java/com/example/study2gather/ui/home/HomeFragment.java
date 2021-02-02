@@ -81,13 +81,13 @@ public class HomeFragment extends Fragment {
         });
 
         //get all liked posts by user
-        likesRef.orderByChild(uid).equalTo(true).addValueEventListener(new ValueEventListener() {
+        likesRef.orderByChild(uid).equalTo(true).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 likedPosts.clear();
                 for (DataSnapshot ds : snapshot.getChildren()) { likedPosts.add(ds.getKey()); }
                 //get posts and pics
-                postsRef.orderByChild("timestamp").addValueEventListener(new ValueEventListener() {
+                postsRef.orderByChild("timestamp").addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         mPosts.clear();

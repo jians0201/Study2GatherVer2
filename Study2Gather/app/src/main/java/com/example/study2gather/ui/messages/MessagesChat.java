@@ -3,13 +3,18 @@ package com.example.study2gather.ui.messages;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.core.widget.NestedScrollView;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Application;
+import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -45,6 +50,9 @@ public class MessagesChat extends AppCompatActivity implements View.OnClickListe
     private ImageView iVChatProfilePic;
     private RecyclerView messagesChatRecyclerView;
     private EditText eTMessageContent;
+    private LinearLayoutManager mLayoutManager;
+    private NestedScrollView messageChatMidLayout;
+    private RecyclerView messagesMessageList;
 
     private DatabaseReference messagesRef;
     private FirebaseUser user;
@@ -60,6 +68,7 @@ public class MessagesChat extends AppCompatActivity implements View.OnClickListe
         tVChatTitle = findViewById(R.id.messagesChatUser);
         iVChatProfilePic = findViewById(R.id.messagesChatProfilePic);
         eTMessageContent = findViewById(R.id.messageChatMessageContent);
+        messagesMessageList = findViewById(R.id.messagesMessageList);
 
         chat = (Chat) getIntent().getSerializableExtra("chat");
         user = FirebaseAuth.getInstance().getCurrentUser();
@@ -83,37 +92,30 @@ public class MessagesChat extends AppCompatActivity implements View.OnClickListe
                     mMessages.add(msg);
                     //only populate questions once all questions have been retrieved
                     if (mMessages.size() == snapshot.getChildrenCount()) setUIRef();
+                    mLayoutManager = new LinearLayoutManager(getParent());
+                    mLayoutManager.setStackFromEnd(true);
+                    messagesMessageList.setLayoutManager(mLayoutManager);
                 }
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {}
         });
 
-//        final String randomID = "msg"+UUID.randomUUID().toString();
-//        Date date = new Date();
-//        mMessages.add(new Message(uid,"Hi", randomID, randomID, date.getTime()));
-//        mMessages.add(new Message(uid,"Hi", randomID, randomID, date.getTime()));
-//        mMessages.add(new Message(uid,"Hi", randomID, randomID, date.getTime()));
-//        mMessages.add(new Message(randomID,"Hi", randomID, randomID, date.getTime()));
-//        mMessages.add(new Message(randomID,"Hi", randomID, randomID, date.getTime()));
-//        mMessages.add(new Message(randomID,"Hi", randomID, randomID, date.getTime()));
-//        mMessages.add(new Message(uid,"Hi", randomID, randomID, date.getTime()));
-//        mMessages.add(new Message(uid,"Hi", randomID, randomID, date.getTime()));
-//        mMessages.add(new Message(uid,"Hi", randomID, randomID, date.getTime()));
-//        mMessages.add(new Message(randomID,"Hi", randomID, randomID, date.getTime()));
-//        mMessages.add(new Message(randomID,"Hi", randomID, randomID, date.getTime()));
-//        mMessages.add(new Message(randomID,"Hi", randomID, randomID, date.getTime()));
-//        mMessages.add(new Message(uid,"Hi", randomID, randomID, date.getTime()));
-//        mMessages.add(new Message(uid,"Hi", randomID, randomID, date.getTime()));
-//        mMessages.add(new Message(uid,"Hi", randomID, randomID, date.getTime()));
-//        mMessages.add(new Message(randomID,"Hi", randomID, randomID, date.getTime()));
-//        mMessages.add(new Message(randomID,"Hi", randomID, randomID, date.getTime()));
-//        mMessages.add(new Message(randomID,"Hi", randomID, randomID, date.getTime()));
-//        mMessages.add(new Message(uid,"Hi", randomID, randomID, date.getTime()));
-//        mMessages.add(new Message(uid,"Hi", randomID, randomID, date.getTime()));
-//        mMessages.add(new Message(uid,"Hi", randomID, randomID, date.getTime()));
-//        setUIRef();
+        eTMessageContent.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    eTMessageContent.setHint(R.string.messageChatMessageContentHintOnFocus);
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.showSoftInput(eTMessageContent, InputMethodManager.SHOW_IMPLICIT);
+                } else {
+                    eTMessageContent.setHint(R.string.messageChatMessageContentHint);
+                }
+            }
+        });
     }
+
+
 
     @Override
     public void onClick(View v) {
