@@ -3,21 +3,17 @@ package com.example.study2gather.ui.home;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.study2gather.Post;
 import com.example.study2gather.R;
-import com.example.study2gather.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -31,7 +27,6 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -47,13 +42,14 @@ public class HomeFragment extends Fragment {
 
     private ArrayList<Post> mPosts = new ArrayList<>();
     private String uid;
-    private User userProfile;
     private HashMap<String, String> usersListWithName = new HashMap<String, String>();
     private ArrayList<String> likedPosts = new ArrayList<String>();
+    private HomeRecylerItemArrayAdapter myRecyclerViewAdapter;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_home, container, false);
         btnNewPost = root.findViewById(R.id.homePostCreateFAB);
+        homeRecyclerView = root.findViewById(R.id.homePostList);
         imagesRef = FirebaseStorage.getInstance().getReference("images");
         profilePicsRef = FirebaseStorage.getInstance().getReference("profileImages");
         user = FirebaseAuth.getInstance().getCurrentUser();
@@ -61,14 +57,8 @@ public class HomeFragment extends Fragment {
         usersRef = FirebaseDatabase.getInstance().getReference("Users");
         postsRef = FirebaseDatabase.getInstance().getReference("Posts");
         likesRef = FirebaseDatabase.getInstance().getReference("Likes");
-
-        //get own info
-        usersRef.child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) { userProfile = snapshot.getValue(User.class); }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) { Toast.makeText(getContext(),"Something Went Wrong",Toast.LENGTH_LONG).show(); }
-        });
+        //set Empty Adapter
+        setUIRef();
 
         //get all users info
         usersRef.addValueEventListener(new ValueEventListener() {
@@ -94,8 +84,7 @@ public class HomeFragment extends Fragment {
                         for (DataSnapshot ds : snapshot.getChildren()) {
                             Post p = ds.getValue(Post.class);
                             //get post pic
-                            StorageReference postPic = FirebaseStorage.getInstance().getReference("images").child(p.getPostPicPath());
-                            postPic.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+                            imagesRef.child(p.getPostPicPath()).getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Uri> task) {
                                     if (task.isSuccessful()) {
@@ -113,7 +102,7 @@ public class HomeFragment extends Fragment {
                                             if (likedPosts.contains(p.getPostID())) p.setLiked(true);
                                             mPosts.add(p);
                                             //only populate posts once all posts have been retrieved
-                                            if (mPosts.size() == snapshot.getChildrenCount()) setUIRef();
+                                            if (mPosts.size() == snapshot.getChildrenCount()) myRecyclerViewAdapter.notifyDataSetChanged();
                                         }
                                     });
                                 }
@@ -133,7 +122,6 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getActivity(), HomeCreatePost.class);
-//                i.putExtra("username",userProfile.getUsername());
                 startActivity(i);
             }
         });
@@ -142,24 +130,17 @@ public class HomeFragment extends Fragment {
     }
 
     private void setUIRef() {
-        //Reference of RecyclerView
-        homeRecyclerView = root.findViewById(R.id.homePostList);
         //Linear Layout Manager
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
         //Set Layout Manager to RecyclerView
         homeRecyclerView.setLayoutManager(linearLayoutManager);
-        //reverse posts so most recent on top
-//        Collections.reverse(mPosts); //not working
         //Create adapter
-        HomeRecylerItemArrayAdapter myRecyclerViewAdapter = new HomeRecylerItemArrayAdapter(uid, mPosts, new HomeRecylerItemArrayAdapter.MyRecyclerViewItemClickListener() {
+        myRecyclerViewAdapter = new HomeRecylerItemArrayAdapter(uid, mPosts, new HomeRecylerItemArrayAdapter.MyRecyclerViewItemClickListener() {
             //Handling clicks
             @Override
-            public void onItemClicked(Post post) {
-//                Toast.makeText(getContext(), post.getPostCaption(), Toast.LENGTH_SHORT).show();
-            }
+            public void onItemClicked(Post post) {}
         });
         //Set adapter to RecyclerView
         homeRecyclerView.setAdapter(myRecyclerViewAdapter);
     }
-
 }

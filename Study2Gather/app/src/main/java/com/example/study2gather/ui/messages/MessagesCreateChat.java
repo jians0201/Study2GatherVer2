@@ -41,34 +41,25 @@ public class MessagesCreateChat extends AppCompatActivity {
     private StorageReference profilePicsRef;
 
     private String uid;
-//    private ArrayList<Chat> mChats;
-    private ArrayList<User> mUsers;
+    private ArrayList<User> mUsers = new ArrayList<User>();
     private ArrayList<String> usersWithExistingChat;
-    private User userProfile, selectedUser;
-//    private HashMap<String, String> usersListWithName;
+    private User selectedUser;
+    private MessagesCreateChatRecyclerItemArrayAdapter myRecyclerViewAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Launch the layout -> profile_edit.xml
         setContentView(R.layout.messages_chat_create);
         tVSelectedUser = findViewById(R.id.messagesChatCreateSelectedUser);
+        newChatUsersRecyclerView = findViewById(R.id.messagesChatCreateUserList);
 
-        mUsers = new ArrayList<User>();
         chatsRef = FirebaseDatabase.getInstance().getReference("Chats");
         usersRef = FirebaseDatabase.getInstance().getReference("Users");
         profilePicsRef = FirebaseStorage.getInstance().getReference("profileImages");
         user = FirebaseAuth.getInstance().getCurrentUser();
         uid = user.getUid();
         usersWithExistingChat = getIntent().getStringArrayListExtra("usersWithExistingChat");
-
-        //get own info
-        usersRef.child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) { userProfile = snapshot.getValue(User.class); }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) { Toast.makeText(MessagesCreateChat.this,"Something Went Wrong",Toast.LENGTH_LONG).show(); }
-        });
+        setUIRef();
 
         //get all users info
         usersRef.addValueEventListener(new ValueEventListener() {
@@ -80,7 +71,6 @@ public class MessagesCreateChat extends AppCompatActivity {
                         User user = ds.getValue(User.class);
                         user.setUserID(ds.getKey());
                         //get user profile pic
-//                        try {
                             profilePicsRef.child(ds.getKey()+"_profile.jpg").getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Uri> task) {
@@ -89,10 +79,9 @@ public class MessagesCreateChat extends AppCompatActivity {
                                     }
                                     mUsers.add(user);
                                     //only populate questions once all questions have been retrieved
-                                    if (mUsers.size() == snapshot.getChildrenCount()-usersWithExistingChat.size()-1) setUIRef();
+                                    if (mUsers.size() == snapshot.getChildrenCount()-usersWithExistingChat.size()-1) myRecyclerViewAdapter.notifyDataSetChanged();
                                 }
                             });
-//                        } catch (StorageException e) {}
 
                     }
                 }
@@ -126,8 +115,6 @@ public class MessagesCreateChat extends AppCompatActivity {
     }
 
     private void setUIRef() {
-        //Reference of RecyclerView
-        newChatUsersRecyclerView = findViewById(R.id.messagesChatCreateUserList);
         //Linear Layout Manager
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(MessagesCreateChat.this, RecyclerView.VERTICAL, false);
         //Set Layout Manager to RecyclerView
@@ -135,7 +122,7 @@ public class MessagesCreateChat extends AppCompatActivity {
         //reverse posts so most recent on top
 //        Collections.reverse(mPosts);
         //Create adapter
-        MessagesCreateChatRecyclerItemArrayAdapter myRecyclerViewAdapter = new MessagesCreateChatRecyclerItemArrayAdapter(mUsers, new MessagesCreateChatRecyclerItemArrayAdapter.MyRecyclerViewItemClickListener()
+        myRecyclerViewAdapter = new MessagesCreateChatRecyclerItemArrayAdapter(mUsers, new MessagesCreateChatRecyclerItemArrayAdapter.MyRecyclerViewItemClickListener()
         {
             //Handling clicks
             @Override

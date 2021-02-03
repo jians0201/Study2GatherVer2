@@ -3,7 +3,6 @@ package com.example.study2gather;
 import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.util.Log;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -12,7 +11,6 @@ import java.util.HashMap;
 public class Chat implements Serializable, Parcelable {
     private String chatTitle, lastMsg, chatId;
     private Uri chatPic;
-//    private ArrayList<String> membersList;
     private HashMap<String, Boolean> membersList;
 
     public Chat() {}

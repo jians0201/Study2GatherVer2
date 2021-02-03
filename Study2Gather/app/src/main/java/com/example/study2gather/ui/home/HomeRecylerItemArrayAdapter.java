@@ -1,13 +1,11 @@
 package com.example.study2gather.ui.home;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
@@ -67,16 +65,13 @@ public class HomeRecylerItemArrayAdapter extends RecyclerView.Adapter<HomeRecyle
         holder.textViewPostUsername.setText(mPosts.get(position).getPostAuthor());
 
         //Set Post Time
-//        String time = mPosts.get(position).getPostTime() + " hours ago";
         Timestamp ts = new Timestamp(mPosts.get(position).getTimestamp());
-//        holder.textViewPostTime.setText(time);
         holder.textViewPostTime.setText(String.valueOf(ts));
 
         //Set Post Caption
         holder.textViewPostCaption.setText(mPosts.get(position).getPostCaption());
 
         //Set Post Picture
-//        holder.imageViewPostPic.setImageResource(mPosts.get(position).getPostPic());
         if (mPosts.get(position).getPostPic() != null) {
             Picasso.get().load(mPosts.get(position).getPostPic()).into(holder.imageViewPostPic);
         } else {
@@ -108,7 +103,6 @@ public class HomeRecylerItemArrayAdapter extends RecyclerView.Adapter<HomeRecyle
                     likesRef.child(post.getPostID()).child(uid).removeValue();
                 }
                 post.setLiked(isChecked);
-//                holder.toggleButtonLikeBtn.setChecked(isChecked);
                 postsRef.child(post.getPostID()).child("postLikeCount").setValue(post.getPostLikeCount());
                 likeCountStr = getLikeCountString(post.getPostLikeCount());
                 if(Integer.parseInt(likeCountStr)>1) {

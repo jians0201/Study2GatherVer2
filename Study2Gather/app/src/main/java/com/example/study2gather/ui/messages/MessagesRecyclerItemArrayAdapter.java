@@ -60,7 +60,6 @@ public class MessagesRecyclerItemArrayAdapter extends RecyclerView.Adapter<Messa
         } else {
             holder.profilePic.setImageResource(R.drawable.no_image);
         }
-//        Picasso.get().load(mChats.get(position).getChatPic()).into(holder.profilePic);
     }
 
     @Override

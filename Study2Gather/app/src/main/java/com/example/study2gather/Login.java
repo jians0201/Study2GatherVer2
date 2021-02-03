@@ -3,7 +3,6 @@ package com.example.study2gather;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.view.animation.Animation;
@@ -14,7 +13,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -38,7 +36,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Launch the layout -> splash.xml
         setContentView(R.layout.login);
         linearLayoutLogin = findViewById(R.id.linearLayoutLogin);
         loginEmail = findViewById(R.id.loginEmailAddress);
@@ -103,8 +100,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                                 pgbar.setVisibility(View.GONE);
                             }
                         }
-                    }).addOnFailureListener(e -> {
-                        Log.d("Login Fail", e.getMessage());
                     });
                 }
                 break;

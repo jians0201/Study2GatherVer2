@@ -55,7 +55,6 @@ public class ForumCreateQuestion extends AppCompatActivity implements View.OnCli
         uid = user.getUid();
         profilePicRef = FirebaseStorage.getInstance().getReference("profileImages").child(uid+"_profile.jpg");
         forumRef = FirebaseDatabase.getInstance().getReference("Forum");
-//        username = getIntent().getStringExtra("username");
 
         //get existing user profile photo
         profilePicRef.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {

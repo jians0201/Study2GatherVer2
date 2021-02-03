@@ -3,22 +3,16 @@ package com.example.study2gather.ui.home;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
-import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -42,8 +36,6 @@ import java.util.Date;
 import java.util.UUID;
 
 public class HomeCreatePost extends AppCompatActivity implements View.OnClickListener {
-//    private ImageButton iBtnBack, iBtnInsertImg, iBtnInsertImgCamera;
-//    private Button btnCreatePost;
     private ImageView iVProfilePic, iVPostPic;
     private EditText eTPostText;
 
@@ -51,21 +43,16 @@ public class HomeCreatePost extends AppCompatActivity implements View.OnClickLis
     private StorageReference profilePicRef, imagesRef;
     private DatabaseReference postsRef;
 
-    private String uid, username;
-//    private long maxId;
+    private String uid;
     private Uri postimguri;
     private Bitmap postimgbm;
-    final int CAMERA_PERMISSION_CODE = 101, GALLERY_CODE = 1, CAMERA_CODE = 0;
+    final int GALLERY_CODE = 1, CAMERA_CODE = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_post_create);
 
-//        iBtnBack = findViewById(R.id.homePostCreateClearButton);
-//        iBtnInsertImg = findViewById(R.id.homePostCreateInsertImgButton);
-//        iBtnInsertImgCamera = findViewById(R.id.homePostCreateAddImgButtonCamera);
-//        btnCreatePost = findViewById(R.id.forumQuestCreateButton);
         iVProfilePic = findViewById(R.id.homePostCreateProfilePic);
         iVPostPic = findViewById(R.id.homePostCreatePostPic);
         eTPostText = findViewById(R.id.homePostCreateText);
@@ -75,7 +62,6 @@ public class HomeCreatePost extends AppCompatActivity implements View.OnClickLis
         profilePicRef = FirebaseStorage.getInstance().getReference("profileImages").child(uid+"_profile.jpg");
         imagesRef = FirebaseStorage.getInstance().getReference("images");
         postsRef = FirebaseDatabase.getInstance().getReference("Posts");
-//        username = getIntent().getStringExtra("username");
 
         //get existing user profile photo
         profilePicRef.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
@@ -163,7 +149,6 @@ public class HomeCreatePost extends AppCompatActivity implements View.OnClickLis
                     createNewPost(postText);
                 }
                 break;
-//            case R.id.homePostCreatePostPic:
             case R.id.homePostCreateInsertImgButton:
                 postimgbm = null;
                 Intent gallery = new Intent();
@@ -175,33 +160,8 @@ public class HomeCreatePost extends AppCompatActivity implements View.OnClickLis
                 postimguri = null;
                 Intent camera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 startActivityForResult(camera, CAMERA_CODE);
-//                askCameraPermission();
                 break;
         }
     }
 
-    private void askCameraPermission() {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.CAMERA}, CAMERA_PERMISSION_CODE);
-        } else {
-            openCamera();
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-//        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == CAMERA_PERMISSION_CODE) {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) { //given permission
-                openCamera();
-            } else {
-                Toast.makeText(this, "Camera Permission is Required to Take Photos Using the Camera", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
-
-    private void openCamera() {
-        Intent camera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        startActivityForResult(camera, CAMERA_CODE);
-    }
 }

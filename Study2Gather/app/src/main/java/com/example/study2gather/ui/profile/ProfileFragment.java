@@ -14,7 +14,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.example.study2gather.R;
 import com.example.study2gather.User;
@@ -36,6 +35,7 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class ProfileFragment extends Fragment {
 
+    private View root;
     private Button btnLogout;
     private ImageView profilePic;
     private TextView profileName, profileEmail, profileBirthday, profileSchool, profileLocation;
@@ -51,8 +51,7 @@ public class ProfileFragment extends Fragment {
     private SharedPreferences prefs;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_profile, container, false);
-
+        root = inflater.inflate(R.layout.fragment_profile, container, false);
         profilePic = root.findViewById(R.id.forumQuestionDetailsAnswerUserProfilePic);
         profileName = root.findViewById(R.id.profileName);
         profileEmail = root.findViewById(R.id.profileEmail);
@@ -87,17 +86,14 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 userProfile = snapshot.getValue(User.class);
-//                Log.i("USER CHILDREN",Long.toString( snapshot.getChildrenCount()));
                 if (userProfile != null) {
                     profileName.setText(userProfile.getUsername());
                     profileEmail.setText(userProfile.getEmail());
                     profileBirthday.setText(userProfile.getDob());
                     if (userProfile.getSchool() == null)  profileSchool.setText("None");
                     else profileSchool.setText(userProfile.getSchool());
-
                     if (userProfile.getLocation() == null) profileLocation.setText("None");
                     else profileLocation.setText(userProfile.getLocation());
-
                     if (userProfile.getGender().equals("male")) profileName.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.ic_male_color_24dp,0);
                     else profileName.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.ic_female_color_24dp,0);
                 }

@@ -1,25 +1,16 @@
 package com.example.study2gather.ui.courses;
 
-import android.net.Uri;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.study2gather.R;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class CoursesLectureTopicRecyclerItemArrayAdapter extends RecyclerView.Adapter<CoursesLectureTopicRecyclerItemArrayAdapter.MyViewHolder> {
@@ -56,14 +47,6 @@ public class CoursesLectureTopicRecyclerItemArrayAdapter extends RecyclerView.Ad
     public void onBindViewHolder(@NonNull CoursesLectureTopicRecyclerItemArrayAdapter.MyViewHolder holder, int position) {
         //Set Course Lecture Topic
         holder.courseLectureTopic.setText("Lecture "+String.valueOf(position+1)+" - "+mCourseLectureTopics.get(position).getCourseLTtitle());
-
-        //Set onClickListener for Download Button
-//        holder.coursesLectureTopicDownloadLink.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//            }
-//        });
     }
 
 
@@ -86,12 +69,10 @@ public class CoursesLectureTopicRecyclerItemArrayAdapter extends RecyclerView.Ad
     //RecyclerView View Holder
     class MyViewHolder extends RecyclerView.ViewHolder {
         private TextView courseLectureTopic;
-        private ImageButton coursesLectureTopicDownloadLink;
 
         MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            courseLectureTopic = itemView.findViewById(R.id.coursesDetailsLecture); //change ID
-            coursesLectureTopicDownloadLink = itemView.findViewById(R.id.coursesDetailsDownloadButton);
+            courseLectureTopic = itemView.findViewById(R.id.coursesDetailsLecture);
         }
     }
 

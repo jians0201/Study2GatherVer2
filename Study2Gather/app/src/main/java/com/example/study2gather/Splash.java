@@ -17,7 +17,6 @@ public class Splash extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Launch the layout -> splash.xml
         setContentView(R.layout.splash);
 
         anim = AnimationUtils.loadAnimation(this, R.anim.fade);

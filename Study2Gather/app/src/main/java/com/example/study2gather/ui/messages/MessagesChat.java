@@ -53,7 +53,6 @@ public class MessagesChat extends AppCompatActivity implements View.OnClickListe
     private RecyclerView messagesChatRecyclerView;
     private EditText eTMessageContent;
     private LinearLayoutManager mLayoutManager;
-    private NestedScrollView messageChatMidLayout;
     private RecyclerView messagesMessageList;
 
     private DatabaseReference messagesRef;
@@ -62,6 +61,7 @@ public class MessagesChat extends AppCompatActivity implements View.OnClickListe
     private Chat chat;
     private String uid;
     private ArrayList<Message> mMessages = new ArrayList<>();
+    private MessagesChatRecyclerItemArrayAdapter myRecyclerViewAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,11 +71,13 @@ public class MessagesChat extends AppCompatActivity implements View.OnClickListe
         iVChatProfilePic = findViewById(R.id.messagesChatProfilePic);
         eTMessageContent = findViewById(R.id.messageChatMessageContent);
         messagesMessageList = findViewById(R.id.messagesMessageList);
+        messagesChatRecyclerView = findViewById(R.id.messagesMessageList);
 
         chat = (Chat) getIntent().getSerializableExtra("chat");
         user = FirebaseAuth.getInstance().getCurrentUser();
         uid = user.getUid();
         messagesRef = FirebaseDatabase.getInstance().getReference("Messages").child(chat.getChatId());
+        setUIRef();
 
         tVChatTitle.setText(chat.getChatTitle());
         if (chat.getChatPic() != null) {
@@ -93,7 +95,7 @@ public class MessagesChat extends AppCompatActivity implements View.OnClickListe
                     Message msg = ds.getValue(Message.class);
                     mMessages.add(msg);
                     //only populate questions once all questions have been retrieved
-                    if (mMessages.size() == snapshot.getChildrenCount()) setUIRef();
+                    if (mMessages.size() == snapshot.getChildrenCount()) myRecyclerViewAdapter.notifyDataSetChanged();
                     mLayoutManager = new LinearLayoutManager(getParent());
                     mLayoutManager.setStackFromEnd(true);
                     messagesMessageList.setLayoutManager(mLayoutManager);
@@ -154,7 +156,6 @@ public class MessagesChat extends AppCompatActivity implements View.OnClickListe
     }
 
     private void createMessage(String msgContent) {
-//        Toast.makeText(MessagesChat.this, "Sending Message", Toast.LENGTH_SHORT).show();
         final String randomMsgId = "msg"+ UUID.randomUUID().toString();
         Date date = new Date();
         Message msg = new Message(uid, msgContent, randomMsgId, chat.getChatId(), date.getTime());
@@ -162,8 +163,6 @@ public class MessagesChat extends AppCompatActivity implements View.OnClickListe
     }
 
     private void setUIRef() {
-        //Reference of RecyclerView
-        messagesChatRecyclerView = findViewById(R.id.messagesMessageList);
         //Linear Layout Manager
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(MessagesChat.this , RecyclerView.VERTICAL, false);
         //Set Layout Manager to RecyclerView
@@ -171,7 +170,7 @@ public class MessagesChat extends AppCompatActivity implements View.OnClickListe
 //       //reverse posts so most recent on top
 //       Collections.reverse(mQns); //not working
         //Create adapter
-        MessagesChatRecyclerItemArrayAdapter myRecyclerViewAdapter = new MessagesChatRecyclerItemArrayAdapter(uid, mMessages, new MessagesChatRecyclerItemArrayAdapter.MyRecyclerViewItemClickListener() {
+        myRecyclerViewAdapter = new MessagesChatRecyclerItemArrayAdapter(uid, mMessages, new MessagesChatRecyclerItemArrayAdapter.MyRecyclerViewItemClickListener() {
             //Handling clicks
             @Override
             public void onItemClicked(Message message) {}

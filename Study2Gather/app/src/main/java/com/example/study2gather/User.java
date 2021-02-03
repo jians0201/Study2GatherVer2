@@ -1,7 +1,6 @@
 package com.example.study2gather;
 
 import android.net.Uri;
-import java.util.ArrayList;
 
 public class User {
     private String username, email, password, gender, dob, school, location, userID;

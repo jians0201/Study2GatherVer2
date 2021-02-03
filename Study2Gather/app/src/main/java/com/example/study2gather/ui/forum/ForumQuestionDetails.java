@@ -8,20 +8,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.Window;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.study2gather.ForumAnswer;
 import com.example.study2gather.ForumQuestion;
 import com.example.study2gather.R;
-import com.example.study2gather.ui.home.HomeCreatePost;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -36,12 +32,9 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
-import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.UUID;
 
 public class ForumQuestionDetails extends AppCompatActivity {
     private ImageButton btnBack;
@@ -58,6 +51,7 @@ public class ForumQuestionDetails extends AppCompatActivity {
     private ArrayList<ForumAnswer> mAns = new ArrayList<>();
     private String uid;
     private HashMap<String, String> usersListWithName;
+    private ForumQuestionDetalsRecyclerItemArrayAdapter myRecyclerViewAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +65,7 @@ public class ForumQuestionDetails extends AppCompatActivity {
         tVAnsCount = findViewById(R.id.forumCommentCount);
         iVQnAuthorPic = findViewById(R.id.forumQuestionDetailsAskUserProfilePic);
         btnNewAns = findViewById(R.id.forumQuestAnsFAB);
+        setUIRef();
 
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,8 +79,6 @@ public class ForumQuestionDetails extends AppCompatActivity {
         user = FirebaseAuth.getInstance().getCurrentUser();
         uid = user.getUid();
         answersRef = FirebaseDatabase.getInstance().getReference("ForumAnswers");
-//        forumRef = FirebaseDatabase.getInstance().getReference("Forum");
-//        username = getIntent().getStringExtra("username");
         usersListWithName = (HashMap<String, String>) getIntent().getSerializableExtra("usersListWithName");
 
         if (question.getQnProfilePic() != null) {
@@ -118,7 +111,7 @@ public class ForumQuestionDetails extends AppCompatActivity {
                             ans.setAnswerAuthor(usersListWithName.get(ans.getAnswerAuthorID()));
                             mAns.add(ans);
                             //only populate questions once all questions have been retrieved
-                            if (mAns.size() == snapshot.getChildrenCount()) setUIRef();
+                            if (mAns.size() == snapshot.getChildrenCount()) myRecyclerViewAdapter.notifyDataSetChanged();
                         }
                     });
                 }
@@ -132,7 +125,6 @@ public class ForumQuestionDetails extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(ForumQuestionDetails.this, ForumCreateAnswer.class);
-//                i.putExtra("username", username);
                 i.putExtra("questionID", question.getQuestionID());
                 i.putExtra("questionAnsCount", question.getAnsCount());
                 startActivity(i);
@@ -147,10 +139,8 @@ public class ForumQuestionDetails extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(ForumQuestionDetails.this , RecyclerView.VERTICAL, false);
         //Set Layout Manager to RecyclerView
         forumAnswerRecyclerView.setLayoutManager(linearLayoutManager);
-//       //reverse posts so most recent on top
-//       Collections.reverse(mQns); //not working
         //Create adapter
-        ForumQuestionDetalsRecyclerItemArrayAdapter myRecyclerViewAdapter = new ForumQuestionDetalsRecyclerItemArrayAdapter(mAns, new ForumQuestionDetalsRecyclerItemArrayAdapter.MyRecyclerViewItemClickListener() {
+        myRecyclerViewAdapter = new ForumQuestionDetalsRecyclerItemArrayAdapter(mAns, new ForumQuestionDetalsRecyclerItemArrayAdapter.MyRecyclerViewItemClickListener() {
             //Handling clicks
             @Override
             public void onItemClicked(ForumAnswer ans) {}

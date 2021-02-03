@@ -10,7 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.study2gather.ForumAnswer;
-import com.example.study2gather.ForumQuestion;
 import com.example.study2gather.R;
 import com.squareup.picasso.Picasso;
 

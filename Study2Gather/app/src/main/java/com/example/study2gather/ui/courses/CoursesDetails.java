@@ -44,6 +44,7 @@ public class CoursesDetails extends AppCompatActivity {
     private Course course;
     private ArrayList<String> mCoursesWYL;
     private ArrayList<CourseLectureTopic> mCoursesLectureTopics = new ArrayList<CourseLectureTopic>();
+    private CoursesLectureTopicRecyclerItemArrayAdapter myRecyclerViewAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -127,7 +128,7 @@ public class CoursesDetails extends AppCompatActivity {
         //Set Layout Manager to RecyclerView
         coursesLectureTopicRecyclerView.setLayoutManager(linearLayoutManager);
         //Create adapter
-        CoursesLectureTopicRecyclerItemArrayAdapter myRecyclerViewAdapter = new CoursesLectureTopicRecyclerItemArrayAdapter(mCoursesLectureTopics, new CoursesLectureTopicRecyclerItemArrayAdapter.MyRecyclerViewItemClickListener()
+        myRecyclerViewAdapter = new CoursesLectureTopicRecyclerItemArrayAdapter(mCoursesLectureTopics, new CoursesLectureTopicRecyclerItemArrayAdapter.MyRecyclerViewItemClickListener()
         {
             //Handling clicks
             @Override

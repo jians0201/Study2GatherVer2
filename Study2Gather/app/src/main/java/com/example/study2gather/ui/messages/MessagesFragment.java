@@ -6,17 +6,14 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.study2gather.Chat;
 import com.example.study2gather.R;
-import com.example.study2gather.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -47,25 +44,19 @@ public class MessagesFragment extends Fragment {
     private String uid;
     private ArrayList<Chat> mChats = new ArrayList<Chat>();
     private ArrayList<String> otherMembersInChat, usersWithExistingChat = new ArrayList<String>();
-    private User userProfile;
     private HashMap<String, String> usersListWithName = new HashMap<String, String>();
+    private MessagesRecyclerItemArrayAdapter myRecyclerViewAdapter;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_messages, container, false);
         btnNewChat = root.findViewById(R.id.messagesChatCreateFAB);
+        messagesRecyclerView = root.findViewById(R.id.messagesList);
         chatsRef = FirebaseDatabase.getInstance().getReference("Chats");
         usersRef = FirebaseDatabase.getInstance().getReference("Users");
         profilePicsRef = FirebaseStorage.getInstance().getReference("profileImages");
         user = FirebaseAuth.getInstance().getCurrentUser();
         uid = user.getUid();
-
-        //get own info
-        usersRef.child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) { userProfile = snapshot.getValue(User.class); }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) { Toast.makeText(getContext(),"Something Went Wrong",Toast.LENGTH_LONG).show(); }
-        });
+        setUIRef();
 
         //get all users info
         usersRef.addValueEventListener(new ValueEventListener() {
@@ -85,7 +76,7 @@ public class MessagesFragment extends Fragment {
                 for (DataSnapshot ds : snapshot.getChildren()) {
                     Chat chat = ds.getValue(Chat.class);
                     otherMembersInChat = chat.getOtherMembers(uid);
-                    //get chat pic (pfp of other user for normal 2 person chat
+                    //get chat pic
                     if (otherMembersInChat.size() == 1) {
                         usersWithExistingChat.add(otherMembersInChat.get(0));
                         profilePicsRef.child(otherMembersInChat.get(0)+"_profile.jpg").getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
@@ -96,10 +87,10 @@ public class MessagesFragment extends Fragment {
                                 }
                                 chat.setChatTitle(usersListWithName.get(otherMembersInChat.get(0)));
                                 mChats.add(chat);
-                                if (mChats.size() == snapshot.getChildrenCount()) setUIRef();
+                                if (mChats.size() == snapshot.getChildrenCount()) myRecyclerViewAdapter.notifyDataSetChanged();
                             }
                         });
-                    } else {}//chat pic for group chat
+                    } //else get chat pic for group chat (not implemented)
                 }
             }
 
@@ -121,16 +112,12 @@ public class MessagesFragment extends Fragment {
     }
 
     private void setUIRef() {
-        //Reference of RecyclerView
-        messagesRecyclerView = root.findViewById(R.id.messagesList);
         //Linear Layout Manager
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
         //Set Layout Manager to RecyclerView
         messagesRecyclerView.setLayoutManager(linearLayoutManager);
-        //reverse posts so most recent on top
-//        Collections.reverse(mPosts);
         //Create adapter
-        MessagesRecyclerItemArrayAdapter myRecyclerViewAdapter = new MessagesRecyclerItemArrayAdapter(mChats, new MessagesRecyclerItemArrayAdapter.MyRecyclerViewItemClickListener()
+        myRecyclerViewAdapter = new MessagesRecyclerItemArrayAdapter(mChats, new MessagesRecyclerItemArrayAdapter.MyRecyclerViewItemClickListener()
         {
             //Handling clicks
             @Override
@@ -138,7 +125,6 @@ public class MessagesFragment extends Fragment {
             {
                 Intent i = new Intent(getActivity(), MessagesChat.class);
                 i.putExtra("chat", (Serializable) chat);
-//                i.putExtra("usersListWithName", usersListWithName);
                 startActivity(i);
             }
         });

@@ -50,7 +50,6 @@ public class ForumCreateAnswer extends AppCompatActivity implements View.OnClick
         profilePicRef = FirebaseStorage.getInstance().getReference("profileImages").child(uid+"_profile.jpg");
         forumRef = FirebaseDatabase.getInstance().getReference("Forum");
         answersRef = FirebaseDatabase.getInstance().getReference("ForumAnswers");
-//        username = getIntent().getStringExtra("username");
         questionID = getIntent().getStringExtra("questionID");
         questionAnsCount = getIntent().getIntExtra("questionAnsCount",0);
 
