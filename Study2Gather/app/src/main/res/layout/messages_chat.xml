@@ -94,7 +94,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@drawable/rounded_corner_border_thin"
-            app:backgroundTint="@color/purple_700"
             android:fontFamily="@font/exo"
             android:hint="@string/messageChatMessageContentHint"
             android:inputType="textPersonName"
@@ -104,6 +103,7 @@
             android:paddingBottom="10dp"
             android:textColor="@color/white"
             android:textColorHint="@color/grey"
+            app:backgroundTint="@color/purple_700"
             app:layout_constraintEnd_toStartOf="@+id/cardView4"
             app:layout_constraintStart_toStartOf="parent" />
 

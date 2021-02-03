@@ -85,6 +85,11 @@ public class HomeRecylerItemArrayAdapter extends RecyclerView.Adapter<HomeRecyle
 
         //Set Post Like Count
         likeCountStr = getLikeCountString(mPosts.get(position).getPostLikeCount());
+        if(Integer.parseInt(likeCountStr)>1) {
+            likeCountStr += " likes";
+        } else {
+            likeCountStr += " like";
+        }
         holder.textViewPostLikeCount.setText(likeCountStr);
 
         holder.toggleButtonLikeBtn.setChecked(mPosts.get(position).isLiked());
