@@ -87,10 +87,11 @@ public class HomeRecylerItemArrayAdapter extends RecyclerView.Adapter<HomeRecyle
         likeCountStr = getLikeCountString(mPosts.get(position).getPostLikeCount());
         if(Integer.parseInt(likeCountStr)>1) {
             likeCountStr += " likes";
-        } else {
+            holder.textViewPostLikeCount.setText(likeCountStr);
+        }else if(Integer.parseInt(likeCountStr)==1) {
             likeCountStr += " like";
+            holder.textViewPostLikeCount.setText(likeCountStr);
         }
-        holder.textViewPostLikeCount.setText(likeCountStr);
 
         holder.toggleButtonLikeBtn.setChecked(mPosts.get(position).isLiked());
 
@@ -110,7 +111,15 @@ public class HomeRecylerItemArrayAdapter extends RecyclerView.Adapter<HomeRecyle
 //                holder.toggleButtonLikeBtn.setChecked(isChecked);
                 postsRef.child(post.getPostID()).child("postLikeCount").setValue(post.getPostLikeCount());
                 likeCountStr = getLikeCountString(post.getPostLikeCount());
-                holder.textViewPostLikeCount.setText(likeCountStr);
+                if(Integer.parseInt(likeCountStr)>1) {
+                    likeCountStr += " likes";
+                    holder.textViewPostLikeCount.setText(likeCountStr);
+                }else if(Integer.parseInt(likeCountStr)==1) {
+                    likeCountStr += " like";
+                    holder.textViewPostLikeCount.setText(likeCountStr);
+                }else if(Integer.parseInt(likeCountStr)==0) {
+                    holder.textViewPostLikeCount.setText("");
+                }
             }
         });
     }
