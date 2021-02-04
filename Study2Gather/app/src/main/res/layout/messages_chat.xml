@@ -65,11 +65,10 @@
         android:id="@+id/messagesMessageList"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:padding="10dp"
         app:layout_constraintBottom_toTopOf="@+id/messageChatBotLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/messageChatTopLayout" >
+        app:layout_constraintTop_toBottomOf="@+id/messageChatTopLayout">
 
     </androidx.recyclerview.widget.RecyclerView>
 
@@ -78,6 +77,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:focusable="true"
         android:gravity="center_vertical"
         android:paddingStart="10dp"
         android:paddingTop="3dp"
@@ -86,9 +86,7 @@
         android:windowSoftInputMode="adjustResize"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:focusable="true"
-        android:focusableInTouchMode="true" >
+        app:layout_constraintStart_toStartOf="parent">
 
         <EditText
             android:id="@+id/messageChatMessageContent"
@@ -96,6 +94,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@drawable/rounded_corner_border_thin"
+            android:focusable="true"
             android:fontFamily="@font/exo"
             android:hint="@string/messageChatMessageContentHint"
             android:inputType="textPersonName"
@@ -107,8 +106,7 @@
             android:textColorHint="@color/grey"
             app:backgroundTint="@color/purple_700"
             app:layout_constraintEnd_toStartOf="@+id/cardView4"
-            app:layout_constraintStart_toStartOf="parent"
-            android:focusable="true" />
+            app:layout_constraintStart_toStartOf="parent" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/messageChatSendBtn"
