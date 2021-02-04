@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.graphics.Rect;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -113,7 +112,6 @@ public class MessagesChat extends AppCompatActivity implements View.OnClickListe
                 Rect outRect = new Rect();
                 v.getGlobalVisibleRect(outRect);
                 if (!outRect.contains((int)event.getRawX(), (int)event.getRawY())) {
-                    Log.d("focus", "touchevent");
                     v.clearFocus();
                     InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
