@@ -3,6 +3,7 @@ package com.example.study2gather.ui.messages;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -79,13 +80,13 @@ public class MessagesFragment extends Fragment {
                     //get chat pic
                     if (otherMembersInChat.size() == 1) {
                         usersWithExistingChat.add(otherMembersInChat.get(0));
+                        chat.setChatTitle(usersListWithName.get(otherMembersInChat.get(0)));
                         profilePicsRef.child(otherMembersInChat.get(0)+"_profile.jpg").getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
                             @Override
                             public void onComplete(@NonNull Task<Uri> task) {
                                 if (task.isSuccessful()) {
                                     chat.setChatPic(task.getResult());
                                 }
-                                chat.setChatTitle(usersListWithName.get(otherMembersInChat.get(0)));
                                 mChats.add(chat);
                                 if (mChats.size() == snapshot.getChildrenCount()) myRecyclerViewAdapter.notifyDataSetChanged();
                             }

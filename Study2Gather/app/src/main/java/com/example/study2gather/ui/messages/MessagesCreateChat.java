@@ -144,7 +144,7 @@ public class MessagesCreateChat extends AppCompatActivity {
         HashMap<String, Boolean> membersList = new HashMap<String, Boolean>();
         membersList.put(uid,true);
         membersList.put(selectedUser.getUserID(),true);
-        Chat chat = new Chat(selectedUser.getUsername(),randomChatId, membersList);
+        Chat chat = new Chat(randomChatId, membersList);
         chatsRef.child(randomChatId).setValue(chat);
         finish();
     }

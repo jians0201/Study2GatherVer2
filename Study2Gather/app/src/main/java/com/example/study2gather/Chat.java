@@ -26,8 +26,7 @@ public class Chat implements Serializable, Parcelable {
     }
 
     //for create chat page
-    public Chat(String chatTitle, String chatId, HashMap<String, Boolean> membersList) {
-        this.chatTitle = chatTitle;
+    public Chat(String chatId, HashMap<String, Boolean> membersList) {
         this.chatId = chatId;
         this.membersList = membersList;
     }
