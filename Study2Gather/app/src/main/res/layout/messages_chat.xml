@@ -107,7 +107,8 @@
             android:textColorHint="@color/grey"
             app:backgroundTint="@color/purple_700"
             app:layout_constraintEnd_toStartOf="@+id/cardView4"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            android:focusable="true" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/messageChatSendBtn"

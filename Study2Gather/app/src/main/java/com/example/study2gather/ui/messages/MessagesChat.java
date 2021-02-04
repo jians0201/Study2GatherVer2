@@ -5,15 +5,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.study2gather.Chat;
 import com.example.study2gather.Message;
@@ -37,7 +41,7 @@ public class MessagesChat extends AppCompatActivity implements View.OnClickListe
     private RecyclerView messagesChatRecyclerView;
     private EditText eTMessageContent;
     private LinearLayoutManager mLayoutManager;
-    private RecyclerView messagesMessageList;
+    private LinearLayout messageChatTopLayout;
 
     private DatabaseReference messagesRef, chatRef;
     private FirebaseUser user;
@@ -46,6 +50,7 @@ public class MessagesChat extends AppCompatActivity implements View.OnClickListe
     private String uid;
     private ArrayList<Message> mMessages = new ArrayList<>();
     private MessagesChatRecyclerItemArrayAdapter myRecyclerViewAdapter;
+    private Activity homeActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,8 +59,9 @@ public class MessagesChat extends AppCompatActivity implements View.OnClickListe
         tVChatTitle = findViewById(R.id.messagesChatUser);
         iVChatProfilePic = findViewById(R.id.messagesChatProfilePic);
         eTMessageContent = findViewById(R.id.messageChatMessageContent);
-        messagesMessageList = findViewById(R.id.messagesMessageList);
         messagesChatRecyclerView = findViewById(R.id.messagesMessageList);
+        messageChatTopLayout = findViewById(R.id.messageChatTopLayout);
+        homeActivity = this;
 
         chat = (Chat) getIntent().getSerializableExtra("chat");
         user = FirebaseAuth.getInstance().getCurrentUser();
@@ -83,7 +89,7 @@ public class MessagesChat extends AppCompatActivity implements View.OnClickListe
                     if (mMessages.size() == snapshot.getChildrenCount()) myRecyclerViewAdapter.notifyDataSetChanged();
                     mLayoutManager = new LinearLayoutManager(getParent());
                     mLayoutManager.setStackFromEnd(true);
-                    messagesMessageList.setLayoutManager(mLayoutManager);
+                    messagesChatRecyclerView.setLayoutManager(mLayoutManager);
                 }
             }
             @Override
@@ -102,24 +108,43 @@ public class MessagesChat extends AppCompatActivity implements View.OnClickListe
                 }
             }
         });
-    }
 
-    @Override
-    public boolean dispatchTouchEvent(MotionEvent event) {
-        if (event.getAction() == MotionEvent.ACTION_DOWN) {
-            View v = getCurrentFocus();
-            if ( v instanceof EditText) {
-                Rect outRect = new Rect();
-                v.getGlobalVisibleRect(outRect);
-                if (!outRect.contains((int)event.getRawX(), (int)event.getRawY())) {
-                    v.clearFocus();
-                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+        messageChatTopLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hideKeyboard(homeActivity);
+            }
+        });
+
+        final GestureDetector detector = new GestureDetector(getApplicationContext(), new ClickListener());
+        messagesChatRecyclerView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if(detector.onTouchEvent(event)) {
+                    hideKeyboard(homeActivity);
+                    return true;
                 }
+                return false;
             }
         }
-        return super.dispatchTouchEvent(event);
+        );
     }
+
+
+
+
+
+    public static void hideKeyboard(Activity activity) {
+        InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        //Find the currently focused view, so we can grab the correct window token from it.
+        View view = activity.getCurrentFocus();
+        //If no view currently has focus, create a new one, just so we can grab a window token from it
+        if (view == null) {
+            view = new View(activity);
+        }
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
+
 
     @Override
     public void onClick(View v) {
@@ -129,6 +154,7 @@ public class MessagesChat extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.messageChatSendBtn:
                 String msgContent = eTMessageContent.getText().toString().trim();
+                eTMessageContent.requestFocus();
                 if (!msgContent.isEmpty()) {
                     createMessage(msgContent);
                     eTMessageContent.setText("");
