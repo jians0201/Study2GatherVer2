@@ -2,38 +2,23 @@ package com.example.study2gather.ui.messages;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-import androidx.core.widget.NestedScrollView;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.Application;
 import android.content.Context;
 import android.graphics.Rect;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.study2gather.Chat;
-import com.example.study2gather.ForumAnswer;
-import com.example.study2gather.ForumQuestion;
 import com.example.study2gather.Message;
 import com.example.study2gather.R;
-import com.example.study2gather.ui.forum.ForumQuestionDetails;
-import com.example.study2gather.ui.forum.ForumQuestionDetalsRecyclerItemArrayAdapter;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -55,7 +40,7 @@ public class MessagesChat extends AppCompatActivity implements View.OnClickListe
     private LinearLayoutManager mLayoutManager;
     private RecyclerView messagesMessageList;
 
-    private DatabaseReference messagesRef;
+    private DatabaseReference messagesRef, chatRef;
     private FirebaseUser user;
 
     private Chat chat;
@@ -77,6 +62,7 @@ public class MessagesChat extends AppCompatActivity implements View.OnClickListe
         user = FirebaseAuth.getInstance().getCurrentUser();
         uid = user.getUid();
         messagesRef = FirebaseDatabase.getInstance().getReference("Messages").child(chat.getChatId());
+        chatRef = FirebaseDatabase.getInstance().getReference("Chats").child(chat.getChatId());
         setUIRef();
 
         tVChatTitle.setText(chat.getChatTitle());
@@ -137,8 +123,6 @@ public class MessagesChat extends AppCompatActivity implements View.OnClickListe
         return super.dispatchTouchEvent(event);
     }
 
-
-
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -160,6 +144,7 @@ public class MessagesChat extends AppCompatActivity implements View.OnClickListe
         Date date = new Date();
         Message msg = new Message(uid, msgContent, randomMsgId, chat.getChatId(), date.getTime());
         messagesRef.child(randomMsgId).setValue(msg);
+        chatRef.child("lastMsg").setValue(msgContent);
     }
 
     private void setUIRef() {
