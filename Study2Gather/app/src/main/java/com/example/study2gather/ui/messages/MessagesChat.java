@@ -74,7 +74,7 @@ public class MessagesChat extends AppCompatActivity implements View.OnClickListe
         if (chat.getChatPic() != null) {
             Picasso.get().load(chat.getChatPic()).into(iVChatProfilePic);
         } else {
-            iVChatProfilePic.setImageResource(R.drawable.no_image);
+            iVChatProfilePic.setImageResource(R.drawable.ic_profile_user_24dp);
         }
 
         //get messages

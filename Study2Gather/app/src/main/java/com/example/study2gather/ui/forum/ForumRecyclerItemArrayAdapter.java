@@ -53,7 +53,7 @@ public class ForumRecyclerItemArrayAdapter extends RecyclerView.Adapter<ForumRec
         if (mQns.get(position).getQnProfilePic() != null) {
             Picasso.get().load(mQns.get(position).getQnProfilePic()).into(holder.imageViewQnUserPic);
         } else {
-            holder.imageViewQnUserPic.setImageResource(R.drawable.no_image);
+            holder.imageViewQnUserPic.setImageResource(R.drawable.ic_profile_user_24dp);
         }
 
         //Set Qn Author

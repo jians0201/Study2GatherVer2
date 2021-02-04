@@ -84,7 +84,7 @@ public class ForumQuestionDetails extends AppCompatActivity {
         if (question.getQnProfilePic() != null) {
             Picasso.get().load(question.getQnProfilePic()).into(iVQnAuthorPic);
         } else {
-            iVQnAuthorPic.setImageResource(R.drawable.no_image);
+            iVQnAuthorPic.setImageResource(R.drawable.ic_profile_user_24dp);
         }
 
         tVQnTitle.setText(question.getQuestionTitle());

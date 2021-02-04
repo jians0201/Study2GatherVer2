@@ -58,7 +58,7 @@ public class HomeRecylerItemArrayAdapter extends RecyclerView.Adapter<HomeRecyle
         if (mPosts.get(position).getPostProfilePic() != null) {
             Picasso.get().load(mPosts.get(position).getPostProfilePic()).into(holder.imageViewPostUserPic);
         } else {
-            holder.imageViewPostPic.setImageResource(R.drawable.no_image);
+            holder.imageViewPostPic.setImageResource(R.drawable.ic_profile_user_24dp);
         }
 
         //Set Post Username

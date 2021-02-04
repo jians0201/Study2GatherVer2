@@ -41,23 +41,23 @@
 
             </androidx.cardview.widget.CardView>
 
+            <TextView
+                android:id="@+id/profileName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:drawablePadding="10dp"
+                android:fontFamily="@font/exo_extrabold"
+                android:textColor="#FFFFFF"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/profileName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="20dp"
-                    android:drawablePadding="10dp"
-                    android:fontFamily="@font/exo_extrabold"
-                    android:textColor="#FFFFFF"
-                    android:textSize="25sp"
-                    android:textStyle="bold" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -109,23 +109,23 @@
                         android:textSize="20sp"
                         app:drawableLeftCompat="@drawable/ic_location_white_24dp" />
 
-                    <Button
-                        android:id="@+id/profileLogout"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="35dp"
-                        android:backgroundTint="@android:color/holo_red_dark"
-                        android:drawableEnd="@drawable/ic_exit_to_app_white_24dp"
-                        android:fontFamily="@font/exo_extrabold"
-                        android:text="@string/profileLogoutButton"
-                        android:textColor="@color/white"
-                        android:textSize="20sp"
-                        app:cornerRadius="9999dp" />
-
                 </LinearLayout>
 
             </LinearLayout>
+
+            <Button
+                android:id="@+id/profileLogout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="35dp"
+                android:backgroundTint="@android:color/holo_red_dark"
+                android:drawableEnd="@drawable/ic_exit_to_app_white_24dp"
+                android:fontFamily="@font/exo_extrabold"
+                android:text="@string/profileLogoutButton"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                app:cornerRadius="9999dp" />
 
         </LinearLayout>
     </ScrollView>

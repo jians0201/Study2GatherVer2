@@ -54,7 +54,7 @@ public class MessagesCreateChatRecyclerItemArrayAdapter extends RecyclerView.Ada
         if (mUsers.get(position).getProfilePic() != null) {
             Picasso.get().load(mUsers.get(position).getProfilePic()).into(holder.profilePic);
         } else {
-            holder.profilePic.setImageResource(R.drawable.no_image);
+            holder.profilePic.setImageResource(R.drawable.ic_profile_user_24dp);
         }
 //        Picasso.get().load(mUsers.get(position).getProfilePic()).into(holder.profilePic);
     }

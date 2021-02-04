@@ -53,7 +53,7 @@ public class ForumQuestionDetalsRecyclerItemArrayAdapter extends RecyclerView.Ad
         if (mAns.get(position).getAnswerProfilePic() != null) {
             Picasso.get().load(mAns.get(position).getAnswerProfilePic()).into(holder.imageViewAnsUserPic);
         } else {
-            holder.imageViewAnsUserPic.setImageResource(R.drawable.no_image);
+            holder.imageViewAnsUserPic.setImageResource(R.drawable.ic_profile_user_24dp);
         }
 
         //Set Ans Author
