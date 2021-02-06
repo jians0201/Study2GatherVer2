@@ -12,10 +12,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.provider.Settings;
-import android.util.Log;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
 
@@ -95,7 +92,6 @@ public class LocationTracker extends Service implements LocationListener {
                         e.printStackTrace();
                     }
 
-                    Log.d("Network", "Network");
                     if (locationManager != null) {
                         location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
 
@@ -112,7 +108,6 @@ public class LocationTracker extends Service implements LocationListener {
                         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
                                 MIN_TIME_BW_UPDATES, MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
 
-                        Log.d("GPS Enabled", "GPS Enabled");
                         if (locationManager != null) {
                             location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 

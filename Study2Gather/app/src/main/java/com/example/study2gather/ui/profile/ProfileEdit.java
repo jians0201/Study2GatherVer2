@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.util.Patterns;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -347,7 +346,6 @@ public class ProfileEdit extends AppCompatActivity implements View.OnClickListen
                     @Override
                     public void onFailure(@NonNull Exception e){
                         Toast.makeText(ProfileEdit.this, "Email was not changed", Toast.LENGTH_SHORT).show();
-                        Log.d("FAILURE", "FAILURE TO UPDATE EMAIL");
                     }
                 });
             }
